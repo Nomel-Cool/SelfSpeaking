@@ -1,0 +1,43 @@
+\contentsline {section}{摘要}{0}{section*.4}%
+\contentsline {section}{Abstract}{0}{section*.5}%
+\contentsline {section}{\numberline {1}引言}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}研究背景}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}研究目的}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}研究意义}{1}{subsection.1.3}%
+\contentsline {section}{\numberline {2}方法}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}构造无穷可数集S}{1}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}$ \binom {n}{2} $叉树的格局布置}{2}{subsubsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.2}构造S的满射的像$ \boldsymbol {\Omega } $及其划分}{2}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}推论1:$ S \cong \left \{\overline {\alpha _{i}} \times \overline {\alpha _{j}} \right \}, i \neq j $}{2}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.3}定义$\boldsymbol {\Omega }\times \boldsymbol {\Omega }$上的双值二元映射$f$}{2}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}交互自动机的设计}{3}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}交互自动机定义}{3}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}交互自动机所接受的形式语言}{3}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}倾向性交互自动机}{3}{subsubsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.4.4}$ \boldsymbol {\sigma }-\mathbf {A} $的子自动机}{4}{subsubsection.2.4.4}%
+\contentsline {subsubsection}{\numberline {2.4.5}$ \mathbf {sub}\left (\boldsymbol {\sigma }-\mathbf {A}\right )_{\boldsymbol {v^{\prime }}} $的扩张}{4}{subsubsection.2.4.5}%
+\contentsline {subsubsection}{\numberline {2.4.6}正规子自动机}{4}{subsubsection.2.4.6}%
+\contentsline {subsection}{\numberline {2.5}$ \boldsymbol {\sigma }-\mathbf {A} $生成的输入序列的封闭性}{5}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}$ \boldsymbol {\sigma }-\mathbf {A} $生成的输入序列的一致性}{5}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}$ \boldsymbol {\sigma }-\mathbf {A} $生成的输入序列的有效性}{6}{subsection.2.7}%
+\contentsline {section}{\numberline {3}完备$ \boldsymbol {\sigma }-\mathbf {A} $}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}循环$ \boldsymbol {Com}\left (\sigma -A\right ) $}{7}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}循环$ \boldsymbol {Com}\left (\sigma -A\right ) $的正规子自动机}{7}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}循环$ \boldsymbol {Com}\left (\sigma -A\right ) $的正规充要条件}{7}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}正规的种类}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}后缀正规}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}反转正规}{7}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}轮换正规}{8}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}正规网络}{8}{subsection.3.3}%
+\contentsline {section}{\numberline {4}生命游戏模型}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}生命游戏简述}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}生命游戏模型转化为$ \boldsymbol {\sigma }-\mathbf {A} $}{10}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}转化的$ \boldsymbol {\sigma }-\mathbf {A} $具有完备性}{10}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}转化程序设计}{11}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}滑翔机模型与循环$ \boldsymbol {Com}\left (\sigma -A\right ) $}{11}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}滑翔机发射器模型与循环$ \boldsymbol {Com}\left (\sigma -A\right ) $}{12}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}glider的扩张与glider gun}{12}{subsection.4.5}%
+\contentsline {section}{\numberline {5}结论}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}工作结果}{13}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}研究方向}{13}{subsection.5.2}%
+\contentsline {section}{参考文献}{13}{section*.11}%
