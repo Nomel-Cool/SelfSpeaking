@@ -42,423 +42,473 @@
 \DeclareMathOperator{\supp}{\mathrm{supp}} % 支撑集
 \DeclareMathOperator{\DL}{\mathrm{DL}}     % 描述长度
 
-\title{\bfseries 自指交互元系统：并行交互、零态紧化与拓扑—状态对偶动力学}
+\title{\bfseries 自指交互元系统：历史依赖倾向、多层拓扑传播链与全微观格局对偶动力学}
 \author{蒙进朗}
-\date{2026年9月4日}
+\date{2026年9月5日}
 
 \begin{document}
-	
-	\maketitle
-	
-	% ================= 摘要 =================
-	\begin{abstract}
-		本文提出一类基于局域并行交互机制的自指动力系统理论框架——交互元系统 $\mathcal{A}=\langle V_\infty,\{\bar{M}_i\},\mathfrak{S},\mathfrak{F},f\rangle$。系统构建在潜在元宇宙 $V_\infty$ 与零态紧化（Null-State Compactification）流形 $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$ 之上，微观槽位 $v_i$ 携带复合状态 $(s_i,\sigma_i,f_i)$，全局动力学严格闭合于不变乘积相空间 $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$ 上的自同态映射。
-		本文系统阐述了状态—拓扑对偶架构下的推断与辨识理论：
-		(1) \textbf{从联合后验到裂解 MDL 准则}：基于贝叶斯定理将现象复现似然与规则链先验融合为全局 MAP 目标。针对有效支撑集维数突变在传统似然中易被高频连续状态更新稀释的问题，本文提出单步似然的\emph{维数裂解}恒等式，将转移概率严格分解为相空间维数跳变似然（计数律）与点集几何物理分布似然（构形律），并在分层流形 $E_k$ 上引入对称化无标号参考测度 $\nu_k = \mathrm{Leb}^{dk}/k!$ 消除跨维奇异性，导出无额外超参数的最小描述长度（MDL）优化目标；
-		(2) \textbf{隐图边缘化与值域分工设计原则}：将瞬时交互图 $G_t$ 视为隐变量，阐述了由 $\sigma$（图空间）与 $f$（状态空间）的值域分工设计原则所唯一确定的前向因果分解方向，确立了交替坐标优化的数学合法性；
-		(3) \textbf{连续时间与物理系统辨识}：系统在连续时间下形式化为紧化积流形上的切换向量场与吸收/激发边界流。以拉格朗日流固撞击点云追踪为例，展示了连续介质微观状态演化与局域拓扑跃迁在框架下的严格物理对应。
-		本文表明，该框架在保持固定空间分析良定义性的同时，能够内生表征非遍历分支动力学与开放式演化。
-		\par\medskip
-		\noindent\textbf{关键词：}交互元系统；零态紧化；倾向性函数；转移规则；维数裂解似然；最小描述长度；对偶推断；开放式演化
-	\end{abstract}
-	
-	\vspace{1em}
-	
-	\renewcommand{\abstractname}{Abstract}
-	\begin{abstract}
-		This paper presents a formal theoretical framework for self-referential dynamical systems founded on local parallel interactions, termed the interaction-element system $\mathcal{A}=\langle V_\infty,\{\bar{M}_i\},\mathfrak{S},\mathfrak{F},f\rangle$. Formulated over a universal coordinate set $V_\infty$ and a null-state compactified manifold $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$, each coordinate slot $v_i$ carries a composite state-rule configuration $(s_i,\sigma_i,f_i)$, and the global dynamics is formalized as a closed endomorphism on the invariant product space $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$.
-		We establish the mathematical derivation chain for the dual inference and identification theory:
-		(1) \textbf{From joint posterior to disintegrated MDL}: Under Bayesian principles, we combine observational reproduction with rule-chain priors into a global MAP objective. To resolve the vulnerability where rare dimensional transitions in the support are diluted by continuous metric updates, we introduce a \emph{likelihood disintegration} identity, partitioning single-step transition probabilities into a phase-space dimension jump likelihood (counting law) and a point-set geometric distribution likelihood (configuration law). By equipping stratified manifolds $E_k$ with symmetric reference measures $\nu_k = \mathrm{Leb}^{dk}/k!$, we eliminate cross-dimensional measure singularities and deduce a parameter-free Minimum Description Length (MDL) objective;
-		(2) \textbf{Latent graph marginalization and range-space design principle}: Treating instantaneous topologies $G_t$ as latent variables, we show that the modular design principle of distinct range spaces for $\sigma$ (graph space) and $f$ (state space) uniquely mandates the forward causal factorization, validating decoupled alternating optimization;
-		(3) \textbf{Continuous-time dynamics and physical identification}: In continuous time, the system instantiates switched vector fields and boundary absorption/excitation flows. Using Lagrangian particle tracking of fluid-solid impacts, we demonstrate the empirical alignment of continuum dynamics with the compactified formulation.
-		We demonstrate that this architecture preserves fixed-space analytical tractability while endogenously accommodating non-ergodic branching and open-ended evolution.
-		\par\medskip
-		\noindent\textbf{Keywords:} interaction-element system; null-state compactification; propensity function; transition rule; disintegrated likelihood; Minimum Description Length; dual inference; open-ended evolution
-	\end{abstract}
-	
-	\tableofcontents
-	\vspace{1em}
-	
-	% ================= 1 引言 =================
-	\section{引言}\label{sec:intro}
-	
-	\subsection{研究背景与状态—拓扑对偶性}
-	
-	在复杂网络动力系统与自组织多智能体理论中，系统演化通常由拓扑选择与局域状态更新双向耦合而成：倾向性规则 $\sigma$ 根据微观状态决定瞬时相互作用通道（结构因子：决定谁与谁交互），局部转移规则 $f$ 沿给定通道驱动物理状态更新（内容因子：决定状态如何演化）\cite{stewart2003symmetry,deville2015modular}。
-	
-	传统动力系统理论通常假定相空间维度是时间不变的。为了赋予系统动态调整有效自由度的能力，同时避免引入破坏微分流形连续性的外部集合增删算子，本文采用\textbf{零态紧化}（Null-State Compactification）表述：将局域状态空间紧化为 $\bar{M} = M \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$，全局相空间恒定为乘积空间 $\Sigma = \bar{M}^{V_\infty}$。系统的物理有效规模 $|V_t| = \#\supp(x_t)$ 从先验结构类型降格为微观格局的后验观测量。
-	
-	\subsection{推导链核心要义与章节安排}
-	
-	本文重点展示从微观交互设定到宏观统计推断准则的推导脉络：
-	\begin{enumerate}[label=(\roman*), leftmargin=2.4em]
-		\item \textbf{交互元系统与零态紧化基底}（\S\ref{sec:base}--\S\ref{sec:sigma}）：给出复合状态 $(s_i,\sigma_i,f_i)$、局域协商拓扑生成 $\sigma$ 以及全局自同态映射 $\Phi:\Sigma\to\Sigma$ 的严格定义；
-		\item \textbf{局域转移规则与全对偶演化}（\S\ref{sec:lifecycle}）：给出 $f_i$ 在有效态演化、局域激发跃迁（$\bot_{\mathrm{u}}\to M$）与吸收注销（$M\to\bot_{\mathrm{d}}$）上的统一更新语义；
-		\item \textbf{从联合后验到裂解 MDL 准则}（\S\ref{sec:measure}）：完整呈现式~\eqref{eq:mdl-chain} 的推导链（Step A $\to$ D）。建立单步似然的维数裂解恒等式（命题~\ref{prop:disintegration}）与分层参考测度，阐明无额外超参数的统计完备性；
-		\item \textbf{隐图边缘化与值域分工设计原则}（\S\ref{sec:dual-learning}）：完整呈现式~\eqref{eq:marginal-likelihood} 的推导链（Step E $\to$ F），阐述值域分工设计原则对因果分解方向的唯一性约束，并给出拉格朗日点云追踪物理辨识算例；
-		\item \textbf{连续时间混合系统与开放式演化讨论}（\S\ref{sec:ct}--\S\ref{sec:open}）：给出紧化流形上的切换流与吸收边界流，探讨该系统在打破 Poincaré 递归与生成开放式模式中的数理性质。
-	\end{enumerate}
-	
-	% ================= 2 交互元系统：零态紧化基底 =================
-	\section{交互元系统：零态紧化基底}\label{sec:base}
-	
-	\subsection{潜在元空间与复合状态流形}
-	
-	\begin{definition}[紧化交互元系统]\label{def:iesystem}
-		一个（零态紧化）\emph{交互元系统}定义为五元组：
-		\begin{equation}
-			\mathcal{A}=\langle V_\infty,\{\bar{M}_i\}_{i\in V_\infty},\mathfrak{S},\mathfrak{F},f\rangle,
-			\label{eq:iesystem}
-		\end{equation}
-		各组分定义如下：
-		\begin{itemize}[leftmargin=2em]
-			\item $V_\infty$ 为固定（有限或可数无限）的\emph{潜在元宇宙索引集}；
-			\item $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}\} \sqcup \{\bot_{\mathrm{d}}\}$ 为槽位 $v_i$ 的\emph{紧化物理状态空间}，其中 $M_i$ 为有效物理流形，$\bot_{\mathrm{u}}$ 为休眠态，$\bot_{\mathrm{d}}$ 为不可逆吸收态；
-			\item $\mathfrak{S}$ 为局域倾向性规则空间，$\mathfrak{F}$ 为局域转移规则空间；
-			\item 每个槽位 $v_i\in V_\infty$ 携带\emph{复合状态}（Composite State）：
-			\begin{equation}
-				x_i(t) = \bigl(s_i(t),\ \sigma_i(t),\ f_i(t)\bigr) \in \bar{M}_i \times \mathfrak{S} \times \mathfrak{F} \eqqcolon \bar{\widetilde{M}}_i;
-				\label{eq:composite-state}
-			\end{equation}
-			\item $\Sigma = \prod_{v\in V_\infty} \bar{\widetilde{M}}_v$ 为系统的不变全局相空间；
-			\item $f=\{f_i\}_{i\in V_\infty}$ 为局域转移规则族。
-		\end{itemize}
-	\end{definition}
-	
-	\begin{definition}[活性支撑集与系统规模观测量]\label{def:support}
-		在全局配置 $x_t\in\Sigma$ 下，时刻 $t$ 的\emph{有效活性集}定义为物理有效状态的支撑集：
-		\begin{equation}
-			V_t \equiv \supp(x_t) = \{\,v_i\in V_\infty:\ s_i(t)\in M_i\,\}.
-			\label{eq:support}
-		\end{equation}
-		瞬时活性规模 $|V_t| = \#\supp(x_t)$ 为定义在全局相空间 $\Sigma$ 上的非负整数值观测量。
-	\end{definition}
-	
-	\subsection{全局自同态演化时序}
-	
-	\begin{definition}[并行演化步]\label{def:evoeq}
-		系统动力学由全局自同态映射 $\Phi:\Sigma\to\Sigma$ 驱动。给定配置 $x_t\in\Sigma$，演化步 $t\to t{+}1$ 包含两个并行阶段：
-		\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-			\item \emph{拓扑评估相}：全体槽位评估成边倾向，导出瞬时全局交互图 $G_t=\sigma(x_t)\in\mathfrak{G}(V_\infty)$ 与局域开邻域 $\Ncal_t(v_i)=\{\,v_j\in V_\infty:(v_j,v_i)\in E(G_t)\,\}$；
-			\item \emph{状态转移相}：全体槽位在各自邻域输入下同步执行局部更新：
-			\begin{equation}
-				x_i(t+1) = f_i\bigl(x_i(t),\ x_t|_{\Ncal_t(v_i)}\bigr), \qquad \forall v_i\in V_\infty.
-				\label{eq:parallel}
-			\end{equation}
-		\end{enumerate}
-	\end{definition}
-	
-	% ================= 3 倾向性规则与拓扑生成 =================
-	\section{\texorpdfstring{倾向性规则与拓扑生成机制}{倾向性规则与拓扑生成机制}}\label{sec:sigma}
-	
-	\begin{assumption}[成对局部性与协商机制]\label{ass:pairwise}
-		边 $(v_i, v_j)\in E(G_t)$ 的连接状态由两端点的复合状态通过对称协商核函数 $h$ 局域判定：
-		\begin{equation}
-			\mathbb{I}_{\{(v_i,v_j)\in E(G_t)\}} = h(x_i, x_j; \sigma_i) \land h(x_j, x_i; \sigma_j).
-			\label{eq:edge-consensus}
-		\end{equation}
-	\end{assumption}
-	
-	在零态紧化空间下，$\sigma$ 统一覆盖全图的拓扑建立：
-	\begin{itemize}[leftmargin=2em]
-		\item \textbf{内部活性耦合}：当 $v_i, v_j\in \supp(x_t)$ 时，式~\eqref{eq:edge-consensus} 判定活性元素间的相互作用通道；
-		\item \textbf{外向拓扑选址}：当活跃元 $v_i\in\supp(x_t)$ 达到激发阈值时，其倾向性规则 $\sigma_i$ 与休眠槽位 $v_k\in V_\infty\setminus\supp(x_t)$（$s_k(t)=\bot_{\mathrm{u}}$）达成连接，建立边 $(v_i, v_k)\in E(G_t)$，将该休眠槽位接入局域相互作用。
-	\end{itemize}
-	
-	% ================= 4 局部转移规则与对偶演化 =================
-	\section{\texorpdfstring{局部转移规则与拓扑—状态对偶演化}{局部转移规则与拓扑—状态对偶演化}}\label{sec:lifecycle}
-	
-	\begin{definition}[紧化局域转移规则]\label{def:compact-f}
-		每个槽位 $v_i\in V_\infty$ 的转移规则为映射 $f_i: \bar{\widetilde{M}}_i \times \prod_{v_j\in\Ncal_t(v_i)}\bar{\widetilde{M}}_j \to \bar{\widetilde{M}}_i$。其在不同状态输入下的演化行为统一定义如下：
-		\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-			\item \textbf{有效态演化（Active Update）}：若 $s_i(t)\in M_i$ 且未达消除条件，则
-			\[
-			s_i(t+1) = f^{\text{metric}}_i\bigl(s_i(t), x_t|_{\Ncal_t(v_i)}\bigr) \in M_i, \qquad (\sigma_i, f_i) \text{ 保持或微调};
-			\]
-			\item \textbf{激发跃迁（Quiescent Activation）}：若 $s_i(t)=\bot_{\mathrm{u}}$ 且其邻域接入了活性元（$\Ncal_t(v_i)\cap\supp(x_t)\neq\emptyset$），则 $f_i$ 读入邻域输入，将该槽位激活为有效物理状态并重组其规则：
-			\begin{equation}
-				s_i(t+1) = f^{\text{init}}_i\bigl(x_t|_{\Ncal_t(v_i)}\bigr) + \varepsilon_i \in M_i, \qquad \varepsilon_i \sim \mathcal{N}(0, \sigma_\varepsilon^2 I),
-				\label{eq:f-active}
-			\end{equation}
-			\begin{equation}
-				\sigma_i(t+1) = \mathcal{R}_\sigma\bigl(\sigma_t|_{\Ncal_t(v_i)}\bigr), \qquad
-				f_i(t+1) = \mathcal{R}_f\bigl(f_t|_{\Ncal_t(v_i)}\bigr),
-				\label{eq:r-assign}
-			\end{equation}
-			其中 $\mathcal{R}_\sigma, \mathcal{R}_f$ 为局域规则重组算子，$\varepsilon_i$ 为连续微扰噪声（满足测度绝对连续性条件）；
-			\item \textbf{吸收注销（Absorption）}：若 $s_i(t)\in M_i$ 且动力学轨道到达消除边界，则 $s_i(t+1) = \bot_{\mathrm{d}}$；
-			\item \textbf{休眠保持（Invariance）}：若 $s_i(t)=\bot_{\mathrm{u}}$ 且 $\Ncal_t(v_i)=\emptyset$，则 $s_i(t+1)=\bot_{\mathrm{u}}$；若 $s_i(t)=\bot_{\mathrm{d}}$，恒有 $s_i(t+1)=\bot_{\mathrm{d}}$。
-		\end{enumerate}
-	\end{definition}
-	
-	\begin{figure}[htbp]
-		\centering
-		\begin{tikzpicture}[
-			box/.style={draw, rounded corners=3pt, align=center, inner sep=4pt,
-				font=\small, minimum height=7mm},
-			arr/.style={-{Stealth[length=2mm]}, semithick}]
-			\node[box, text width=7.4cm] (sig) at (0,0)
-			{$\sigma(x_t)$：并行计算全图拓扑 $G_t\in\mathfrak{G}(V_\infty)$\\（包含活跃元间连边与休眠槽位 $\bot_{\mathrm{u}}$ 的局域选址）};
-			\node[box, text width=7.4cm] (nbh) at (0,-1.2)
-			{提取各槽位局域复合投影 $x_t|_{\Ncal_t(v_i)}$};
-			\node[box, text width=7.8cm] (tr) at (0,-2.4)
-			{全体槽位同步执行局域转移 $x_i(t+1)=f_i\bigl(x_i(t), x_t|_{\Ncal_t(v_i)}\bigr)$};
-			\node[box, text width=3.8cm] (ok) at (-4.8,-4.2)
-			{\textbf{有效态演化}\\$s_i(t)\in M_i \to s_i'\in M_i$\\规则保持或微调};
-			\node[box, text width=3.8cm] (dd) at (0,-4.2)
-			{\textbf{吸收注销}\\$s_i(t)\in M_i \to \bot_{\mathrm{d}}$\\脱离支撑集 $\supp(x)$};
-			\node[box, text width=3.8cm] (bb) at (4.8,-4.2)
-			{\textbf{激发跃迁}\\$\bot_{\mathrm{u}} \to s_i'\in M_i$\\规则重组 $\mathcal{R}(\cdot)$};
-			\node[box, text width=7.8cm] (vt) at (0,-6.0)
-			{全局相空间自同态更新：$x_{t+1}\in\Sigma = \prod_{v\in V_\infty}\bar{\widetilde{M}}_v$\\活性支撑集导出更新：$V_{t+1} = \supp(x_{t+1})$};
-			\draw[arr] (sig) -- (nbh);
-			\draw[arr] (nbh) -- (tr);
-			\draw[arr] (tr) -- (ok);
-			\draw[arr] (tr) -- (dd);
-			\draw[arr] (tr) -- (bb);
-			\draw[arr] (ok) -- (vt);
-			\draw[arr] (dd) -- (vt);
-			\draw[arr] (bb) -- (vt);
-			\draw[arr, dashed] (vt) to[out=180,in=180]
-			node[left, font=\scriptsize] {进入下一时步} (sig);
-		\end{tikzpicture}
-		\caption{基于零态紧化与 $\sigma/f$ 拓扑—状态对偶的系统单步演化时序。}
-		\label{fig:lifecycle}
-	\end{figure}
-	
-	% ================= 5 推导链 I：联合后验到裂解 MDL 准则 =================
-	\section{\texorpdfstring{推导链 I：从联合后验到裂解 MDL 准则}{推导链 I：从联合后验到裂解 MDL 准则}}\label{sec:measure}
-	
-	\subsection{\texorpdfstring{从初始想法到联合后验目标（Step A $\to$ D）}{从初始想法到联合后验目标（Step A -> D）}}
-	
-	在系统辨识中，设观测到的宏观物理现象流为状态序列 $s_{0:T} = (s_0, s_1, \dots, s_T)$。待推断的对象为跨时间生效的规则链（Rule-Chains）$\{(\sigma^{(k)}, f^{(k)})\}_{k=1}^K$。推导链的构建步骤如下：
-	
-	\paragraph{Step A（后验焊接）。}
-	仅优化先验链概率 $p(\text{chains})$ 会退化为脱离实际现象的平凡规则。依据贝叶斯定理，学习目标必须形式化为在给定观测现象下的规则链最大后验估计（MAP）：
-	\begin{equation}
-		p\bigl(\text{chains}\mid s_{0:T}\bigr) \propto
-		\underbrace{p\bigl(s_{0:T}\mid\text{chains}\bigr)}_{\text{现象复现似然}}
-		\cdot
-		\underbrace{p(\text{chains})}_{\text{规则链先验分布}}.
-		\label{eq:step-a}
-	\end{equation}
-	
-	\paragraph{Step B（马尔可夫单步因子化）。}
-	物理状态由微观规则逐时刻驱动生成，满足一阶马尔可夫性：
-	\begin{equation}
-		p\bigl(s_{0:T}\mid\text{chains}\bigr) = p(s_0)\prod_{t=0}^{T-1} p\bigl(s_{t+1}\mid s_t;\ \text{生效规则}_t\bigr).
-		\label{eq:step-b}
-	\end{equation}
-	
-	\paragraph{Step C（制度指示映射的时间化）。}
-	将时间域划分为 $K$ 个分段常数制度（Regimes），引入时间指示映射 $c(t)\in\{1,\dots,K\}$，则第 $t$ 步生效的规则为 $(\sigma^{(c(t))}, f^{(c(t))})$。
-	
-	\paragraph{Step D（Shannon 码与 MDL 桥梁）。}
-	对规则先验采用通用无损编码（Shannon-Kolmogorov 编码）：$p(\text{chains}) \propto 2^{-\DL(\text{Rule-Chain})}$。将负对数后验最小化转化为最小描述长度（MDL）的二部码长优化目标：$\min [L(\text{data}\mid\text{model}) + \lambda L(\text{model})]$。
-	
-	\subsection{似然的维数裂解与测度论分层}
-	
-	在包含局域激发（支撑集维度变化）的系统中，直接应用式~\eqref{eq:step-b} 存在理论与数值缺陷：由于激发跳变在时间序列中属于稀有事件，标准点集似然在时间求和下导致跳变步的梯度被高频连续状态误差严重稀释；同时，$-\lambda\DL$ 正则项会对引入跳变参数产生反向惩罚。
-	
-	为使微观结构跃迁与连续运动在似然中获得均衡且严密的数学表达，本文给出**单步似然的维数裂解恒等式**：
-	
-	\begin{proposition}[单步似然维数裂解恒等式]\label{prop:disintegration}
-		记 $|V_{t+1}| = \#\supp(s_{t+1})$ 为下一时刻的有效相空间维数。单步转移对数似然可严格裂解为相空间维数跳变似然与点集几何物理分布似然的代数和：
-		\begin{equation}
-			\log p\bigl(s_{t+1}\mid s_t;\ \sigma^{(c(t))}, f^{(c(t))}\bigr) =
-			\underset{\text{相空间维数跳变似然}}{\underbrace{\log p\bigl(|V_{t+1}|\mid s_t;\ \sigma^{(c(t))}, f^{(c(t))}\bigr)}}
-			\;+\;
-			\underset{\text{点集几何与物理分布似然}}{\underbrace{\log p\bigl(s_{t+1}\mid |V_{t+1}|, s_t, G_t;\ f^{(c(t))}\bigr)}}.
-			\label{eq:disintegration}
-		\end{equation}
-	\end{proposition}
-	
-	\begin{remark}[分层参考测度消解测度奇异性]\label{rem:measure-strata}
-		在测度论中，不同维度的欧氏空间 $\mathbb{R}^{dk}$ 与 $\mathbb{R}^{dk'}$（$k\neq k'$）上的 Lebesgue 测度互为奇异测度，无法直接定义变维空间上的全局 Lebesgue 密度。命题~\ref{prop:disintegration} 的数学合法性建立在相空间的分层流形分解之上：定义分层子集 $E_k = \{s\in\Sigma: |\supp(s)|=k\}$，由全概率公式，测度按层解耦为 $p(s_{t+1}\in ds\mid s_t) = p(k\mid s_t) \cdot p(s_{t+1}\in ds\mid k, s_t)$：
-		\begin{itemize}[leftmargin=2em]
-			\item \textbf{层间计数因子}：$p(|V_{t+1}|=k\mid s_t)$ 是定义在离散非负整数集 $\mathbb{N}_0$ 上的良定义概率质量函数，严格量化了局域拓扑对有效维度的改变；
-			\item \textbf{层内构形因子}：$p(s_{t+1}\in ds\mid k, s_t)$ 在固定的层 $E_k$ 内采用对称化无标号参考测度 $\nu_k = \mathrm{Leb}^{dk}/k!$（针对无标号点云观测）。由于式~\eqref{eq:f-active} 中存在扰动项 $\varepsilon$，条件概率关于 $\nu_k$ 绝对连续，密度处处良定义。
-		\end{itemize}
-		裂解式~\eqref{eq:disintegration} 是恒等变换，统计推断在权重为 $1$ 处自然完备，无需人为引入外生加权旋钮。
-	\end{remark}
-	
-	\subsection{更新后的裂解 MDL 优化目标}
-	
-	结合推导链 Step A $\to$ D 与命题~\ref{prop:disintegration} 的维数裂解，系统的全局 MDL 辨识目标形式化为如下紧凑优化形式：
-	\begin{equation}
-		\begin{aligned}
-			\max_{\{\sigma^{(k)}, f^{(k)}\}_{k=1}^K} \Bigg\{
-			\sum_{t=0}^{T-1} & \Big[ \log p\bigl(|V_{t+1}|\mid s_t;\ \sigma^{(c(t))}, f^{(c(t))}\bigr)
-			+ \log p\bigl(s_{t+1}\mid |V_{t+1}|, s_t, G_t;\ f^{(c(t))}\bigr) \Big] \\
-			& + \log p(\text{Model}) \;-\; \lambda \cdot \DL\bigl(\text{Rule-Chain}\bigr) \Bigg\}.
-		\end{aligned}
-		\label{eq:mdl-chain}
-	\end{equation}
-	该式在信息论意义下严格平衡了维度跳变预测、连续运动拟合与模型描述复杂度。
-	
-	% ================= 6 推导链 II：对偶推断与物理辨识 =================
-	\section{\texorpdfstring{推导链 II：边际似然分解与物理系统辨识}{推导链 II：边际似然分解与物理系统辨识}}\label{sec:dual-learning}
-	
-	\subsection{\texorpdfstring{隐图边缘化与值域分工设计原则（Step E $\to$ F）}{隐图边缘化与值域分工设计原则（Step E -> F）}}
-	
-	\paragraph{Step E（隐图边缘化）。}
-	在实际物理观测中，瞬时交互网络 $G_t$ 无法直接通过传感器读出，属于隐变量。单步转移概率必须对全图空间 $\mathfrak{G}(V_\infty)$ 进行边际化求和：
-	\begin{equation}
-		p(x_{t+1}\mid x_t;\ \sigma, f) = \sum_{G_t\in\mathfrak{G}(V_\infty)} p(x_{t+1}, G_t\mid x_t;\ \sigma, f).
-		\label{eq:step-e}
-	\end{equation}
-	
-	\paragraph{Step F（值域分工设计原则）。}
-	联合条件概率在形式上允许前向因果与反向因果两种分解。本框架确立了\textbf{值域分工设计原则}（Range-Space Decoupling Design Principle）：
-	\begin{itemize}[leftmargin=2em]
-		\item \textbf{倾向性映射 $\sigma$ 的值域}：严格限定于离散交互图空间 $\mathfrak{G}(V_\infty)$（结构模型：输出成边概率与拓扑选址）；
-		\item \textbf{转移映射 $f$ 的值域}：严格限定于连续/紧化物理状态空间 $\bar{\widetilde{M}}$（内容模型：输出坐标更新与激活动力学）。
-	\end{itemize}
-	若采用反向分解 $p(x_{t+1}\mid x_t)p(G_t\mid x_t, x_{t+1})$，则要求转移规则 $f$ 在无拓扑条件下生成状态、且对图结构具备评估语义，这在模块化设计上构成了严重越权。因此，值域分工设计原则唯一确定了前向因果分解，导出核心边际似然公式：
-	\begin{equation}
-		\boxed{\ p(x_{t+1}\mid x_t;\ \sigma, f) = \sum_{G_t\in\mathfrak{G}(V_\infty)}
-			\underbrace{p(G_t\mid x_t;\ \sigma)}_{\text{结构因子 (拓扑分布)}}
-			\cdot
-			\underbrace{p(x_{t+1}\mid x_t, G_t;\ f)}_{\text{内容因子 (状态转移)}}.\ }
-		\label{eq:marginal-likelihood}
-	\end{equation}
-	
-	\subsection{解耦交替坐标优化（EM 架构）}
-	
-	式~\eqref{eq:marginal-likelihood} 确立了解耦坐标优化的算法架构：
-	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-		\item \textbf{$\sigma$-优化相}：固定转移规则 $f$，在隐图后验分布 $p(G_t\mid x_t, x_{t+1}; f) \propto p(G_t\mid x_t;\sigma)p(x_{t+1}\mid x_t,G_t;f)$ 引导下，在图分布空间通过梯度反向传播优化 $\sigma$；
-		\item \textbf{$f$-优化相}：固定倾向性规则 $\sigma$，以采样确定的图拓扑作为局域计算图，通过沿时间反向传播（BPTT）联合优化 $f$ 的连续运动参数与激发跃迁参数。
-	\end{enumerate}
-	
-	\subsection{物理辨识实例：连续介质拉格朗日点云动力学}
-	
-	考虑高速冲击载荷下的流固耦合拉格朗日粒子追踪数据流（图~\ref{fig:splash}），该物理过程与紧化对偶推导模型构成严格同构：
-	
-	\begin{figure}[htbp]
-		\centering
-		\begin{tikzpicture}[
-			box/.style={draw, rounded corners=2pt, align=center, inner sep=3pt, font=\scriptsize, minimum height=6mm},
-			arr/.style={-{Stealth[length=1.5mm]}, thin}]
-			\node[box, fill=gray!10] (phase1) at (0,0) {\textbf{平流运动相}\\$V_t = V_{\text{solid}}$\\自由弹道 $f_{\text{ballistic}}$};
-			\node[box, fill=gray!15] (phase2) at (3.6,0) {\textbf{界面接触相}\\$E(G_t)$ 建立界面连边\\应力耗散 $f_{\text{impact}}$};
-			\node[box, fill=gray!20] (phase3) at (7.4,0) {\textbf{破碎飞溅相}\\$\sigma$ 选址连边 $\bot_{\mathrm{u}}$\\激发跃迁 $\bot_{\mathrm{u}}\to M$};
-			\node[box, fill=gray!25] (phase4) at (11.2,0) {\textbf{重组融合相}\\质点到达吸收集 $\bot_{\mathrm{d}}$\\脱离支撑集 $V_t\downarrow$};
-			\draw[arr] (phase1) -- (phase2);
-			\draw[arr] (phase2) -- (phase3);
-			\draw[arr] (phase3) -- (phase4);
-		\end{tikzpicture}
-		\caption{固—液撞击连续介质动力学在紧化交互元系统中的对偶物理映射。}
-		\label{fig:splash}
-	\end{figure}
-	
-	\begin{itemize}[leftmargin=2em]
-		\item \textbf{质点状态与支撑集}：潜在元宇宙 $V_\infty$ 提供粒子槽位储备，处于物理运动状态的介质微团构成有效支撑集 $V_t=\supp(x_t)$；
-		\item \textbf{飞溅破碎与激发跃迁}：当局部介质受剪切拉伸发生断裂飞溅时，界面质点通过 $\sigma$ 建立拓扑选址连边接入休眠槽位 $\bot_{\mathrm{u}}$；转移函数 $f_i$ 根据周围粒子的质量通量与动量张量，直接将该槽位更新为飞溅粒子的初始运动学配态；
-		\item \textbf{融合与吸收注销}：液滴重新汇入流体主体时，质点自由度经由 $f_i$ 转移至吸收态 $\bot_{\mathrm{d}}$，动量平滑耗散注入连续场中。
-	\end{itemize}
-	
-	% ================= 7 连续时间 =================
-	\section{连续时间：紧化流形上的切换动力学}\label{sec:ct}
-	
-	在连续时间设定下，系统定义在紧化乘积流形 $\Sigma = \prod_{v\in V_\infty}\bar{M}_v$ 上。对每种拓扑配置 $E\in\mathfrak{G}(V_\infty)$，系统配备局域光滑向量场 $X_E$。模式切换由倾向性映射族 $\{\sigma_i\}$ 连续评估：
-	\begin{equation}
-		\dot x(t) = X_{E_m}(x(t)),
-		\qquad
-		x(t)=\varphi^{E_m}_{t-\tau_m}\bigl(x(\tau_m)\bigr).
-		\label{eq:switchflow}
-	\end{equation}
-	
-	系统在紧化空间中的连续演化包含两类边界行为：
-	\begin{itemize}[leftmargin=2em]
-		\item \textbf{吸收停时（Boundary Absorption）}：$\bot_{\mathrm{d}}$ 对应于局域流形内部的闭不变吸收集 $D_i\subset\bar{M}_i$。元素 $v_i$ 进入吸收态的时刻由首次到达停时确定：$\tau_i = \inf\{\,t\ge 0:\ x_i(t)\in D_i\,\}$；
-		\item \textbf{激发跳变（Boundary Excitation）}：$\bot_{\mathrm{u}}$ 对应于流形的静止休眠边界。当活跃流穿过状态触发截面 $\Gamma\subset\Sigma$ 时，$\sigma$ 触发拓扑切换并诱发边界跳变：
-		\begin{equation}
-			x_k(t^{\ast+}) = f_k\bigl(\bot_{\mathrm{u}},\ x_t|_{\Ncal_t(v_k)}(t^{\ast-})\bigr) \in M_k, \qquad v_k \in V_\infty\setminus\supp(x_{t^{\ast-}}).
-			\label{eq:ct-jump}
-		\end{equation}
-	\end{itemize}
-	系统在数学上严格表现为固定相空间上的\emph{切换混合动力系统}（Switched Hybrid Dynamical System）。
-	
-	% ================= 8 开放式演化讨论 =================
-	\section{关于开放式演化的理论讨论}\label{sec:open}
-	
-	\subsection{固定相空间与无界发散演化的统一}
-	
-	零态紧化在形式上将动力系统定义在固定相空间 $\Sigma=\bar{M}^{V_\infty}$ 上，但系统依然具备涌现开放式演化的能力：
-	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-		\item \textbf{支撑集的非遍历发散}：当取潜在元宇宙 $V_\infty = \mathbb{N}$ 时，系统有效支撑集序列 $\{\supp(x_t)\}_{t\ge 0}$ 构成无界增长的分支树。系统的可达微观构型随有效维度的增加而呈现组合爆炸，打破了有限维紧致不变集的循环约束；
-		\item \textbf{规则空间的非平衡态扩散}：通过局域重组机制 $\mathcal{R}$，激发跃迁持续在槽位中生成新的动力学规则实例 $(\sigma_i, f_i)$，经验规则测度 $\mu_t = \frac{1}{|V_t|}\sum_{v\in\supp(x_t)}\delta_{(\sigma_v, f_v)}$ 在规则空间中进行持续的非平衡态漂移；
-		\item \textbf{理论分析的规范性}：将系统规模降格为微观格局的宏观观测量，结合式~\eqref{eq:mdl-chain} 的维数裂解与分层测度，消除了分析变维流形时的几何不连续性，使遍历论与统计力学方法能够严密应用于自组织演化系统的刻画。
-	\end{enumerate}
-	
-	\subsection{理论边界与公理化先验}
-	
-	\begin{remark}[理论边界与假设账本]\label{rem:boundary}
-		本模型推导链在形式化完备性上依赖于以下前提：
-		\begin{itemize}[leftmargin=2em]
-			\item \textbf{单步马尔可夫生成}（Step B）与\textbf{分段常数制度映射}（Step C）；
-			\item \textbf{值域分工设计原则}（Step F）：限定 $\sigma$ 负责图空间而 $f$ 负责物理状态空间；
-			\item \textbf{潜在槽位容量}：数值实现若取有限 $V_\infty$，系统活性规模受限于 $|V_t|\le|V_\infty|$。真正无界的开放演化依赖于 $V_\infty=\mathbb{N}$ 的渐近设定或死态复位机制（$\bot_{\mathrm{d}}\to\bot_{\mathrm{u}}$）。
-		\end{itemize}
-	\end{remark}
-	
-	% ================= 9 结论 =================
-	\section{结论}\label{sec:conclusion}
-	
-	本文系统建立了基于零态紧化与拓扑—状态对偶的自指交互元系统理论框架，并完成了从微观交互假设到宏观推断目标的完整推导链：
-	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-		\item 引入潜在元宇宙与紧化状态流形 $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$，将系统演化统一为固定乘积相空间 $\Sigma$ 上的自同态动力学；
-		\item 建立了单步转移似然的维数裂解恒等式，将对数似然精确拆分为相空间维数跳变似然与点集几何物理分布似然，利用分层对称化测度消解了变维奇异性，导出了更新后的裂解 MDL 优化目标；
-		\item 基于值域分工设计原则，严密导出了边际似然的因果分解方向，确立了解耦交替优化的算法基础。
-	\end{enumerate}
-	该框架为研究多相物理系统辨识、连续介质拉格朗日模拟及开放式自组织演化提供了严密且统一的数学理论基石。
-	
-	% ================= 参考文献 =================
-	\begin{thebibliography}{9}
-		\small
-		
-		\bibitem{stewart2003symmetry}
-		Stewart, I., Golubitsky, M., Pivato, M. Symmetry groupoids and patterns of
-		synchrony in coupled cell systems. \textit{SIAM Journal on Applied Dynamical
-			Systems}, 2003, 2(4): 609--646.
-		
-		\bibitem{deville2015modular}
-		DeVille, L., Lerman, E. Modular dynamical systems on networks.
-		\textit{Journal of Functional Analysis}, 2015, 268(2): 294--327.
-		
-		\bibitem{ray1991}
-		Ray, T. S. An approach to the synthesis of life. In: Langton, C., Taylor, C.,
-		Farmer, J. D., Rasmussen, S. (eds.) \textit{Artificial Life II}, Santa Fe
-		Institute Studies in the Sciences of Complexity, vol. XI. Addison-Wesley,
-		1991: 371--408.
-		
-		\bibitem{ofria2004}
-		Ofria, C., Wilke, C. O. Avida: A software platform for research in
-		computational evolutionary biology. \textit{Artificial Life}, 2004, 10(2):
-		191--229.
-		
-		\bibitem{schmidhuber1991}
-		Schmidhuber, J. A possibility for implementing curiosity and boredom in
-		model-building neural controllers. In: Meyer, J.-A., Wilson, S. W. (eds.)
-		\textit{From Animals to Animats: Proceedings of the First International
-			Conference on Simulation of Adaptive Behavior}. MIT Press/Bradford Books,
-		1991: 222--227.
-		
-		\bibitem{pattee1995}
-		Pattee, H. H. Artificial life needs a real epistemology. In: Mor\'an, F.,
-		Moreno, A., Merelo, J. J., Chac\'on, P. (eds.) \textit{Advances in Artificial
-			Life: Third European Conference on Artificial Life (ECAL 1995)}, Lecture
-		Notes in Computer Science 929. Springer, 1995: 23--38.
-		
-		\bibitem{lehman2015}
-		Lehman, J., Stanley, K. O. \textit{Why Greatness Cannot Be Planned: The Myth
-			of the Objective}. Springer, 2015.
-		
-		\bibitem{mordvintsev2020}
-		Mordvintsev, A., Randazzo, E., Niklasson, E., Levin, M. Growing neural
-		cellular automata. \textit{Distill}, 2020. \texttt{doi:10.23915/distill.00023}.
-		
-	\end{thebibliography}
-	
+
+\maketitle
+
+% ================= 摘要 =================
+\begin{abstract}
+本文提出一类基于局域并行交互机制的自指动力系统理论框架——交互元系统 $\mathcal{A}=\langle V_\infty,\{\bar{M}_i\},\mathfrak{S},\mathfrak{E},\mathfrak{F},\eta,f\rangle$。系统构建在潜在元宇宙 $V_\infty$ 与零态紧化（Null-State Compactification）空间 $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$ 之上，微观槽位 $v_i$ 携带状态—规则复合配置 $x_i(t)=(s_i(t),\sigma_i(t),f_i(t))$。
+针对动力学闭环与结构推断，本文建立了完备的三阶段自指演化与全微观格局辨识理论：
+(1) \textbf{历史依赖倾向与多层拓扑传播链}：倾向性规则族 $\sigma$ 以系统演化至今的完整历史轨迹 $\mathcal{H}_t = (x_0, x_1, \dots, x_t)$ 为输入，生成初始交互图 $G_t^{(0)}$；随后引入图拓扑传播链 $\eta = \eta_L \circ \dots \circ \eta_1$，通过多层结构重写与高阶局域协调，将初始拓扑精化为实际生效的有效交互图 $\widetilde{G}_t$，闭合了 $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$ 的完整自指因果回路；
+(2) \textbf{全微观格局转移与并行演化}：局部转移规则 $f$ 在有效图 $\widetilde{G}_t$ 上并行驱动全体槽位的状态更新，全局动力学严格闭合于乘积相空间 $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$ 上的自同态映射；
+(3) \textbf{全微观状态跟踪的 MDL 辨识准则}：为防止仅跟踪宏观规模标量导致模型学习到伪统计事实，本文构建了覆盖 $V_\infty$ 全体元微观复合配置 $x_{t+1}$ 的全条件似然，推导了包含拓扑生成、传播链与微观状态转移的三重边际似然分解公式，并建立了最小描述长度（MDL）优化目标。以拉格朗日连续介质粒子断裂与融合为例，展示了该系统对复杂多相动力学微观因果机制的严格表征能力；
+(4) \textbf{计算普遍性与理论模拟边界}：严格证明了该系统在退化流形上包含初等元胞机 Rule 110 与 Conway's Game of Life，具备图灵完备性（Turing Completeness），为复杂物理与离散系统的建模提供了无界表达力基准。
+在连续时间设定下，该框架形式化为历史驱动的变维混合切换系统。本文表明，该系统在保持严密测度分析良定义性的同时，能够实现结构、规律与微观状态的内生协同演化。
+\par\medskip
+\noindent\textbf{关键词：}交互元系统；历史依赖；拓扑传播链；零态紧化；全微观格局；自指动力学；最小描述长度；图灵完备性
+\end{abstract}
+
+\vspace{1em}
+
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+This paper presents a formal theoretical framework for self-referential dynamical systems founded on local parallel interactions, termed the interaction-element system $\mathcal{A}=\langle V_\infty,\{\bar{M}_i\},\mathfrak{S},\mathfrak{E},\mathfrak{F},\eta,f\rangle$. Formulated over a universal coordinate set $V_\infty$ and a null-state compactified manifold $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$, each coordinate slot $v_i$ carries a composite state-rule configuration $x_i(t)=(s_i(t),\sigma_i(t),f_i(t))$.
+We establish a tripartite self-referential closed loop and full microscopic configuration identification theory:
+(1) \textbf{History-dependent propensity and multi-layer topology propagation chain}: The propensity rules $\sigma$ take the historical trajectory $\mathcal{H}_t = (x_0, \dots, x_t)$ as input to generate an initial interaction graph $G_t^{(0)}$. A multi-layer topology propagation chain $\eta = \eta_L \circ \dots \circ \eta_1$ then executes structural refinement, transforming $G_t^{(0)}$ into an effective operational graph $\widetilde{G}_t$, closing the causal loop $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$;
+(2) \textbf{Full microscopic transition and parallel dynamics}: The local transition rules $f$ execute parallel updates across $\widetilde{G}_t$, strictly formalizing the global dynamics as a closed endomorphism on the invariant product space $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$;
+(3) \textbf{Microscopic configuration tracking under MDL}: To prevent pathological convergence caused by tracking only macroscopic scalars, we formulate the joint likelihood over the complete microstate configuration $x_{t+1}$ across all potential coordinates $V_\infty$. We deduce a tripartite marginal likelihood factorization governing structural evaluation, topological propagation, and microstate transition, coupled with the Minimum Description Length (MDL) criterion;
+(4) \textbf{Computational universality and simulation boundaries}: We rigorously prove that the system encompasses Rule 110 and Conway's Game of Life on degenerate submanifolds, establishing Turing Completeness (TC) as a formal expressivity baseline.
+In continuous time, this framework instantiates history-driven hybrid switched systems. We prove that this architecture preserves analytical tractability while endogenously accommodating open-ended evolution.
+\par\medskip
+\noindent\textbf{Keywords:} interaction-element system; history dependence; topology propagation chain; null-state compactification; full microscopic configuration; self-referential dynamics; Minimum Description Length; Turing Completeness
+\end{abstract}
+
+\tableofcontents
+\vspace{1em}
+
+% ================= 1 引言 =================
+\section{引言}\label{sec:intro}
+
+\subsection{研究背景与理论闭环的重构}
+
+在自组织复杂系统与演化动力学的建模中，拓扑结构与微观物理状态之间存在着深层的自指循环：系统的交互拓扑并非瞬时状态的无记忆切片，而是由系统自初始时刻演化至今的完整历史路径 $\mathcal{H}_t$ 所共同塑造；同时，由历史诱导的微观成边倾向在转化为实际物理耦合前，往往需要经历多层次的局域协调、路径传递与结构重写 $\eta$；最终，在提炼出的有效交互结构上，微观转移律 $f$ 驱动全体实体推进至下一物理状态，生成新的历史片段。
+
+传统复杂动力学模型通常割裂了这一因果回路，将拓扑生成退化为单步无记忆映射，或使用固定不变的邻接矩阵 \cite{stewart2003symmetry,deville2015modular}。同时，在统计推断与系统辨识中，若仅使用系统活性规模等宏观标量作为损失约束，极易诱导模型拟合出违反局域物理守恒的伪因果关系。
+
+\subsection{本文核心贡献}
+
+本文提出了一套完备的自指交互元系统理论，重点突破如下：
+\begin{itemize}[leftmargin=2em]
+\item \textbf{因果回路完备化（$f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$）}：显式引入历史轨迹空间 $\mathcal{H}_t$，形式化定义从历史输入到初始图生成 $\sigma$、再经由多层图传播链 $\eta$ 导出有效图 $\widetilde{G}_t$、最后由转移律 $f$ 驱动状态演化的完整动力学回路；
+\item \textbf{零态紧化相空间}：引入潜在元全集 $V_\infty$ 与紧化状态空间 $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$，将全局演化严格表达为不变乘积流形 $\Sigma = \prod_{v\in V_\infty}\bar{\widetilde{M}}_v$ 上的自同态动力系统；
+\item \textbf{全微观格局跟踪的 MDL 推断}：摒弃简缩标量约束，直接对潜在元宇宙 $V_\infty$ 中全体槽位的微观复合状态 $x_{t+1}$ 建立精确概率推断模型，给出三因子边际似然分解与多制度规则链估计准则；
+\item \textbf{计算普遍性与理论模拟边界}：给出了架构在退化子系统下对经典图灵完备系统（Rule 110 与 Game of Life）的构造性归约，确立了系统的理论模拟能力下界。
+\end{itemize}
+
+% ================= 2 交互元系统：零态紧化与历史流形 =================
+\section{交互元系统：零态紧化与历史流形}\label{sec:base}
+
+\subsection{复合状态与潜在元宇宙}
+
+\begin{definition}[紧化自指交互元系统]\label{def:iesystem}
+一个\emph{自指交互元系统}定义为七元组：
+\begin{equation}
+\mathcal{A}=\langle V_\infty,\{\bar{M}_i\}_{i\in V_\infty},\mathfrak{S},\mathfrak{E},\mathfrak{F},\eta,f\rangle,
+\label{eq:iesystem}
+\end{equation}
+其中各组分定义如下：
+\begin{itemize}[leftmargin=2em]
+\item $V_\infty$ 为固定（有限或可数无限）的\emph{潜在元宇宙索引集}；
+\item $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}\} \sqcup \{\bot_{\mathrm{d}}\}$ 为槽位 $v_i$ 的\emph{紧化物理状态空间}（$M_i$ 为有效物理流形，$\bot_{\mathrm{u}}$ 为休眠态，$\bot_{\mathrm{d}}$ 为不可逆吸收态）；
+\item $\mathfrak{S}$ 为历史倾向性规则空间，$\mathfrak{E}$ 为拓扑传播算子空间，$\mathfrak{F}$ 为局域转移规则空间；
+\item 每个槽位 $v_i\in V_\infty$ 携带\emph{复合微观状态}：
+  \begin{equation}
+  x_i(t) = \bigl(s_i(t),\ \sigma_i(t),\ f_i(t)\bigr) \in \bar{M}_i \times \mathfrak{S} \times \mathfrak{F} \eqqcolon \bar{\widetilde{M}}_i;
+  \label{eq:composite-state}
+  \end{equation}
+\item $\Sigma = \prod_{v\in V_\infty} \bar{\widetilde{M}}_v$ 为系统的不变全局格局空间；
+\item $\eta=\{\eta_l\}_{l=1}^L \in \mathfrak{E}$ 为多层拓扑传播链；
+\item $f=\{f_i\}_{i\in V_\infty} \in \mathfrak{F}$ 为局域物理转移规则族。
+\end{itemize}
+\end{definition}
+
+\begin{definition}[历史轨迹流形]\label{def:history}
+系统演化至时刻 $t$ 的\emph{完整历史轨迹}定义为格局空间的直积元：
+\begin{equation}
+\mathcal{H}_t = \bigl(x_0, x_1, \dots, x_t\bigr) \in \prod_{k=0}^t \Sigma \eqqcolon \mathbf{H}_t.
+\label{eq:history}
+\end{equation}
+系统的有效物理支撑集定义为 $V_t \equiv \supp(x_t) = \{v_i\in V_\infty: s_i(t)\in M_i\}$。
+\end{definition}
+
+% ================= 3 历史倾向性映射与多层拓扑传播链 =================
+\section{\texorpdfstring{历史倾向性映射与多层拓扑传播链 $\eta$}{历史倾向性映射与多层拓扑传播链 η}}\label{sec:sigma-eta}
+
+\subsection{\texorpdfstring{历史依赖的倾向性映射 $\sigma$}{历史依赖的倾向性映射 σ}}
+
+不同于无记忆的马尔可夫选图，相互作用倾向取决于微观实体自创生以来的完整时空演化。
+
+\begin{definition}[历史倾向性映射]\label{def:history-sigma}
+倾向性规则族 $\sigma$ 将全局历史轨迹映射为初始瞬时交互图：
+\begin{equation}
+\sigma:\ \mathbf{H}_t \longrightarrow \mathfrak{G}(V_\infty), \qquad G_t^{(0)} = \sigma(\mathcal{H}_t).
+\label{eq:sigma-map}
+\end{equation}
+成对连边判定满足成对历史局部性：
+\begin{equation}
+\mathbb{I}_{\{(v_i,v_j)\in E(G_t^{(0)})\}} = h\bigl(\mathcal{H}_t(v_i), \mathcal{H}_t(v_j);\, \sigma_i\bigr) \land h\bigl(\mathcal{H}_t(v_j), \mathcal{H}_t(v_i);\, \sigma_j\bigr),
+\label{eq:edge-history}
+\end{equation}
+其中 $\mathcal{H}_t(v_i) = (x_i(0), \dots, x_i(t))$ 为元素 $v_i$ 的局域微观历史线。
+\end{definition}
+
+\subsection{\texorpdfstring{多层拓扑传播链 $\eta$（$G_t^{(0)} \to \dots \to \widetilde{G}_t$）}{多层拓扑传播链 η（G_t^(0) -> ... -> G_t~）}}
+
+初始倾向图 $G_t^{(0)}$ 仅反映点对间的一阶直接交互意愿。在实际物理或复杂网络演化中，相互作用通道需经历多跳传递、介质极化或局域协调。
+
+\begin{definition}[拓扑传播链]\label{def:eta-chain}
+定义由 $L$ 层拓扑变换算子构成的传播链 $\eta = \eta_L \circ \eta_{L-1} \circ \dots \circ \eta_1$。在历史 $\mathcal{H}_t$ 调制下，交互图经历如下多层精化：
+\begin{equation}
+G_t^{(0)} \xrightarrow{\quad\eta_1\quad} G_t^{(1)} \xrightarrow{\quad\eta_2\quad} \dots \xrightarrow{\quad\eta_L\quad} G_t^{(L)} \equiv \widetilde{G}_t,
+\label{eq:eta-refinement}
+\end{equation}
+其中每一步变换 $\eta_l: \mathfrak{G}(V_\infty) \times \mathbf{H}_t \to \mathfrak{G}(V_\infty)$ 的局域成边满足：
+\begin{equation}
+(v_i, v_j) \in E(G_t^{(l)}) \iff \rho_l\Big(G_t^{(l-1)}, \mathcal{H}_t|_{\Ncal_{G_t^{(l-1)}}(v_i) \cup \Ncal_{G_t^{(l-1)}}(v_j)}\Big) = 1.
+\label{eq:eta-local}
+\end{equation}
+最终输出的 $\widetilde{G}_t$ 称为系统在 $t$ 时刻的\emph{有效交互图}。
+\end{definition}
+
+% ================= 4 局部转移规则与全局单步演化 =================
+\section{\texorpdfstring{局部转移规则与全局演化回路}{局部转移规则与全局演化回路}}\label{sec:lifecycle}
+
+\subsection{有效图上的局域转移映射}
+
+在有效交互图 $\widetilde{G}_t$ 确定后，物理状态更新与规则重组完全在各槽位的局域有效邻域 $\Ncal_{\widetilde{G}_t}(v_i)$ 内并行执行。
+
+\begin{definition}[紧化局域转移规则]\label{def:compact-f}
+每个槽位 $v_i\in V_\infty$ 的转移规则为映射 $f_i: \bar{\widetilde{M}}_i \times \prod_{v_j\in\Ncal_{\widetilde{G}_t}(v_i)}\bar{\widetilde{M}}_j \to \bar{\widetilde{M}}_i$。其在有效拓扑下的微观更新统一定义如下：
+\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
+\item \textbf{有效态连续演化}：若 $s_i(t)\in M_i$ 且未达吸收边界，则计算物理流形更新：
+  \[
+  s_i(t+1) = f^{\text{metric}}_i\bigl(s_i(t), x_t|_{\Ncal_{\widetilde{G}_t}(v_i)}\bigr) \in M_i, \qquad (\sigma_i, f_i) \text{ 保持或自适应微调};
+  \]
+\item \textbf{激发跃迁与规则重组}：若 $s_i(t)=\bot_{\mathrm{u}}$ 且在有效图中被成功接入活跃邻域（$\Ncal_{\widetilde{G}_t}(v_i)\cap\supp(x_t)\neq\emptyset$），则槽位激活为有效物理状态并重组动力学规则：
+  \begin{equation}
+  s_i(t+1) = f^{\text{init}}_i\bigl(x_t|_{\Ncal_{\widetilde{G}_t}(v_i)}\bigr) + \varepsilon_i \in M_i, \qquad \varepsilon_i \sim \mathcal{N}(0, \sigma_\varepsilon^2 I),
+  \label{eq:f-active}
+  \end{equation}
+  \begin{equation}
+  \sigma_i(t+1) = \mathcal{R}_\sigma\bigl(\sigma_t|_{\Ncal_{\widetilde{G}_t}(v_i)}\bigr), \qquad
+  f_i(t+1) = \mathcal{R}_f\bigl(f_t|_{\Ncal_{\widetilde{G}_t}(v_i)}\bigr);
+  \label{eq:r-assign}
+  \end{equation}
+\item \textbf{吸收注销}：若 $s_i(t)\in M_i$ 且动力学轨道到达消除边界，则跃迁至不可逆吸收死态 $s_i(t+1) = \bot_{\mathrm{d}}$；
+\item \textbf{休眠保持}：若 $s_i(t)=\bot_{\mathrm{u}}$ 且 $\Ncal_{\widetilde{G}_t}(v_i)=\emptyset$，保持 $s_i(t+1)=\bot_{\mathrm{u}}$；若 $s_i(t)=\bot_{\mathrm{d}}$，恒有 $s_i(t+1)=\bot_{\mathrm{d}}$。
+\end{enumerate}
+\end{definition}
+
+\subsection{自指单步闭环演化时序}
+
+\begin{proposition}[系统演化闭环]\label{prop:closed-loop}
+系统的单步演化构成了如下无缝闭合的因果回路：
+\begin{equation}
+\mathcal{H}_t \xrightarrow{\quad\sigma\quad} G_t^{(0)} \xrightarrow{\quad\eta\quad} \widetilde{G}_t \xrightarrow{\quad f\quad} x_{t+1} \implies \mathcal{H}_{t+1} = (\mathcal{H}_t, x_{t+1}),
+\label{eq:loop}
+\end{equation}
+系统全局状态转移 $\Phi: \mathbf{H}_t \to \Sigma$ 在紧化相空间 $\Sigma$ 上是严格内生闭合的。
+\end{proposition}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=3pt, align=center, inner sep=4pt,
+              font=\small, minimum height=7mm},
+  arr/.style={-{Stealth[length=2mm]}, semithick}]
+\node[box, text width=7.6cm] (hist) at (0,0)
+  {\textbf{历史轨迹聚合}：$\mathcal{H}_t = (x_0, x_1, \dots, x_t) \in \mathbf{H}_t$};
+\node[box, text width=7.6cm] (sig) at (0,-1.3)
+  {\textbf{历史倾向性映射}：$G_t^{(0)} = \sigma(\mathcal{H}_t) \in \mathfrak{G}(V_\infty)$};
+\node[box, text width=7.6cm] (eta) at (0,-2.6)
+  {\textbf{多层拓扑传播链}：$G_t^{(0)} \xrightarrow{\eta_1} \dots \xrightarrow{\eta_L} \widetilde{G}_t$（有效交互图）};
+\node[box, text width=7.8cm] (tr) at (0,-4.0)
+  {\textbf{有效图上并行转移}：$x_i(t+1)=f_i\bigl(x_i(t), x_t|_{\Ncal_{\widetilde{G}_t}(v_i)}\bigr), \forall v_i\in V_\infty$};
+\node[box, text width=3.8cm] (ok) at (-4.8,-5.8)
+  {\textbf{有效态演化}\\$s_i(t)\in M_i \to s_i'\in M_i$};
+\node[box, text width=3.8cm] (dd) at (0,-5.8)
+  {\textbf{吸收注销}\\$s_i(t)\in M_i \to \bot_{\mathrm{d}}$};
+\node[box, text width=3.8cm] (bb) at (4.8,-5.8)
+  {\textbf{激发跃迁}\\$\bot_{\mathrm{u}} \to s_i'\in M_i,\ \mathcal{R}(\cdot)$};
+\node[box, text width=7.8cm] (vt) at (0,-7.5)
+  {\textbf{全微观格局更新}：$x_{t+1}\in\Sigma = \prod_{v\in V_\infty}\bar{\widetilde{M}}_v$\\增广历史流形：$\mathcal{H}_{t+1} = (\mathcal{H}_t, x_{t+1})$};
+\draw[arr] (hist) -- (sig);
+\draw[arr] (sig) -- (eta);
+\draw[arr] (eta) -- (tr);
+\draw[arr] (tr) -- (ok);
+\draw[arr] (tr) -- (dd);
+\draw[arr] (tr) -- (bb);
+\draw[arr] (ok) -- (vt);
+\draw[arr] (dd) -- (vt);
+\draw[arr] (bb) -- (vt);
+\draw[arr, dashed] (vt) to[out=180,in=180]
+  node[left, font=\scriptsize] {推进至下一时步} (hist);
+\end{tikzpicture}
+\caption{基于历史倾向 $\sigma$、拓扑传播链 $\eta$ 与微观转移 $f$ 的自指演化闭环。}
+\label{fig:lifecycle}
+\end{figure}
+
+% ================= 5 推导链 I：全微观状态跟踪与 MDL 准则 =================
+\section{\texorpdfstring{推导链 I：全微观格局跟踪与裂解 MDL 准则}{推导链 I：全微观格局跟踪与裂解 MDL 准则}}\label{sec:measure}
+
+\subsection{\texorpdfstring{全微观格局跟踪的必要性与 Step A $\to$ D}{全微观格局跟踪的必要性与 Step A -> D}}
+
+在系统辨识中，若仅跟踪宏观活性维数标量 $|V_{t+1}|$，会导致模型学习到严重失真的物理事实。因此，统计推断必须直接建立在潜在元全集 $V_\infty$ 上全体交互元的微观状态配置向量 $x_{t+1} = (x_i(t+1))_{i\in V_\infty}$ 之上。
+
+推导步骤如下：
+\paragraph{Step A（全局后验目标）。}
+给定系统观测轨迹 $s_{0:T}$，待学习参数为制度化规则链序列 $\{(\sigma^{(k)}, \eta^{(k)}, f^{(k)})\}_{k=1}^K$。由贝叶斯公式：
+\begin{equation}
+p\bigl(\text{Rule-Chains}\mid s_{0:T}\bigr) \propto
+p\bigl(s_{0:T}\mid\text{Rule-Chains}\bigr) \cdot p(\text{Rule-Chains}).
+\label{eq:step-a}
+\end{equation}
+
+\paragraph{Step B（全微观格局因果因子化）。}
+在历史依赖流形下，时间步转移由微观格局在历史条件下的全概率展开：
+\begin{equation}
+p\bigl(s_{0:T}\mid\text{Rule-Chains}\bigr) = p(s_0)\prod_{t=0}^{T-1} p\bigl(s_{t+1}\mid \mathcal{H}_t;\ \sigma^{(c(t))}, \eta^{(c(t))}, f^{(c(t))}\bigr),
+\label{eq:step-b}
+\end{equation}
+其中 $s_{t+1} = (s_i(t+1))_{i\in V_\infty} \in \bar{M}^{V_\infty}$ 包含了活跃槽位的值、休眠槽位的 $\bot_{\mathrm{u}}$ 状态以及死亡槽位的 $\bot_{\mathrm{d}}$ 状态。
+
+\paragraph{Step C（制度时间化）与 Step D（MDL 编码映射）。}
+引入分段常数映射 $c(t)\in\{1,\dots,K\}$，并将先验转化为 Kolmogorov 描述长度惩罚 $-\lambda\DL(\text{Rule-Chain})$。
+
+\subsection{全微观状态似然的维数裂解与分层测度}
+
+\begin{proposition}[全微观格局维数裂解恒等式]\label{prop:disintegration}
+记系统微观占有指示向量为 $\mathbf{z}_{t+1} = (\mathbb{I}_{\{s_i(t+1)\in M_i\}})_{i\in V_\infty} \in \{0,1\}^{V_\infty}$。全格局条件对数似然可严格分解为全局微观占有构形似然与有效物理坐标分布似然：
+\begin{equation}
+\log p\bigl(s_{t+1}\mid \mathcal{H}_t;\ \text{Rule}_t\bigr) =
+\underset{\text{微观槽位占有与维数跃迁似然}}{\underbrace{\log p\bigl(\mathbf{z}_{t+1}\mid \mathcal{H}_t;\ \text{Rule}_t\bigr)}}
+\;+\;
+\underset{\text{全微观物理坐标分布似然}}{\underbrace{\log p\bigl(s_{t+1}|_{\supp(\mathbf{z}_{t+1})}\mid \mathbf{z}_{t+1}, \mathcal{H}_t, \widetilde{G}_t;\ f_t\bigr)}}.
+\label{eq:disintegration}
+\end{equation}
+\end{proposition}
+
+\begin{remark}[测度论严格性]\label{rem:measure-rigor}
+式~\eqref{eq:disintegration} 中第一项为定义在离散超立方体 $\{0,1\}^{V_\infty}$ 上的概率质量函数；第二项定义在条件确定的连续流形 $\prod_{i\in\supp(\mathbf{z}_{t+1})} M_i$ 上，采用对称化无标号参考测度 $\nu_k = \mathrm{Leb}^{dk}/k!$。两项相加严格构成良定义测度，无需引入外生加权系数。
+\end{remark}
+
+\subsection{更新后的全微观格局 MDL 优化目标}
+
+结合推导链与命题~\ref{prop:disintegration}，系统的全局辨识目标表述为如下优化形式：
+\begin{equation}
+\begin{aligned}
+\max_{\{\sigma^{(k)}, \eta^{(k)}, f^{(k)}\}_{k=1}^K} \Bigg\{
+  \sum_{t=0}^{T-1} \bigg[
+    & \log p\bigl(\mathbf{z}_{t+1}\mid \mathcal{H}_t;\ \sigma^{(c(t))}, \eta^{(c(t))}, f^{(c(t))}\bigr) \\
+    & + \log p\bigl(s_{t+1}|_{\supp(\mathbf{z}_{t+1})}\mid \mathbf{z}_{t+1}, \mathcal{H}_t, \widetilde{G}_t;\ f^{(c(t))}\bigr) \bigg] \\
+    & + \log p(\text{Model}) \;-\; \lambda \cdot \DL\bigl(\text{Rule-Chain}\bigr) \Bigg\}.
+\end{aligned}
+\label{eq:mdl-chain}
+\end{equation}
+
+% ================= 6 推导链 II：对偶推断与物理辨识 =================
+\section{\texorpdfstring{推导链 II：三重边际似然分解与物理系统辨识}{推导链 II：三重边际似然分解与物理系统辨识}}\label{sec:dual-learning}
+
+\subsection{\texorpdfstring{隐图边缘化与值域分工设计原则（Step E $\to$ F）}{隐图边缘化与值域分工设计原则（Step E -> F）}}
+
+\paragraph{Step E（初始图与有效图的双重隐变量边缘化）。}
+在真实物理观测中，$G_t^{(0)}$ 与 $\widetilde{G}_t$ 均属于隐变量。单步转移概率必须对全局图空间执行联合边际化：
+\begin{equation}
+p(x_{t+1}\mid \mathcal{H}_t;\ \sigma, \eta, f) = \sum_{\widetilde{G}_t\in\mathfrak{G}(V_\infty)} \sum_{G_t^{(0)}\in\mathfrak{G}(V_\infty)} p\bigl(x_{t+1}, \widetilde{G}_t, G_t^{(0)}\mid \mathcal{H}_t;\ \sigma, \eta, f\bigr).
+\label{eq:step-e}
+\end{equation}
+
+\paragraph{Step F（值域分工设计原则与三重因子分解）。}
+依据模块化设计的\textbf{值域分工设计原则}（Range-Space Decoupling Design Principle）：
+\begin{itemize}[leftmargin=2em]
+\item $\sigma$ 的值域限定于初始图空间 $\mathfrak{G}(V_\infty)$（从历史提取结构倾向）；
+\item $\eta$ 的值域限定于有效图空间 $\mathfrak{G}(V_\infty)$（在图空间内部执行拓扑精化与协调）；
+\item $f$ 的值域限定于物理状态流形 $\bar{\widetilde{M}}$（在给定有效图拓扑下执行状态更新）。
+\end{itemize}
+值域分工原则排除了反向依赖，唯一确立了如下前向三因子因果分解链：
+\begin{equation}
+\boxed{\ p(x_{t+1}\mid \mathcal{H}_t;\ \sigma, \eta, f) = \sum_{\widetilde{G}_t} \sum_{G_t^{(0)}}
+\underbrace{p\bigl(G_t^{(0)}\mid \mathcal{H}_t;\ \sigma\bigr)}_{\text{历史倾向因子}}
+\cdot
+\underbrace{p\bigl(\widetilde{G}_t\mid G_t^{(0)}, \mathcal{H}_t;\ \eta\bigr)}_{\text{拓扑传播因子}}
+\cdot
+\underbrace{p\bigl(x_{t+1}\mid x_t, \widetilde{G}_t;\ f\bigr)}_{\text{微观状态转移因子}}.\ }
+\label{eq:marginal-likelihood}
+\end{equation}
+
+\subsection{三相解耦交替坐标优化}
+
+式~\eqref{eq:marginal-likelihood} 导出了算法上的三相交替优化机制：
+\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
+\item \textbf{$\sigma$-优化相}：固定 $\eta$ 与 $f$，在隐图后验分布引导下优化历史倾向性网络 $\sigma$；
+\item \textbf{$\eta$-优化相}：固定 $\sigma$ 与 $f$，优化图传播算子 $\eta$ 的参数；
+\item \textbf{$f$-优化相}：固定 $\sigma$ 与 $\eta$，在采样的有效图 $\widetilde{G}_t$ 上优化连续状态更新与激发跃迁网络。
+\end{enumerate}
+
+\subsection{物理辨识实例：流固冲击粒子动力学}
+
+以高速流固碰撞连续介质的拉格朗日粒子追踪数据流（图~\ref{fig:splash}）为例，三层自指对偶架构展现出精确的物理同构：
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, inner sep=3pt, font=\scriptsize, minimum height=6mm},
+  arr/.style={-{Stealth[length=1.5mm]}, thin}]
+\node[box, fill=gray!10] (phase1) at (0,0) {\textbf{平流运动相}\\历史平滑 $\mathcal{H}_t$\\自由弹道 $f_{\text{ballistic}}$};
+\node[box, fill=gray!15] (phase2) at (3.6,0) {\textbf{冲击接触相}\\历史剪切触发 $\sigma$\\$\eta$ 建立界面接触网};
+\node[box, fill=gray!20] (phase3) at (7.4,0) {\textbf{破碎飞溅相}\\$\eta$ 选址激活 $\bot_{\mathrm{u}}$\\全微观状态激发 $s^\ast$};
+\node[box, fill=gray!25] (phase4) at (11.2,0) {\textbf{重组融合相}\\多跳融合拓扑 $\widetilde{G}_t$\\质点吸收 $\bot_{\mathrm{d}}$};
+\draw[arr] (phase1) -- (phase2);
+\draw[arr] (phase2) -- (phase3);
+\draw[arr] (phase3) -- (phase4);
+\end{tikzpicture}
+\caption{固—液撞击连续介质动力学在三层自指交互元系统中的物理映射。}
+\label{fig:splash}
+\end{figure}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{历史累积与接触判定（$\mathcal{H}_t \to \sigma$）}：介质的局部塑性应变累积于历史 $\mathcal{H}_t$ 中，当累积应力超过屈服极限时，$\sigma$ 触发断裂连边倾向 $G_t^{(0)}$；
+\item \textbf{裂纹扩展与多跳传播（$G_t^{(0)} \to \eta \to \widetilde{G}_t$）}：传播链 $\eta$ 对局域应力集中区实施断裂传递闭包计算，生成宏观裂纹与飞溅液滴的有效拓扑边界 $\widetilde{G}_t$；
+\item \textbf{全微观状态写入（$\widetilde{G}_t \to f \to x_{t+1}$）}：转移律 $f$ 依据周围介质质点的动量与质量张量，直接计算被激活飞溅粒子的物理状态，全微观格局目标~\eqref{eq:mdl-chain} 确保每一个微观粒子的位置、速度与质量严格满足守恒律。
+\end{itemize}
+
+% ================= 7 连续时间 =================
+\section{连续时间：历史驱动的切换流与边界跃迁}\label{sec:ct}
+
+在连续时间设定下，系统定义在紧化乘积流形 $\Sigma = \prod_{v\in V_\infty}\bar{M}_v$ 上。对每种有效拓扑配置 $\widetilde{E}\in\mathfrak{G}(V_\infty)$，系统配置局域光滑向量场 $X_{\widetilde{E}}$。模式切换由历史泛函 $\sigma(\mathcal{H}_t)$ 与传播链 $\eta$ 驱动：
+\begin{equation}
+\dot x(t) = X_{\widetilde{E}_m}(x(t)), \qquad \widetilde{E}_m = \eta\bigl(\sigma(\mathcal{H}_t)\bigr),
+\label{eq:switchflow}
+\end{equation}
+其中 $\mathcal{H}_t = \{x(\tau)\}_{\tau\in[0,t]}$ 为连续历史轨道。
+
+连续动力学中的两类边界行为表述为：
+\begin{itemize}[leftmargin=2em]
+\item \textbf{吸收停时}：$v_i$ 消除时刻由首次到达吸收边界 $D_i\subset\bar{M}_i$ 的停时确定：$\tau_i = \inf\{\,t\ge 0:\ x_i(t)\in D_i\,\}$；
+\item \textbf{历史触发的激发跳变}：当历史轨迹泛函穿过状态截面 $\Gamma\subset \mathbf{H}_t$ 时，有效拓扑 $\widetilde{G}_t$ 接入休眠槽位 $v_k$，诱发边界跳变：
+  \begin{equation}
+  x_k(t^{\ast+}) = f_k\bigl(\bot_{\mathrm{u}},\ x_t|_{\Ncal_{\widetilde{G}_t}(v_k)}(t^{\ast-})\bigr) \in M_k, \qquad v_k \in V_\infty\setminus\supp(x_{t^{\ast-}}).
+  \label{eq:ct-jump}
+  \end{equation}
+\end{itemize}
+
+% ================= 8 开放式演化与理论边界讨论 =================
+\section{开放式演化与理论边界讨论}\label{sec:open}
+
+\subsection{历史依赖与全微观非遍历性}
+
+引入历史流形 $\mathcal{H}_t$ 与全微观格局跟踪后，系统在本质上强化了开放式演化的数理基础：
+\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
+\item \textbf{非马尔可夫路径依赖}：状态演化由完整历史 $\mathcal{H}_t$ 调制，系统轨道在相空间中不会重访历史测度，打破了有限维紧致相空间的 Poincaré 递归；
+\item \textbf{微观规则的种群演化}：伴随休眠槽位不断被有效图 $\widetilde{G}_t$ 激活，重组算子 $\mathcal{R}$ 持续向系统注入新的局域规则 $(\sigma^\ast, f^\ast)$，经验规则测度 $\mu_t = \frac{1}{|V_t|}\sum_{v\in\supp(x_t)}\delta_{(\sigma_v, f_v)}$ 在无限维表示空间中呈现非平衡态定向扩散。
+\end{enumerate}
+
+\subsection{计算普遍性与理论模拟边界（Turing Completeness）}
+
+为了确立该动力系统框架在计算论层面的表达力理论下界，本文通过子流形退化构造证明其具备通用图灵计算能力。
+
+\begin{proposition}[计算普遍性 / 图灵完备性]\label{prop:turing-completeness}
+交互元系统 $\mathcal{A}=\langle V_\infty,\{\bar{M}_i\},\mathfrak{S},\mathfrak{E},\mathfrak{F},\eta,f\rangle$ 是图灵完备（Turing-Complete）的。任意通用图灵机均可同态嵌入于该系统的一类确定性退化子流形中。
+\end{proposition}
+
+\begin{proof}[构造性归约证明]
+考虑系统在以下退化约束下的子流形行为：(a) 历史投影取单步无记忆截面 $\sigma(\mathcal{H}_t) = \sigma(x_t)$；(b) 拓扑传播链取恒等映射 $\eta = \mathrm{id}$（即 $\widetilde{G}_t = G_t^{(0)}$）；(c) 规则全域时不变 $\sigma_i \equiv \sigma_0, f_i \equiv f_0$；(d) 初始有效支撑集全域激活 $\supp(x_0) = V_\infty$，且动力学封闭在有效子集 $M_i$ 内（永不触发 $\bot_{\mathrm{u}}$ 或 $\bot_{\mathrm{d}}$）。此时系统恒等退化为经典同步元胞自动机（Cellular Automaton）。基于此可给出两条独立的经典归约：
+\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
+\item \textbf{一维极小完备归约（Rule 110）}：取 $V_\infty = \mathbb{Z}$，物理状态集 $M = \{0, 1\}$。设定 $\sigma$ 产生标准一维近邻拓扑 $\Ncal(i) = \{i-1, i+1\}$。定义 $f_0$ 查表执行初等元胞机 Rule 110 的转移逻辑 $\delta_{110}: \{0,1\}^3 \to \{0,1\}$。依据 Cook (2004) 定理 \cite{cook2004universality}，Rule 110 可以模拟循环标记系统（Cyclic Tag System）并等价于通用图灵机，故 $\mathcal{A}|_{\text{Rule 110}}$ 具备图灵完备性；
+\item \textbf{二维网格归约（Conway's Game of Life）}：取 $V_\infty = \mathbb{Z}^2$，$M = \{0, 1\}$（死/活状态均在 $M$ 内部演化，不改变物理支撑集）。$\sigma$ 产生标准 8-邻域 Moore 拓扑，$f_0$ 执行标准 B3/S23 转移律。依据 Conway (1970) 与 Berlekamp 等 (1982) 的滑翔机枪与逻辑门构造 \cite{berlekamp1982winning}，$\mathcal{A}|_{\text{GoL}}$ 具备通用计算能力。
+\end{enumerate}
+进一步地，当 $\eta$ 处于非平凡状态（$L \ge 1$）时，系统具备单步多跳指针解析与图重写能力，内生等价于动态存储修改机（Storage Modification Machines, SMM \cite{schonhage1980storage}），确立了更广义的有源图计算能力。
+\end{proof}
+
+\begin{remark}[模拟边界与可学习性区隔]\label{rem:tc-boundary}
+命题~\ref{prop:turing-completeness} 确立了本系统的理论模拟边界：任何物理可计算的经典力学系统或偏微分方程数值解法均落在该架构的表达力闭包之内。但这仅代表系统参数空间的**存在性天花板**（Expressivity Upper-bound），并不蕴含从有限经验数据中反向推断出该规则的易学性（Learnability）。在系统辨识中，离散元胞机与连续物理粒子追踪构成了自底向上的学习难度阶梯。
+\end{remark}
+
+\subsection{理论假设账本}
+
+\begin{remark}[形式化假设账本]\label{rem:boundary}
+本框架推导链依赖的前提假设汇总如下：
+\begin{itemize}[leftmargin=2em]
+\item \textbf{成对历史局部性}（假设~\ref{ass:pairwise}）：成边判定仅依赖两端点的局域历史；
+\item \textbf{值域分工设计原则}（Step F）：$\sigma$ 负责图空间生成，$\eta$ 负责图空间精化，$f$ 负责状态空间转移；
+\item \textbf{潜在元宇宙基数}：理论分析假定 $V_\infty = \mathbb{N}$，实际计算中取足够大常数或采用死态复用机制（$\bot_{\mathrm{d}}\to\bot_{\mathrm{u}}$）。
+\end{itemize}
+\end{remark}
+
+% ================= 9 结论 =================
+\section{结论}\label{sec:conclusion}
+
+本文系统建立了包含历史依赖倾向 $\sigma$、多层拓扑传播链 $\eta$ 与微观物理转移 $f$ 的自指交互元系统理论框架：
+\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
+\item 建立了 $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$ 的自指因果回路，将拓扑生成推广为历史驱动且包含多层结构协调的传播过程；
+\item 提出了基于全微观格局 $x_{t+1}$ 的维数裂解似然与分层参考测度，排除了宏观标量约束导致的退化伪事实，导出了规整的裂解 MDL 优化目标；
+\item 基于值域分工设计原则，严格导出了三因子边际似然分解公式与三相解耦优化算法；
+\item 构造性证明了系统的图灵完备性，确立了系统的理论模拟能力下界。
+\end{enumerate}
+该理论体系为复杂自组织演化系统、自适应拓扑神经网络以及连续介质拉格朗日多相物理建模提供了严格统一的数理基石。
+
+% ================= 参考文献 =================
+\begin{thebibliography}{99}
+\small
+
+\bibitem{stewart2003symmetry}
+Stewart, I., Golubitsky, M., Pivato, M. Symmetry groupoids and patterns of
+synchrony in coupled cell systems. \textit{SIAM Journal on Applied Dynamical
+Systems}, 2003, 2(4): 609--646.
+
+\bibitem{deville2015modular}
+DeVille, L., Lerman, E. Modular dynamical systems on networks.
+\textit{Journal of Functional Analysis}, 2015, 268(2): 294--327.
+
+\bibitem{cook2004universality}
+Cook, M. Universality in elementary cellular automata. \textit{Complex Systems},
+2004, 15(1): 1--40.
+
+\bibitem{berlekamp1982winning}
+Berlekamp, E. R., Conway, J. H., Guy, R. K. \textit{Winning Ways for your
+Mathematical Plays}. Academic Press, 1982.
+
+\bibitem{schonhage1980storage}
+Sch\"onhage, A. Storage modification machines. \textit{SIAM Journal on
+Computing}, 1980, 9(3): 490--508.
+
+\bibitem{ray1991}
+Ray, T. S. An approach to the synthesis of life. In: Langton, C., Taylor, C.,
+Farmer, J. D., Rasmussen, S. (eds.) \textit{Artificial Life II}, Santa Fe
+Institute Studies in the Sciences of Complexity, vol. XI. Addison-Wesley,
+1991: 371--408.
+
+\bibitem{ofria2004}
+Ofria, C., Wilke, C. O. Avida: A software platform for research in
+computational evolutionary biology. \textit{Artificial Life}, 2004, 10(2):
+191--229.
+
+\bibitem{schmidhuber1991}
+Schmidhuber, J. A possibility for implementing curiosity and boredom in
+model-building neural controllers. In: Meyer, J.-A., Wilson, S. W. (eds.)
+\textit{From Animals to Animats: Proceedings of the First International
+Conference on Simulation of Adaptive Behavior}. MIT Press/Bradford Books,
+1991: 222--227.
+
+\bibitem{pattee1995}
+Pattee, H. H. Artificial life needs a real epistemology. In: Mor\'an, F.,
+Moreno, A., Merelo, J. J., Chac\'on, P. (eds.) \textit{Advances in Artificial
+Life: Third European Conference on Artificial Life (ECAL 1995)}, Lecture
+Notes in Computer Science 929. Springer, 1995: 23--38.
+
+\bibitem{lehman2015}
+Lehman, J., Stanley, K. O. \textit{Why Greatness Cannot Be Planned: The Myth
+of the Objective}. Springer, 2015.
+
+\bibitem{mordvintsev2020}
+Mordvintsev, A., Randazzo, E., Niklasson, E., Levin, M. Growing neural
+cellular automata. \textit{Distill}, 2020. \texttt{doi:10.23915/distill.00023}.
+
+\end{thebibliography}
+
 \end{document}
