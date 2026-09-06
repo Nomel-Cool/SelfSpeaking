@@ -8,21 +8,22 @@
 \contentsline {subsection}{\numberline {3.2}多层拓扑传播链 $\miteta $（$G_t^{(0)} \to \dots \to \widetilde {G}_t$）}{5}{subsection.3.2}%
 \contentsline {section}{\numberline {4}局部转移规则与全局演化回路}{5}{section.4}%
 \contentsline {subsection}{\numberline {4.1}有效图上的局域转移映射}{5}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}自指单步闭环演化时序}{5}{subsection.4.2}%
-\contentsline {section}{\numberline {5}在线贝叶斯更新与全微观格局跟踪}{6}{section.5}%
-\contentsline {subsection}{\numberline {5.1}从批处理辨识到在线递推}{6}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}在线贝叶斯递推核}{6}{subsection.5.2}%
+\contentsline {subsection}{\numberline {4.2}自指单步闭环演化时序}{6}{subsection.4.2}%
+\contentsline {section}{\numberline {5}在线对偶贝叶斯更新：$f$-$\mitsigma $ 核心架构}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}$f$-$\mitsigma $ 对偶耦合与端到端可微性}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}$f$-$\mitsigma $ 端到端在线贝叶斯递推}{7}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}全微观格局似然的单步维数裂解}{7}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}逐帧损失与整体收敛性}{7}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}MDL 作为结构先验}{8}{subsection.5.5}%
-\contentsline {section}{\numberline {6}隐变量边缘化与在线物理辨识}{9}{section.6}%
-\contentsline {subsection}{\numberline {6.1}有效图作为隐变量的自动边缘化}{9}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}在线贝叶斯更新闭环算法}{9}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}物理辨识实例：流固冲击粒子动力学（在线版本）}{10}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}收敛性讨论}{11}{subsection.6.4}%
+\contentsline {subsection}{\numberline {5.4}逐帧损失与 SGLD 收敛性}{8}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}MDL 作为 $f$-$\mitsigma $ 结构先验}{8}{subsection.5.5}%
+\contentsline {section}{\numberline {6}三层扩展：引入拓扑传播链 $\miteta $ 的 $f$-$\miteta $-$\mitsigma $ 架构}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}从 $f$-$\mitsigma $ 到 $f$-$\miteta $-$\mitsigma $：三层前向串联}{9}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}$f$-$\miteta $-$\mitsigma $ 三层端到端在线贝叶斯递推}{9}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}$f$-$\miteta $-$\mitsigma $ 隐图边缘化}{10}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}$f$-$\miteta $-$\mitsigma $ MDL 三层先验}{10}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}物理辨识实例：流固冲击粒子动力学（三层扩展）}{10}{subsection.6.5}%
 \contentsline {section}{\numberline {7}连续时间：历史驱动的切换流与边界跃迁}{11}{section.7}%
-\contentsline {section}{\numberline {8}开放式演化与理论边界讨论}{12}{section.8}%
-\contentsline {subsection}{\numberline {8.1}历史依赖与全微观非遍历性}{12}{subsection.8.1}%
+\contentsline {section}{\numberline {8}开放式演化与理论边界讨论}{11}{section.8}%
+\contentsline {subsection}{\numberline {8.1}历史依赖与全微观非遍历性}{11}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}计算普遍性与理论模拟边界（Turing Completeness）}{12}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}理论假设账本}{13}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.3}理论假设账本}{12}{subsection.8.3}%
 \contentsline {section}{\numberline {9}结论}{13}{section.9}%

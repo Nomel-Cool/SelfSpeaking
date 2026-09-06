@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.12.25)  5 SEP 2026 21:03
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.12.25)  6 SEP 2026 09:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2115,12 +2115,7 @@ Package microtype Info: Character `textquotedblleft ' is missing
 Package microtype Info: Character `textquotedblright ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/b/n/12'.
 (microtype)             Ignoring protrusion settings for this character.
-
-Overfull \hbox (9.80026pt too wide) in paragraph at lines 99--100
-[]\TU/SimSun(0)/b/n/10.95 在 线 贝 叶 斯 更 新 与 全 微 观 格 局 推 断\TU/SimSun(0)/m/n/10.95 
-：|  摒 弃 批 处 理 固 定 规 则 链 假 设，|  建 立 规 则 参 数 $[][] [] [][][][] [][][] [][][]$
- []
-
+ [3]
 Package microtype Info: Character `textendash ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/m/it/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -2139,7 +2134,6 @@ Package microtype Info: Character `textquotedblleft ' is missing
 Package microtype Info: Character `textquotedblright ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/m/it/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
-[3]
 Package microtype Info: Character `textendash ' is missing
 (microtype)             in font `TU/TimesNewRoman(1)/b/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -2432,7 +2426,7 @@ Package microtype Info: Character `textquotedblleft ' is missing
 Package microtype Info: Character `textquotedblright ' is missing
 (microtype)             in font `TU/TimesNewRoman(1)/b/n/6'.
 (microtype)             Ignoring protrusion settings for this character.
-
+ [4]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `subscript' on input line 160.
@@ -2445,7 +2439,6 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `subscript' on input line 160.
 
-[4]
 Package microtype Info: Character `textendash ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/m/n/7.9935'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -2488,6 +2481,7 @@ Overfull \hbox (6.27626pt too wide) in paragraph at lines 192--193
 ][][] [] [][]$ 且 在 有 效 图 中 被 成 功 接 入 活 跃 邻 域  |（$[][][][][][] [] [][][][][] []
  []
 
+[5]
 Package microtype Info: Character `textendash ' is missing
 (microtype)             in font `TU/TimesNewRoman(1)/b/n/5'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -2524,20 +2518,24 @@ Package microtype Info: Character `textquotedblleft ' is missing
 Package microtype Info: Character `textquotedblright ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/m/n/8'.
 (microtype)             Ignoring protrusion settings for this character.
-[5] [6]
 
-LaTeX Warning: Reference `sec:measure' on page 7 undefined on input line 334.
-
-[7]
-Overfull \hbox (46.98524pt too wide) detected at line 431
-[][][][]
- []
-
-[8]
-
-LaTeX Warning: Reference `sec:dual-learning' on page 9 undefined on input line 
-441.
-
+Missing character: There is no 预 (U+9884) in font Cambria Math/OT:script=math;l
+anguage=dflt;+ssty=0;!
+Missing character: There is no 测 (U+6D4B) in font Cambria Math/OT:script=math;l
+anguage=dflt;+ssty=0;!
+Missing character: There is no 误 (U+8BEF) in font Cambria Math/OT:script=math;l
+anguage=dflt;+ssty=0;!
+Missing character: There is no 差 (U+5DEE) in font Cambria Math/OT:script=math;l
+anguage=dflt;+ssty=0;!
+[6] [7] [8]
+Missing character: There is no 预 (U+9884) in font Cambria Math/OT:script=math;l
+anguage=dflt;+ssty=0;!
+Missing character: There is no 测 (U+6D4B) in font Cambria Math/OT:script=math;l
+anguage=dflt;+ssty=0;!
+Missing character: There is no 误 (U+8BEF) in font Cambria Math/OT:script=math;l
+anguage=dflt;+ssty=0;!
+Missing character: There is no 差 (U+5DEE) in font Cambria Math/OT:script=math;l
+anguage=dflt;+ssty=0;!
 [9]
 Package microtype Info: Character `textendash ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/b/n/8'.
@@ -2557,11 +2555,25 @@ Package microtype Info: Character `textquotedblleft ' is missing
 Package microtype Info: Character `textquotedblright ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/b/n/8'.
 (microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textendash ' is missing
+(microtype)             in font `TU/TimesNewRoman(0)/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textemdash ' is missing
+(microtype)             in font `TU/TimesNewRoman(0)/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquoteleft ' is missing
+(microtype)             in font `TU/TimesNewRoman(0)/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquoteright ' is missing
+(microtype)             in font `TU/TimesNewRoman(0)/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblleft ' is missing
+(microtype)             in font `TU/TimesNewRoman(0)/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblright ' is missing
+(microtype)             in font `TU/TimesNewRoman(0)/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
  [10] [11] [12]
-
-LaTeX Warning: Reference `ass:pairwise' on page 13 undefined on input line 630.
-
-
 Package microtype Info: Character `textendash ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/m/it/10'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -2580,7 +2592,7 @@ Package microtype Info: Character `textquotedblleft ' is missing
 Package microtype Info: Character `textquotedblright ' is missing
 (microtype)             in font `TU/TimesNewRoman(0)/m/it/10'.
 (microtype)             Ignoring protrusion settings for this character.
-[13]
+ [13]
 
 Package fontspec Info: Could not resolve font "FangSong/BI" (it probably
 (fontspec)             doesn't exist).
@@ -2609,18 +2621,15 @@ Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
  [14] (./selfSpeaking.aux)
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `selfSpeaking.out' has not changed.
-(rerunfilecheck)             Checksum: 83459A37FC5F43B541F693C8C73D1733;4222.
+(rerunfilecheck)             Checksum: 031A4FFCFC838113E154E30B4E4578CC;4720.
  ) 
 Here is how much of TeX's memory you used:
- 33681 strings out of 476179
- 707797 string characters out of 5810425
- 1163368 words of memory out of 5000000
- 53830 multiletter control sequences out of 15000+600000
- 480722 words of font info for 169 fonts, out of 8000000 for 9000
+ 33713 strings out of 476179
+ 711309 string characters out of 5810425
+ 1165383 words of memory out of 5000000
+ 53860 multiletter control sequences out of 15000+600000
+ 480738 words of font info for 171 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  100i,18n,114p,1009b,1083s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

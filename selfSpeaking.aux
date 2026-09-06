@@ -33,9 +33,9 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}历史倾向性映射与多层拓扑传播链 $\miteta $}{4}{section.3}\protected@file@percent }
 \newlabel{sec:sigma-eta}{{3}{4}{\texorpdfstring {历史倾向性映射与多层拓扑传播链 $\eta $}{历史倾向性映射与多层拓扑传播链 η}}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}历史依赖的倾向性映射 $\mitsigma $}{4}{subsection.3.1}\protected@file@percent }
-\newlabel{def:history-sigma}{{3.1}{4}{历史倾向性映射}{definition.3.1}{}}
-\newlabel{eq:sigma-map}{{3.1}{4}{历史倾向性映射}{equation.3.1}{}}
-\newlabel{eq:edge-history}{{3.2}{4}{历史倾向性映射}{equation.3.2}{}}
+\newlabel{def:history-sigma}{{3.1}{5}{历史倾向性映射}{definition.3.1}{}}
+\newlabel{eq:sigma-map}{{3.1}{5}{历史倾向性映射}{equation.3.1}{}}
+\newlabel{eq:edge-history}{{3.2}{5}{历史倾向性映射}{equation.3.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}多层拓扑传播链 $\miteta $（$G_t^{(0)} \to \dots  \to \widetilde {G}_t$）}{5}{subsection.3.2}\protected@file@percent }
 \newlabel{def:eta-chain}{{3.2}{5}{拓扑传播链}{definition.3.2}{}}
 \newlabel{eq:eta-refinement}{{3.3}{5}{拓扑传播链}{equation.3.3}{}}
@@ -46,84 +46,88 @@
 \newlabel{def:compact-f}{{4.1}{5}{紧化局域转移规则}{definition.4.1}{}}
 \newlabel{eq:f-active}{{4.1}{5}{紧化局域转移规则}{equation.4.1}{}}
 \newlabel{eq:r-assign}{{4.2}{5}{紧化局域转移规则}{equation.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}自指单步闭环演化时序}{5}{subsection.4.2}\protected@file@percent }
-\newlabel{prop:closed-loop}{{4.2}{5}{系统演化闭环}{definition.4.2}{}}
-\newlabel{eq:loop}{{4.3}{5}{系统演化闭环}{equation.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}自指单步闭环演化时序}{6}{subsection.4.2}\protected@file@percent }
+\newlabel{prop:closed-loop}{{4.2}{6}{系统演化闭环}{definition.4.2}{}}
+\newlabel{eq:loop}{{4.3}{6}{系统演化闭环}{equation.4.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 基于历史倾向 $\mitsigma $、拓扑传播链 $\miteta $ 与微观转移 $f$ 的自指演化闭环。}}{6}{figure.1}\protected@file@percent }
 \newlabel{fig:lifecycle}{{1}{6}{基于历史倾向 $\sigma $、拓扑传播链 $\eta $ 与微观转移 $f$ 的自指演化闭环。}{figure.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}在线贝叶斯更新与全微观格局跟踪}{6}{section.5}\protected@file@percent }
-\newlabel{sec:online-bayes}{{5}{6}{在线贝叶斯更新与全微观格局跟踪}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}从批处理辨识到在线递推}{6}{subsection.5.1}\protected@file@percent }
-\newlabel{def:online-theta}{{5.1}{6}{在线规则参数}{definition.5.1}{}}
-\newlabel{eq:theta-def}{{5.1}{6}{在线规则参数}{equation.5.1}{}}
-\newlabel{eq:theta-markov}{{5.2}{6}{在线规则参数}{equation.5.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}在线贝叶斯递推核}{6}{subsection.5.2}\protected@file@percent }
-\newlabel{prop:online-bayes}{{5.2}{6}{在线贝叶斯更新递推}{definition.5.2}{}}
-\newlabel{eq:online-bayes-kernel}{{5.3}{6}{在线贝叶斯更新递推}{equation.5.3}{}}
-\newlabel{rem:loop-isomorphism}{{5.3}{7}{与闭环演化的同构性}{definition.5.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}在线对偶贝叶斯更新：$f$-$\mitsigma $ 核心架构}{6}{section.5}\protected@file@percent }
+\newlabel{sec:online-dual-bayes}{{5}{6}{在线对偶贝叶斯更新：\texorpdfstring {$f$-$\sigma $}{f-σ} 核心架构}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}$f$-$\mitsigma $ 对偶耦合与端到端可微性}{6}{subsection.5.1}\protected@file@percent }
+\newlabel{eq:f-sigma-forward}{{5.1}{6}{\texorpdfstring {$f$-$\sigma $}{f-σ} 对偶耦合与端到端可微性}{equation.5.1}{}}
+\newlabel{eq:f-sigma-chain}{{5.2}{6}{\texorpdfstring {$f$-$\sigma $}{f-σ} 对偶耦合与端到端可微性}{equation.5.2}{}}
+\newlabel{def:f-sigma-params}{{5.1}{7}{$f$-$\sigma $ 对偶联合参数}{definition.5.1}{}}
+\newlabel{eq:f-sigma-joint}{{5.3}{7}{$f$-$\sigma $ 对偶联合参数}{equation.5.3}{}}
+\newlabel{eq:f-sigma-posterior}{{5.4}{7}{$f$-$\sigma $ 对偶联合参数}{equation.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}$f$-$\mitsigma $ 端到端在线贝叶斯递推}{7}{subsection.5.2}\protected@file@percent }
+\newlabel{prop:f-sigma-bayes}{{5.2}{7}{$f$-$\sigma $ 端到端在线贝叶斯更新}{definition.5.2}{}}
+\newlabel{eq:f-sigma-forward-detailed}{{5.5}{7}{$f$-$\sigma $ 端到端在线贝叶斯更新}{equation.5.5}{}}
+\newlabel{eq:f-sigma-sgld}{{5.6}{7}{$f$-$\sigma $ 端到端在线贝叶斯更新}{equation.5.6}{}}
+\newlabel{eq:f-sigma-grad-f}{{5.7}{7}{$f$-$\sigma $ 端到端在线贝叶斯更新}{equation.5.7}{}}
+\newlabel{eq:f-sigma-grad-sigma}{{5.8}{7}{$f$-$\sigma $ 端到端在线贝叶斯更新}{equation.5.8}{}}
+\newlabel{rem:f-sigma-physics}{{5.3}{7}{物理直观}{definition.5.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}全微观格局似然的单步维数裂解}{7}{subsection.5.3}\protected@file@percent }
 \newlabel{prop:online-disintegration}{{5.4}{7}{在线单步维数裂解}{definition.5.4}{}}
-\newlabel{eq:online-disintegration}{{5.5}{7}{在线单步维数裂解}{equation.5.5}{}}
+\newlabel{eq:online-disintegration}{{5.9}{7}{在线单步维数裂解}{equation.5.9}{}}
 \newlabel{rem:measure-rigor-online}{{5.5}{7}{测度论严格性}{definition.5.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}逐帧损失与整体收敛性}{7}{subsection.5.4}\protected@file@percent }
-\newlabel{def:loss-online}{{5.6}{7}{逐帧即时损失与累积损失}{definition.5.6}{}}
-\newlabel{eq:instant-loss-online}{{5.6}{7}{逐帧即时损失与累积损失}{equation.5.6}{}}
-\newlabel{eq:cumulative-loss-online}{{5.7}{7}{逐帧即时损失与累积损失}{equation.5.7}{}}
-\citation{ghosh2006bayesian}
-\citation{shalizi2009dynamics}
-\newlabel{prop:monotonic-loss}{{5.7}{8}{逐帧更新保证整体最小化}{definition.5.7}{}}
-\newlabel{eq:kl-monotonic}{{5.8}{8}{逐帧更新保证整体最小化}{equation.5.8}{}}
-\newlabel{eq:expected-loss-dec}{{5.9}{8}{逐帧更新保证整体最小化}{equation.5.9}{}}
-\newlabel{eq:asymptotic-opt-online}{{5.10}{8}{逐帧更新保证整体最小化}{equation.5.10}{}}
+\citation{welling2011bayesian}
+\citation{teh2016consistency}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}逐帧损失与 SGLD 收敛性}{8}{subsection.5.4}\protected@file@percent }
+\newlabel{def:loss-online}{{5.6}{8}{逐帧即时损失与累积损失}{definition.5.6}{}}
+\newlabel{eq:instant-loss-online}{{5.10}{8}{逐帧即时损失与累积损失}{equation.5.10}{}}
+\newlabel{eq:cumulative-loss-online}{{5.11}{8}{逐帧即时损失与累积损失}{equation.5.11}{}}
+\newlabel{prop:sgld-convergence}{{5.7}{8}{SGLD 对偶更新的收敛性}{definition.5.7}{}}
+\newlabel{eq:loss-convergence-online}{{5.12}{8}{SGLD 对偶更新的收敛性}{equation.5.12}{}}
 \newlabel{rem:loss-monitor-online}{{5.8}{8}{实际监控策略}{definition.5.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}MDL 作为结构先验}{8}{subsection.5.5}\protected@file@percent }
-\newlabel{def:mdl-prior-online}{{5.9}{8}{MDL 结构先验（在线版本）}{definition.5.9}{}}
-\newlabel{eq:mdl-prior-online}{{5.11}{8}{MDL 结构先验（在线版本）}{equation.5.11}{}}
-\newlabel{rem:mdl-integration-online}{{5.10}{8}{与标准在线贝叶斯的统一}{definition.5.10}{}}
-\newlabel{eq:mdl-neglog-online}{{5.12}{8}{与标准在线贝叶斯的统一}{equation.5.12}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}隐变量边缘化与在线物理辨识}{9}{section.6}\protected@file@percent }
-\newlabel{sec:dual-learning-online}{{6}{9}{隐变量边缘化与在线物理辨识}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}有效图作为隐变量的自动边缘化}{9}{subsection.6.1}\protected@file@percent }
-\newlabel{prop:latent-marginal-online}{{6.1}{9}{单步似然的隐图边缘化（在线版本）}{definition.6.1}{}}
-\newlabel{eq:latent-marginal-online}{{6.1}{9}{单步似然的隐图边缘化（在线版本）}{equation.6.1}{}}
-\newlabel{rem:range-decoupling-online}{{6.2}{9}{值域分工原则的贝叶斯实现}{definition.6.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}在线贝叶斯更新闭环算法}{9}{subsection.6.2}\protected@file@percent }
-\newlabel{prop:online-algorithm}{{6.3}{9}{在线贝叶斯更新闭环算法}{definition.6.3}{}}
-\newlabel{eq:predictive-online}{{6.2}{9}{在线贝叶斯更新闭环算法}{equation.6.2}{}}
-\newlabel{eq:online-update}{{6.3}{9}{在线贝叶斯更新闭环算法}{equation.6.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces 在线贝叶斯更新闭环算法流程图。每一步包含预测、观测、更新与损失监控四个阶段。}}{10}{figure.2}\protected@file@percent }
-\newlabel{fig:online-algorithm}{{2}{10}{在线贝叶斯更新闭环算法流程图。每一步包含预测、观测、更新与损失监控四个阶段。}{figure.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}物理辨识实例：流固冲击粒子动力学（在线版本）}{10}{subsection.6.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces 固—液撞击连续介质动力学的在线贝叶斯物理辨识：每帧后验分布自然追踪不同物理阶段。}}{10}{figure.3}\protected@file@percent }
-\newlabel{fig:splash-online}{{3}{10}{固—液撞击连续介质动力学的在线贝叶斯物理辨识：每帧后验分布自然追踪不同物理阶段。}{figure.3}{}}
-\citation{ghosh2006bayesian}
-\citation{shalizi2009dynamics}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}收敛性讨论}{11}{subsection.6.4}\protected@file@percent }
-\newlabel{prop:asymptotic-online}{{6.4}{11}{渐近最优性}{definition.6.4}{}}
-\newlabel{eq:convergence-online}{{6.4}{11}{渐近最优性}{equation.6.4}{}}
-\newlabel{eq:loss-convergence-online}{{6.5}{11}{渐近最优性}{equation.6.5}{}}
-\newlabel{rem:batch-relation-online}{{6.5}{11}{与批处理的关系}{definition.6.5}{}}
-\newlabel{eq:batch-ineq-online}{{6.6}{11}{与批处理的关系}{equation.6.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}MDL 作为 $f$-$\mitsigma $ 结构先验}{8}{subsection.5.5}\protected@file@percent }
+\newlabel{def:f-sigma-mdl}{{5.9}{8}{$f$-$\sigma $ MDL 对偶先验}{definition.5.9}{}}
+\newlabel{eq:f-sigma-mdl}{{5.13}{8}{$f$-$\sigma $ MDL 对偶先验}{equation.5.13}{}}
+\newlabel{rem:f-sigma-mdl-sgld}{{5.10}{8}{MDL 在 $f$-$\sigma $ SGLD 中的实现}{definition.5.10}{}}
+\newlabel{eq:f-sigma-sgld-mdl}{{5.14}{8}{MDL 在 $f$-$\sigma $ SGLD 中的实现}{equation.5.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}三层扩展：引入拓扑传播链 $\miteta $ 的 $f$-$\miteta $-$\mitsigma $ 架构}{9}{section.6}\protected@file@percent }
+\newlabel{sec:three-layer}{{6}{9}{三层扩展：引入拓扑传播链 \texorpdfstring {$\eta $}{η} 的 \texorpdfstring {$f$-$\eta $-$\sigma $}{f-η-σ} 架构}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}从 $f$-$\mitsigma $ 到 $f$-$\miteta $-$\mitsigma $：三层前向串联}{9}{subsection.6.1}\protected@file@percent }
+\newlabel{eq:three-layer-forward}{{6.1}{9}{从 \texorpdfstring {$f$-$\sigma $}{f-σ} 到 \texorpdfstring {$f$-$\eta $-$\sigma $}{f-η-σ}：三层前向串联}{equation.6.1}{}}
+\newlabel{eq:three-layer-chain}{{6.2}{9}{从 \texorpdfstring {$f$-$\sigma $}{f-σ} 到 \texorpdfstring {$f$-$\eta $-$\sigma $}{f-η-σ}：三层前向串联}{equation.6.2}{}}
+\newlabel{def:three-layer-params}{{6.1}{9}{$f$-$\eta $-$\sigma $ 三层联合参数}{definition.6.1}{}}
+\newlabel{eq:three-layer-joint}{{6.3}{9}{$f$-$\eta $-$\sigma $ 三层联合参数}{equation.6.3}{}}
+\newlabel{eq:three-layer-posterior}{{6.4}{9}{$f$-$\eta $-$\sigma $ 三层联合参数}{equation.6.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}$f$-$\miteta $-$\mitsigma $ 三层端到端在线贝叶斯递推}{9}{subsection.6.2}\protected@file@percent }
+\newlabel{prop:three-layer-bayes}{{6.2}{9}{三层端到端在线贝叶斯更新}{definition.6.2}{}}
+\newlabel{eq:three-layer-forward-detailed}{{6.5}{9}{三层端到端在线贝叶斯更新}{equation.6.5}{}}
+\newlabel{eq:three-layer-sgld}{{6.6}{9}{三层端到端在线贝叶斯更新}{equation.6.6}{}}
+\newlabel{eq:three-grad-f}{{6.7}{9}{三层端到端在线贝叶斯更新}{equation.6.7}{}}
+\newlabel{eq:three-grad-eta}{{6.8}{9}{三层端到端在线贝叶斯更新}{equation.6.8}{}}
+\newlabel{eq:three-grad-sigma}{{6.9}{9}{三层端到端在线贝叶斯更新}{equation.6.9}{}}
+\newlabel{rem:three-layer-physics}{{6.3}{9}{三层扩展的物理意义}{definition.6.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}$f$-$\miteta $-$\mitsigma $ 隐图边缘化}{10}{subsection.6.3}\protected@file@percent }
+\newlabel{prop:three-layer-latent}{{6.4}{10}{三层单步似然的隐图边缘化}{definition.6.4}{}}
+\newlabel{eq:three-layer-marginal}{{6.10}{10}{三层单步似然的隐图边缘化}{equation.6.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}$f$-$\miteta $-$\mitsigma $ MDL 三层先验}{10}{subsection.6.4}\protected@file@percent }
+\newlabel{def:three-layer-mdl}{{6.5}{10}{$f$-$\eta $-$\sigma $ MDL 三层先验}{definition.6.5}{}}
+\newlabel{eq:three-layer-mdl}{{6.11}{10}{$f$-$\eta $-$\sigma $ MDL 三层先验}{equation.6.11}{}}
+\newlabel{eq:three-layer-sgld-mdl}{{6.12}{10}{$f$-$\eta $-$\sigma $ MDL 三层先验}{equation.6.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}物理辨识实例：流固冲击粒子动力学（三层扩展）}{10}{subsection.6.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces $f$-$\miteta $-$\mitsigma $ 三层扩展的物理映射与对偶反向传播。实线为前向预测，虚线为误差回传。}}{11}{figure.2}\protected@file@percent }
+\newlabel{fig:three-layer-physics}{{2}{11}{$f$-$\eta $-$\sigma $ 三层扩展的物理映射与对偶反向传播。实线为前向预测，虚线为误差回传。}{figure.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {7}连续时间：历史驱动的切换流与边界跃迁}{11}{section.7}\protected@file@percent }
 \newlabel{sec:ct}{{7}{11}{连续时间：历史驱动的切换流与边界跃迁}{section.7}{}}
 \newlabel{eq:switchflow}{{7.1}{11}{连续时间：历史驱动的切换流与边界跃迁}{equation.7.1}{}}
-\newlabel{eq:ct-bayes}{{7.2}{11}{连续时间：历史驱动的切换流与边界跃迁}{equation.7.2}{}}
+\newlabel{eq:ct-langevin}{{7.2}{11}{连续时间：历史驱动的切换流与边界跃迁}{equation.7.2}{}}
+\newlabel{eq:ct-jump}{{7.3}{11}{连续时间：历史驱动的切换流与边界跃迁}{equation.7.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}开放式演化与理论边界讨论}{11}{section.8}\protected@file@percent }
+\newlabel{sec:open}{{8}{11}{开放式演化与理论边界讨论}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}历史依赖与全微观非遍历性}{11}{subsection.8.1}\protected@file@percent }
 \citation{cook2004universality}
 \citation{berlekamp1982winning}
 \citation{schonhage1980storage}
-\newlabel{eq:ct-jump}{{7.3}{12}{连续时间：历史驱动的切换流与边界跃迁}{equation.7.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}开放式演化与理论边界讨论}{12}{section.8}\protected@file@percent }
-\newlabel{sec:open}{{8}{12}{开放式演化与理论边界讨论}{section.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}历史依赖与全微观非遍历性}{12}{subsection.8.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.2}计算普遍性与理论模拟边界（Turing Completeness）}{12}{subsection.8.2}\protected@file@percent }
 \newlabel{prop:turing-completeness}{{8.1}{12}{计算普遍性 / 图灵完备性}{definition.8.1}{}}
+\newlabel{rem:tc-boundary}{{8.2}{12}{模拟边界与可学习性区隔}{definition.8.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}理论假设账本}{12}{subsection.8.3}\protected@file@percent }
+\newlabel{rem:boundary}{{8.3}{12}{形式化假设账本}{definition.8.3}{}}
 \bibcite{stewart2003symmetry}{1}
 \bibcite{deville2015modular}{2}
-\newlabel{rem:tc-boundary}{{8.2}{13}{模拟边界与可学习性区隔}{definition.8.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}理论假设账本}{13}{subsection.8.3}\protected@file@percent }
-\newlabel{rem:boundary}{{8.3}{13}{形式化假设账本}{definition.8.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}结论}{13}{section.9}\protected@file@percent }
-\newlabel{sec:conclusion}{{9}{13}{结论}{section.9}{}}
 \bibcite{cook2004universality}{3}
 \bibcite{berlekamp1982winning}{4}
 \bibcite{schonhage1980storage}{5}
@@ -131,8 +135,10 @@
 \bibcite{ofria2004}{7}
 \bibcite{schmidhuber1991}{8}
 \bibcite{pattee1995}{9}
+\@writefile{toc}{\contentsline {section}{\numberline {9}结论}{13}{section.9}\protected@file@percent }
+\newlabel{sec:conclusion}{{9}{13}{结论}{section.9}{}}
 \bibcite{lehman2015}{10}
 \bibcite{mordvintsev2020}{11}
-\bibcite{ghosh2006bayesian}{12}
-\bibcite{shalizi2009dynamics}{13}
+\bibcite{welling2011bayesian}{12}
+\bibcite{teh2016consistency}{13}
 \gdef \@abspage@last{14}
