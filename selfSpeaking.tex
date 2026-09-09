@@ -56,11 +56,11 @@
 		针对动力学闭环与结构推断，本文建立了完备的三阶段自指演化与全微观格局辨识理论：
 		(1) \textbf{历史依赖倾向与多层拓扑传播链}：倾向性规则族 $\sigma$ 以系统演化至今的完整历史轨迹 $\mathcal{H}_t = (x_0, x_1, \dots, x_t)$ 为输入，生成初始交互图 $G_t^{(0)}$；随后引入图拓扑传播链 $\eta = \eta_L \circ \dots \circ \eta_1$，通过多层结构重写与高阶局域协调，将初始拓扑精化为实际生效的有效交互图 $\widetilde{G}_t$，闭合了 $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$ 的完整自指因果回路；
 		(2) \textbf{全微观格局转移与并行演化}：局部转移规则 $f$ 在有效图 $\widetilde{G}_t$ 上并行驱动全体槽位的状态更新，全局动力学严格闭合于乘积相空间 $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$ 上的自同态映射；
-		(3) \textbf{在线对偶贝叶斯更新与全微观状态跟踪}：建立了基于端到端可微对偶学习的在线贝叶斯递推框架——拓扑生成规则 $\sigma$ 与状态转移规则 $f$ 构成前向串联（$\sigma \to \widetilde{G} \to f \to \hat{s}_{t+1}$）与反向耦合（$\nabla_\sigma \ell$ 通过 $f$ 回传）的 $f$-$\sigma$ 核心对偶系统；进一步扩展为 $f$-$\eta$-$\sigma$ 三层架构，引入可学习的拓扑传播链 $\eta$ 作为中间精化层；联合参数 $\theta=(\theta_\sigma,\theta_f)$（或 $\theta=(\theta_\sigma,\theta_\eta,\theta_f)$）通过随机梯度朗之万动力学（SGLD）逐帧更新后验分布；MDL原则作为独立结构先验嵌入初始分布；
+		(3) \textbf{全微观状态跟踪的 MDL 辨识准则}：为防止仅跟踪宏观规模标量导致模型学习到伪统计事实，本文构建了覆盖 $V_\infty$ 全体元微观复合配置 $x_{t+1}$ 的全条件似然，推导了包含拓扑生成、传播链与微观状态转移的三重边际似然分解公式，并建立了最小描述长度（MDL）优化目标。以拉格朗日连续介质粒子断裂与融合为例，展示了该系统对复杂多相动力学微观因果机制的严格表征能力；
 		(4) \textbf{计算普遍性与理论模拟边界}：严格证明了该系统在退化流形上包含初等元胞机 Rule 110 与 Conway's Game of Life，具备图灵完备性（Turing Completeness），为复杂物理与离散系统的建模提供了无界表达力基准。
 		在连续时间设定下，该框架形式化为历史驱动的变维混合切换系统。本文表明，该系统在保持严密测度分析良定义性的同时，能够实现结构、规律与微观状态的内生协同演化。
 		\par\medskip
-		\noindent\textbf{关键词：}交互元系统；历史依赖；拓扑传播链；零态紧化；全微观格局；自指动力学；在线对偶贝叶斯更新；随机梯度朗之万动力学；最小描述长度；图灵完备性
+		\noindent\textbf{关键词：}交互元系统；历史依赖；拓扑传播链；零态紧化；全微观格局；自指动力学；最小描述长度；图灵完备性
 	\end{abstract}
 	
 	\vspace{1em}
@@ -71,11 +71,11 @@
 		We establish a tripartite self-referential closed loop and full microscopic configuration identification theory:
 		(1) \textbf{History-dependent propensity and multi-layer topology propagation chain}: The propensity rules $\sigma$ take the historical trajectory $\mathcal{H}_t = (x_0, \dots, x_t)$ as input to generate an initial interaction graph $G_t^{(0)}$. A multi-layer topology propagation chain $\eta = \eta_L \circ \dots \circ \eta_1$ then executes structural refinement, transforming $G_t^{(0)}$ into an effective operational graph $\widetilde{G}_t$, closing the causal loop $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$;
 		(2) \textbf{Full microscopic transition and parallel dynamics}: The local transition rules $f$ execute parallel updates across $\widetilde{G}_t$, strictly formalizing the global dynamics as a closed endomorphism on the invariant product space $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$;
-		(3) \textbf{Online dual Bayesian updating for full microscopic configuration tracking}: We formulate an end-to-end differentiable dual learning framework where the topology generation rule $\sigma$ and the state transition rule $f$ form a forward cascade ($\sigma \to \widetilde{G} \to f \to \hat{s}_{t+1}$) with backward coupling ($\nabla_\sigma \ell$ back-propagated through $f$) as the core $f$-$\sigma$ dual architecture; this is further extended to a three-layer $f$-$\eta$-$\sigma$ architecture with a learnable topology propagation chain $\eta$ as an intermediate refinement layer; the joint parameter $\theta=(\theta_\sigma,\theta_f)$ (or $\theta=(\theta_\sigma,\theta_\eta,\theta_f)$) updates the posterior sequentially via Stochastic Gradient Langevin Dynamics (SGLD); the MDL principle is embedded as independent structural priors;
+		(3) \textbf{Microscopic configuration tracking under MDL}: To prevent pathological convergence caused by tracking only macroscopic scalars, we formulate the joint likelihood over the complete microstate configuration $x_{t+1}$ across all potential coordinates $V_\infty$. We deduce a tripartite marginal likelihood factorization governing structural evaluation, topological propagation, and microstate transition, coupled with the Minimum Description Length (MDL) criterion;
 		(4) \textbf{Computational universality and simulation boundaries}: We rigorously prove that the system encompasses Rule 110 and Conway's Game of Life on degenerate submanifolds, establishing Turing Completeness (TC) as a formal expressivity baseline.
 		In continuous time, this framework instantiates history-driven hybrid switched systems. We prove that this architecture preserves analytical tractability while endogenously accommodating open-ended evolution.
 		\par\medskip
-		\noindent\textbf{Keywords:} interaction-element system; history dependence; topology propagation chain; null-state compactification; full microscopic configuration; self-referential dynamics; online dual Bayesian updating; Stochastic Gradient Langevin Dynamics; Minimum Description Length; Turing Completeness
+		\noindent\textbf{Keywords:} interaction-element system; history dependence; topology propagation chain; null-state compactification; full microscopic configuration; self-referential dynamics; Minimum Description Length; Turing Completeness
 	\end{abstract}
 	
 	\tableofcontents
@@ -96,7 +96,7 @@
 	\begin{itemize}[leftmargin=2em]
 		\item \textbf{因果回路完备化（$f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$）}：显式引入历史轨迹空间 $\mathcal{H}_t$，形式化定义从历史输入到初始图生成 $\sigma$、再经由多层图传播链 $\eta$ 导出有效图 $\widetilde{G}_t$、最后由转移律 $f$ 驱动状态演化的完整动力学回路；
 		\item \textbf{零态紧化相空间}：引入潜在元全集 $V_\infty$ 与紧化状态空间 $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$，将全局演化严格表达为不变乘积流形 $\Sigma = \prod_{v\in V_\infty}\bar{\widetilde{M}}_v$ 上的自同态动力系统；
-		\item \textbf{在线对偶贝叶斯更新与全微观格局推断}：摒弃批处理固定规则链假设，建立 $f$-$\sigma$ 核心对偶架构（$\sigma \to \widetilde{G} \to f \to \hat{s}_{t+1}$，$\nabla_\sigma \ell$ 通过 $f$ 回传）及其 $f$-$\eta$-$\sigma$ 三层扩展；给出单步似然中隐变量 $G_t^{(0)}$ 与 $\widetilde{G}_t$ 的自动边缘化公式；利用随机梯度朗之万动力学证明逐帧更新的累积损失收敛于全局最优；
+		\item \textbf{全微观格局跟踪的 MDL 推断}：摒弃简缩标量约束，直接对潜在元宇宙 $V_\infty$ 中全体槽位的微观复合状态 $x_{t+1}$ 建立精确概率推断模型，给出三因子边际似然分解与多制度规则链估计准则；
 		\item \textbf{计算普遍性与理论模拟边界}：给出了架构在退化子系统下对经典图灵完备系统（Rule 110 与 Game of Life）的构造性归约，确立了系统的理论模拟能力下界。
 	\end{itemize}
 	
@@ -253,325 +253,129 @@
 		\label{fig:lifecycle}
 	\end{figure}
 	
-	% ================= 5 在线对偶贝叶斯更新：f-σ 核心架构 =================
-	\section{在线对偶贝叶斯更新：\texorpdfstring{$f$-$\sigma$}{f-σ} 核心架构}\label{sec:online-dual-bayes}
+	% ================= 5 推导链 I：全微观状态跟踪与 MDL 准则 =================
+	\section{\texorpdfstring{推导链 I：全微观格局跟踪与裂解 MDL 准则}{推导链 I：全微观格局跟踪与裂解 MDL 准则}}\label{sec:measure}
 	
-	\subsection{\texorpdfstring{$f$-$\sigma$}{f-σ} 对偶耦合与端到端可微性}
+	\subsection{\texorpdfstring{全微观格局跟踪的必要性与 Step A $\to$ D}{全微观格局跟踪的必要性与 Step A -> D}}
 	
-	第~\ref{sec:sigma-eta}~节与第~\ref{sec:lifecycle}~节定义的 $\sigma$ 与 $f$ 类型签名不同（$\sigma: \mathbf{H}_t \to \mathfrak{G}(V_\infty)$，$f: \bar{\widetilde{M}}_i \times \prod_{\mathcal{N}} \bar{\widetilde{M}}_j \to \bar{\widetilde{M}}_i$），但通过以下方式形成对偶耦合：
+	在系统辨识中，若仅跟踪宏观活性维数标量 $|V_{t+1}|$，会导致模型学习到严重失真的物理事实。因此，统计推断必须直接建立在潜在元全集 $V_\infty$ 上全体交互元的微观状态配置向量 $x_{t+1} = (x_i(t+1))_{i\in V_\infty}$ 之上。
 	
-	\begin{enumerate}[label=(\arabic*), leftmargin=2em]
-		\item \textbf{前向依赖}：$f$ 的输入 $\widetilde{G}_t$ 由 $\sigma$ 生成。在核心架构中暂不考虑 $\eta$（或等价地令 $\eta = \mathrm{id}$），有：
+	推导步骤如下：
+	\paragraph{Step A（全局后验目标）。}
+	给定系统观测轨迹 $s_{0:T}$，待学习参数为制度化规则链序列 $\{(\sigma^{(k)}, \eta^{(k)}, f^{(k)})\}_{k=1}^K$。由贝叶斯公式：
+	\begin{equation}
+		p\bigl(\text{Rule-Chains}\mid s_{0:T}\bigr) \propto
+		p\bigl(s_{0:T}\mid\text{Rule-Chains}\bigr) \cdot p(\text{Rule-Chains}).
+		\label{eq:step-a}
+	\end{equation}
+	
+	\paragraph{Step B（全微观格局因果因子化）。}
+	在历史依赖流形下，时间步转移由微观格局在历史条件下的全概率展开：
+	\begin{equation}
+		p\bigl(s_{0:T}\mid\text{Rule-Chains}\bigr) = p(s_0)\prod_{t=0}^{T-1} p\bigl(s_{t+1}\mid \mathcal{H}_t;\ \sigma^{(c(t))}, \eta^{(c(t))}, f^{(c(t))}\bigr),
+		\label{eq:step-b}
+	\end{equation}
+	其中 $s_{t+1} = (s_i(t+1))_{i\in V_\infty} \in \bar{M}^{V_\infty}$ 包含了活跃槽位的值、休眠槽位的 $\bot_{\mathrm{u}}$ 状态以及死亡槽位的 $\bot_{\mathrm{d}}$ 状态。
+	
+	\paragraph{Step C（制度时间化）与 Step D（MDL 编码映射）。}
+	引入分段常数映射 $c(t)\in\{1,\dots,K\}$，并将先验转化为 Kolmogorov 描述长度惩罚 $-\lambda\DL(\text{Rule-Chain})$。
+	
+	\subsection{全微观状态似然的维数裂解与分层测度}
+	
+	\begin{proposition}[全微观格局维数裂解恒等式]\label{prop:disintegration}
+		记系统微观占有指示向量为 $\mathbf{z}_{t+1} = (\mathbb{I}_{\{s_i(t+1)\in M_i\}})_{i\in V_\infty} \in \{0,1\}^{V_\infty}$。全格局条件对数似然可严格分解为全局微观占有构形似然与有效物理坐标分布似然：
 		\begin{equation}
-			\widetilde{G}_t = G_t^{(0)} = \sigma(\mathcal{H}_t);
-			\label{eq:f-sigma-forward}
+			\log p\bigl(s_{t+1}\mid \mathcal{H}_t;\ \text{Rule}_t\bigr) =
+			\underset{\text{微观槽位占有与维数跃迁似然}}{\underbrace{\log p\bigl(\mathbf{z}_{t+1}\mid \mathcal{H}_t;\ \text{Rule}_t\bigr)}}
+			\;+\;
+			\underset{\text{全微观物理坐标分布似然}}{\underbrace{\log p\bigl(s_{t+1}|_{\supp(\mathbf{z}_{t+1})}\mid \mathbf{z}_{t+1}, \mathcal{H}_t, \widetilde{G}_t;\ f_t\bigr)}}.
+			\label{eq:disintegration}
 		\end{equation}
-		\item \textbf{反向依赖}：$\sigma$ 的更新依赖 $f$ 的反向传播，即
-		\begin{equation}
-			\nabla_\sigma \ell_t = \underbrace{\nabla_\sigma \widetilde{G}_t}_{\sigma \text{ 对图的贡献}} \cdot \underbrace{\nabla_{\widetilde{G}} \hat{s}_{t+1}}_{f \text{ 对图的敏感度}} \cdot \underbrace{\nabla_{\hat{s}} \ell_t}_{预测误差}.
-			\label{eq:f-sigma-chain}
-		\end{equation}
+	\end{proposition}
+	
+	\begin{remark}[测度论严格性]\label{rem:measure-rigor}
+		式~\eqref{eq:disintegration} 中第一项为定义在离散超立方体 $\{0,1\}^{V_\infty}$ 上的概率质量函数；第二项定义在条件确定的连续流形 $\prod_{i\in\supp(\mathbf{z}_{t+1})} M_i$ 上，采用对称化无标号参考测度 $\nu_k = \mathrm{Leb}^{dk}/k!$。两项相加严格构成良定义测度，无需引入外生加权系数。
+	\end{remark}
+	
+	\subsection{更新后的全微观格局 MDL 优化目标}
+	
+	结合推导链与命题~\ref{prop:disintegration}，系统的全局辨识目标表述为如下优化形式：
+	\begin{equation}
+		\begin{aligned}
+			\max_{\{\sigma^{(k)}, \eta^{(k)}, f^{(k)}\}_{k=1}^K} \Bigg\{
+			\sum_{t=0}^{T-1} \bigg[
+			& \log p\bigl(\mathbf{z}_{t+1}\mid \mathcal{H}_t;\ \sigma^{(c(t))}, \eta^{(c(t))}, f^{(c(t))}\bigr) \\
+			& + \log p\bigl(s_{t+1}|_{\supp(\mathbf{z}_{t+1})}\mid \mathbf{z}_{t+1}, \mathcal{H}_t, \widetilde{G}_t;\ f^{(c(t))}\bigr) \bigg] \\
+			& + \log p(\text{Model}) \;-\; \lambda \cdot \DL\bigl(\text{Rule-Chain}\bigr) \Bigg\}.
+		\end{aligned}
+		\label{eq:mdl-chain}
+	\end{equation}
+	
+	% ================= 6 推导链 II：对偶推断与物理辨识 =================
+	\section{\texorpdfstring{推导链 II：三重边际似然分解与物理系统辨识}{推导链 II：三重边际似然分解与物理系统辨识}}\label{sec:dual-learning}
+	
+	\subsection{\texorpdfstring{隐图边缘化与值域分工设计原则（Step E $\to$ F）}{隐图边缘化与值域分工设计原则（Step E -> F）}}
+	
+	\paragraph{Step E（初始图与有效图的双重隐变量边缘化）。}
+	在真实物理观测中，$G_t^{(0)}$ 与 $\widetilde{G}_t$ 均属于隐变量。单步转移概率必须对全局图空间执行联合边际化：
+	\begin{equation}
+		p(x_{t+1}\mid \mathcal{H}_t;\ \sigma, \eta, f) = \sum_{\widetilde{G}_t\in\mathfrak{G}(V_\infty)} \sum_{G_t^{(0)}\in\mathfrak{G}(V_\infty)} p\bigl(x_{t+1}, \widetilde{G}_t, G_t^{(0)}\mid \mathcal{H}_t;\ \sigma, \eta, f\bigr).
+		\label{eq:step-e}
+	\end{equation}
+	
+	\paragraph{Step F（值域分工设计原则与三重因子分解）。}
+	依据模块化设计的\textbf{值域分工设计原则}（Range-Space Decoupling Design Principle）：
+	\begin{itemize}[leftmargin=2em]
+		\item $\sigma$ 的值域限定于初始图空间 $\mathfrak{G}(V_\infty)$（从历史提取结构倾向）；
+		\item $\eta$ 的值域限定于有效图空间 $\mathfrak{G}(V_\infty)$（在图空间内部执行拓扑精化与协调）；
+		\item $f$ 的值域限定于物理状态流形 $\bar{\widetilde{M}}$（在给定有效图拓扑下执行状态更新）。
+	\end{itemize}
+	值域分工原则排除了反向依赖，唯一确立了如下前向三因子因果分解链：
+	\begin{equation}
+		\boxed{\ p(x_{t+1}\mid \mathcal{H}_t;\ \sigma, \eta, f) = \sum_{\widetilde{G}_t} \sum_{G_t^{(0)}}
+			\underbrace{p\bigl(G_t^{(0)}\mid \mathcal{H}_t;\ \sigma\bigr)}_{\text{历史倾向因子}}
+			\cdot
+			\underbrace{p\bigl(\widetilde{G}_t\mid G_t^{(0)}, \mathcal{H}_t;\ \eta\bigr)}_{\text{拓扑传播因子}}
+			\cdot
+			\underbrace{p\bigl(x_{t+1}\mid x_t, \widetilde{G}_t;\ f\bigr)}_{\text{微观状态转移因子}}.\ }
+		\label{eq:marginal-likelihood}
+	\end{equation}
+	
+	\subsection{三相解耦交替坐标优化}
+	
+	式~\eqref{eq:marginal-likelihood} 导出了算法上的三相交替优化机制：
+	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
+		\item \textbf{$\sigma$-优化相}：固定 $\eta$ 与 $f$，在隐图后验分布引导下优化历史倾向性网络 $\sigma$；
+		\item \textbf{$\eta$-优化相}：固定 $\sigma$ 与 $f$，优化图传播算子 $\eta$ 的参数；
+		\item \textbf{$f$-优化相}：固定 $\sigma$ 与 $\eta$，在采样的有效图 $\widetilde{G}_t$ 上优化连续状态更新与激发跃迁网络。
 	\end{enumerate}
 	
-	这一对偶耦合决定了 $\sigma$ 与 $f$ 必须作为\textbf{端到端可微的联合系统}进行训练。
+	\subsection{物理辨识实例：流固冲击粒子动力学}
 	
-	\begin{definition}[$f$-$\sigma$ 对偶联合参数]\label{def:f-sigma-params}
-		定义系统的核心可学习参数为：
-		\begin{equation}
-			\theta = (\theta_\sigma,\ \theta_f) \in \Theta_\sigma \times \Theta_f,
-			\label{eq:f-sigma-joint}
-		\end{equation}
-		其中 $\theta_\sigma$ 参数化拓扑生成规则 $\sigma$（含各槽位局域规则 $\{\sigma_i\}_{i\in V_\infty}$），$\theta_f$ 参数化状态转移规则 $f$（含各槽位局域规则 $\{f_i\}_{i\in V_\infty}$）。两者的联合后验为：
-		\begin{equation}
-			p(\theta_t \mid \mathcal{H}_t) \propto p(s_t \mid s_{t-1}, \theta_{t-1}) \cdot p(\theta_{t-1} \mid \mathcal{H}_{t-1}),
-			\label{eq:f-sigma-posterior}
-		\end{equation}
-		其梯度通过链式法则~\eqref{eq:f-sigma-chain} 同时分配给 $\theta_\sigma$ 与 $\theta_f$。
-	\end{definition}
-	
-	\subsection{\texorpdfstring{$f$-$\sigma$}{f-σ} 端到端在线贝叶斯递推}
-	
-	\begin{proposition}[$f$-$\sigma$ 端到端在线贝叶斯更新]\label{prop:f-sigma-bayes}
-		$f$-$\sigma$ 对偶系统的单步更新如下：
-		
-		\medskip
-		\textbf{前向生成}：
-		\begin{equation}
-			\begin{aligned}
-				\widetilde{G}_t &= \sigma_t(\mathcal{H}_t), \\
-				\hat{s}_{t+1} &= f_t(s_t, \widetilde{G}_t), \\
-				\ell_t &= -\log p(s_{t+1} \mid \hat{s}_{t+1}).
-			\end{aligned}
-			\label{eq:f-sigma-forward-detailed}
-		\end{equation}
-		
-		\medskip
-		\textbf{对偶 SGLD 更新}：
-		\begin{equation}
-			\begin{aligned}
-				\theta_\sigma^{(t+1)} &= \theta_\sigma^{(t)} - \frac{\eta_t}{2} \nabla_{\theta_\sigma} \ell_t + \sqrt{\eta_t} \xi_t^{(\sigma)}, \\
-				\theta_f^{(t+1)} &= \theta_f^{(t)} - \frac{\eta_t}{2} \nabla_{\theta_f} \ell_t + \sqrt{\eta_t} \xi_t^{(f)},
-			\end{aligned}
-			\label{eq:f-sigma-sgld}
-		\end{equation}
-		其中各梯度为：
-		\begin{align}
-			\nabla_{\theta_f} \ell_t &= \nabla_{\hat{s}} \ell_t \cdot \nabla_{\theta_f} \hat{s}_{t+1}, \label{eq:f-sigma-grad-f} \\
-			\nabla_{\theta_\sigma} \ell_t &= \nabla_{\hat{s}} \ell_t \cdot \nabla_{\widetilde{G}} f \cdot \nabla_{\theta_\sigma} \widetilde{G}_t. \label{eq:f-sigma-grad-sigma}
-		\end{align}
-	\end{proposition}
-	
-	\begin{remark}[物理直观]\label{rem:f-sigma-physics}
-		式~\eqref{eq:f-sigma-grad-sigma} 表明：$\sigma$ 不直接看见物理损失，而是通过 $f$ 对图结构的敏感度 $\nabla_{\widetilde{G}} f$ 来间接感知自己的表现——这正是“误差从 $f$ 回传到 $\sigma$”的对偶学习本质。
-	\end{remark}
-	
-	\subsection{全微观格局似然的单步维数裂解}
-	
-	与批处理设定不同，在线框架下的单步似然 $p(s_t \mid s_{t-1}, \theta_{t-1})$ 直接定义在当前帧的微观格局上。
-	
-	\begin{proposition}[在线单步维数裂解]\label{prop:online-disintegration}
-		记 $\mathbf{z}_t = (\mathbb{I}_{\{s_i(t)\in M_i\}})_{i\in V_\infty} \in \{0,1\}^{V_\infty}$ 为时刻 $t$ 的微观占有指示向量。单步观测似然可分解为：
-		\begin{equation}
-			\begin{aligned}
-				\log p(s_t \mid s_{t-1}, \theta_{t-1})
-				=\;&
-				\underbrace{\log p(\mathbf{z}_t \mid s_{t-1}, \theta_{t-1})}_{\text{维数跃迁（生灭过程）似然}} \\
-				&+ 
-				\underbrace{\log p\bigl(s_t|_{\supp(\mathbf{z}_t)} \mid \mathbf{z}_t, s_{t-1}, \widetilde{G}_{t-1}, f_{t-1}\bigr)}_{\text{有效物理坐标分布似然}}.
-			\end{aligned}
-			\label{eq:online-disintegration}
-		\end{equation}
-		其中第一项为离散概率质量函数（定义在 $\{0,1\}^{V_\infty}$ 上），第二项为连续密度（定义在 $\prod_{i\in\supp(\mathbf{z}_t)} M_i$ 上，采用对称化参考测度 $\nu_k = \mathrm{Leb}^{dk}/k!$）。两项之和构成 $\bar{M}^{V_\infty}$ 上的良定义测度。
-	\end{proposition}
-	
-	\begin{remark}[测度论严格性]\label{rem:measure-rigor-online}
-		式~\eqref{eq:online-disintegration} 中第一项与第二项分别定义在离散与连续空间上，采用分层参考测度 $\nu_k = \mathrm{Leb}^{dk}/k!$ 即可保证两项相加构成 $\bar{M}^{V_\infty}$ 上的良定义测度，无需引入外生加权系数。
-	\end{remark}
-	
-	\subsection{逐帧损失与 SGLD 收敛性}
-	
-	在线对偶贝叶斯更新的核心优势在于：\emph{无需预知未来数据}，每步更新均朝向解释当前观测的方向调整参数。
-	
-	\begin{definition}[逐帧即时损失与累积损失]\label{def:loss-online}
-		定义时刻 $t$ 的\emph{即时负对数似然损失}为：
-		\begin{equation}
-			\ell_t(\theta_{t-1}) = -\log p(s_t \mid s_{t-1}, \theta_{t-1}),
-			\label{eq:instant-loss-online}
-		\end{equation}
-		其物理含义为：用上一时刻规则 $\theta_{t-1}$ 预测当前帧 $s_t$ 时所付出的信息代价。定义\emph{累积损失}为：
-		\begin{equation}
-			\mathcal{L}_T = \sum_{t=1}^T \ell_t(\theta_{t-1}),
-			\label{eq:cumulative-loss-online}
-		\end{equation}
-		初始化为 $\mathcal{L}_0 = +\infty$（对应无信息先验下的最大不确定性）。
-	\end{definition}
-	
-	\begin{proposition}[SGLD 对偶更新的收敛性]\label{prop:sgld-convergence}
-		在式~\eqref{eq:f-sigma-sgld} 的 SGLD 更新下，若满足：
-		\begin{enumerate}[label=(\roman*), leftmargin=2.4em]
-			\item 参数空间 $\Theta_\sigma \times \Theta_f$ 紧致；
-			\item 损失函数 $\ell_t(\theta)$ 关于 $\theta$ 光滑且满足耗散性（dissipativity）条件；
-			\item 学习率 $\eta_t$ 满足 $\sum_t \eta_t = \infty$、$\sum_t \eta_t^2 < \infty$；
-		\end{enumerate}
-		则 $\{\theta_t\}$ 弱收敛于联合后验分布 $p(\theta \mid \mathcal{H}_\infty)$。等价地，累积损失满足：
-		\begin{equation}
-			\frac{1}{T}\mathcal{L}_T \;\xrightarrow{\;a.s.\;}\; \min_{\theta \in \Theta_\sigma \times \Theta_f} \mathbb{E}_{p_{\mathrm{true}}(s)}[-\log p(s_t \mid s_{t-1}, \theta)].
-			\label{eq:loss-convergence-online}
-		\end{equation}
-		证明参见 \cite{welling2011bayesian, teh2016consistency}。
-	\end{proposition}
-	
-	\begin{remark}[实际监控策略]\label{rem:loss-monitor-online}
-		在实际算法实现中，维护全局变量 $\mathcal{L}_{\mathrm{best}} = +\infty$。每完成一帧更新后：
-		\begin{enumerate}[label=(\roman*), leftmargin=2.4em]
-			\item 计算即时损失 $\ell_t$ 并更新 $\mathcal{L}_t = \mathcal{L}_{t-1} + \ell_t$；
-			\item 若 $\mathcal{L}_t < \mathcal{L}_{\mathrm{best}}$，则记录该步对全局最小化有正贡献，并更新 $\mathcal{L}_{\mathrm{best}} = \mathcal{L}_t$；
-			\item 由命题~\ref{prop:sgld-convergence}~的渐近一致性，该检查过程在 $T \to \infty$ 时收敛于全局最优。
-		\end{enumerate}
-	\end{remark}
-	
-	\subsection{MDL 作为 \texorpdfstring{$f$-$\sigma$}{f-σ} 结构先验}
-	
-	最小描述长度（MDL）原则在本框架中不再作为全局优化目标，而是作为参数空间上的\emph{结构先验}，分别对 $\sigma$ 与 $f$ 施加独立的正则化。
-	
-	\begin{definition}[$f$-$\sigma$ MDL 对偶先验]\label{def:f-sigma-mdl}
-		定义 $f$-$\sigma$ 核心架构的 MDL 先验为：
-		\begin{equation}
-			p(\theta_\sigma, \theta_f) \propto \exp\bigl(-\lambda_\sigma \DL(\theta_\sigma) - \lambda_f \DL(\theta_f)\bigr),
-			\label{eq:f-sigma-mdl}
-		\end{equation}
-		其中 $\lambda_\sigma, \lambda_f > 0$ 为独立正则化系数，分别控制拓扑生成规则与状态转移规则的复杂度惩罚强度。
-	\end{definition}
-	
-	\begin{remark}[MDL 在 $f$-$\sigma$ SGLD 中的实现]\label{rem:f-sigma-mdl-sgld}
-		将式~\eqref{eq:f-sigma-mdl} 作为初始先验代入 SGLD 更新~\eqref{eq:f-sigma-sgld}，得到带 MDL 正则化的对偶更新：
-		\begin{equation}
-			\begin{aligned}
-				\theta_\sigma^{(t+1)} &= \theta_\sigma^{(t)} - \frac{\eta_t}{2} \bigl( \nabla_{\theta_\sigma} \ell_t + \lambda_\sigma \nabla_{\theta_\sigma} \DL(\theta_\sigma) \bigr) + \sqrt{\eta_t} \xi_t^{(\sigma)}, \\
-				\theta_f^{(t+1)} &= \theta_f^{(t)} - \frac{\eta_t}{2} \bigl( \nabla_{\theta_f} \ell_t + \lambda_f \nabla_{\theta_f} \DL(\theta_f) \bigr) + \sqrt{\eta_t} \xi_t^{(f)}.
-			\end{aligned}
-			\label{eq:f-sigma-sgld-mdl}
-		\end{equation}
-		在实际深度学习中，$\nabla_\theta \DL(\theta)$ 通常由权重衰减（weight decay）近似实现。
-	\end{remark}
-	
-	% ================= 6 三层扩展：f-η-σ 架构 =================
-	\section{三层扩展：引入拓扑传播链 \texorpdfstring{$\eta$}{η} 的 \texorpdfstring{$f$-$\eta$-$\sigma$}{f-η-σ} 架构}\label{sec:three-layer}
-	
-	\subsection{从 \texorpdfstring{$f$-$\sigma$}{f-σ} 到 \texorpdfstring{$f$-$\eta$-$\sigma$}{f-η-σ}：三层前向串联}
-	
-	第~\ref{sec:online-dual-bayes}~节的 $f$-$\sigma$ 核心架构可自然扩展至包含拓扑传播链 $\eta$ 的三层结构。此时前向传播变为：
-	
-	\begin{equation}
-		\mathcal{H}_t \xrightarrow{\sigma} G_t^{(0)} \xrightarrow{\eta} \widetilde{G}_t \xrightarrow{f} \hat{s}_{t+1}.
-		\label{eq:three-layer-forward}
-	\end{equation}
-	
-	反向传播相应地延伸为三层链式法则：
-	
-	\begin{equation}
-		\nabla_\sigma \ell_t = 
-		\underbrace{\nabla_\sigma G_t^{(0)}}_{\sigma \text{ 对初始图的贡献}}
-		\cdot
-		\underbrace{\nabla_{G^{(0)}} \widetilde{G}_t}_{\eta \text{ 的雅可比}}
-		\cdot
-		\underbrace{\nabla_{\widetilde{G}} \hat{s}_{t+1}}_{f \text{ 对图的敏感度}}
-		\cdot
-		\underbrace{\nabla_{\hat{s}} \ell_t}_{预测误差}.
-		\label{eq:three-layer-chain}
-	\end{equation}
-	
-	\begin{definition}[$f$-$\eta$-$\sigma$ 三层联合参数]\label{def:three-layer-params}
-		定义三层扩展系统的完整可学习参数为：
-		\begin{equation}
-			\theta = (\theta_\sigma,\ \theta_\eta,\ \theta_f) \in \Theta_\sigma \times \Theta_\eta \times \Theta_f,
-			\label{eq:three-layer-joint}
-		\end{equation}
-		其中 $\theta_\eta$ 参数化拓扑传播链 $\eta$（含传播层数 $L$、逐层变换参数等）。三者的联合后验为：
-		\begin{equation}
-			p(\theta_t \mid \mathcal{H}_t) \propto p(s_t \mid s_{t-1}, \theta_{t-1}) \cdot p(\theta_{t-1} \mid \mathcal{H}_{t-1}),
-			\label{eq:three-layer-posterior}
-		\end{equation}
-		其梯度通过链式法则~\eqref{eq:three-layer-chain} 同时分配给 $\theta_\sigma$、$\theta_\eta$ 与 $\theta_f$。
-	\end{definition}
-	
-	\subsection{\texorpdfstring{$f$-$\eta$-$\sigma$}{f-η-σ} 三层端到端在线贝叶斯递推}
-	
-	\begin{proposition}[三层端到端在线贝叶斯更新]\label{prop:three-layer-bayes}
-		$f$-$\eta$-$\sigma$ 三层系统的单步更新如下：
-		
-		\medskip
-		\textbf{前向生成}：
-		\begin{equation}
-			\begin{aligned}
-				G_t^{(0)} &= \sigma_t(\mathcal{H}_t), \\
-				\widetilde{G}_t &= \eta_t(G_t^{(0)}), \\
-				\hat{s}_{t+1} &= f_t(s_t, \widetilde{G}_t), \\
-				\ell_t &= -\log p(s_{t+1} \mid \hat{s}_{t+1}).
-			\end{aligned}
-			\label{eq:three-layer-forward-detailed}
-		\end{equation}
-		
-		\medskip
-		\textbf{三层同步 SGLD 更新}：
-		\begin{equation}
-			\begin{aligned}
-				\theta_\sigma^{(t+1)} &= \theta_\sigma^{(t)} - \frac{\eta_t}{2} \nabla_{\theta_\sigma} \ell_t + \sqrt{\eta_t} \xi_t^{(\sigma)}, \\
-				\theta_\eta^{(t+1)} &= \theta_\eta^{(t)} - \frac{\eta_t}{2} \nabla_{\theta_\eta} \ell_t + \sqrt{\eta_t} \xi_t^{(\eta)}, \\
-				\theta_f^{(t+1)} &= \theta_f^{(t)} - \frac{\eta_t}{2} \nabla_{\theta_f} \ell_t + \sqrt{\eta_t} \xi_t^{(f)},
-			\end{aligned}
-			\label{eq:three-layer-sgld}
-		\end{equation}
-		其中各梯度由链式法则给出：
-		\begin{align}
-			\nabla_{\theta_f} \ell_t &= \nabla_{\hat{s}} \ell_t \cdot \nabla_{\theta_f} \hat{s}_{t+1}, \label{eq:three-grad-f} \\
-			\nabla_{\theta_\eta} \ell_t &= \nabla_{\hat{s}} \ell_t \cdot \nabla_{\widetilde{G}} f \cdot \nabla_{\theta_\eta} \widetilde{G}_t, \label{eq:three-grad-eta} \\
-			\nabla_{\theta_\sigma} \ell_t &= \nabla_{\hat{s}} \ell_t \cdot \nabla_{\widetilde{G}} f \cdot \nabla_{\widetilde{G}} \eta \cdot \nabla_{\theta_\sigma} G_t^{(0)}. \label{eq:three-grad-sigma}
-		\end{align}
-	\end{proposition}
-	
-	\begin{remark}[三层扩展的物理意义]\label{rem:three-layer-physics}
-		与核心 $f$-$\sigma$ 架构相比，三层扩展引入了 $\eta$ 作为中间可学习模块：
-		\begin{itemize}[leftmargin=2em]
-			\item $\eta$ 的前向作用：将 $\sigma$ 生成的初始图 $G_t^{(0)}$ 精化为有效图 $\widetilde{G}_t$，对应物理上的“多跳传播”、“局域协调”或“介质极化”；
-			\item $\eta$ 的反向作用：将 $f$ 对 $\widetilde{G}_t$ 的梯度进一步回传至 $G_t^{(0)}$，使 $\sigma$ 能感知到“经过 $\eta$ 精化后的图结构”对预测的影响；
-			\item 当 $\eta = \mathrm{id}$（恒等映射）时，三层架构退化为第~\ref{sec:online-dual-bayes}~节的 $f$-$\sigma$ 核心架构。
-		\end{itemize}
-	\end{remark}
-	
-	\subsection{\texorpdfstring{$f$-$\eta$-$\sigma$}{f-η-σ} 隐图边缘化}
-	
-	\begin{proposition}[三层单步似然的隐图边缘化]\label{prop:three-layer-latent}
-		给定历史 $\mathcal{H}_{t-1}$ 与三层参数 $\theta_{t-1}=(\sigma_{t-1},\eta_{t-1},f_{t-1})$，观测 $s_t$ 的似然通过对初始图与有效图的联合求和得到：
-		\begin{equation}
-			\boxed{
-				p(s_t \mid s_{t-1}, \theta_{t-1}) = 
-				\sum_{\widetilde{G}_{t-1}} \sum_{G_{t-1}^{(0)}}
-				\underbrace{p(s_t \mid s_{t-1}, \widetilde{G}_{t-1}, f_{t-1})}_{\text{状态转移因子}}
-				\cdot
-				\underbrace{p(\widetilde{G}_{t-1} \mid G_{t-1}^{(0)}, \eta_{t-1})}_{\text{拓扑传播因子}}
-				\cdot
-				\underbrace{p(G_{t-1}^{(0)} \mid \mathcal{H}_{t-1}, \sigma_{t-1})}_{\text{历史倾向因子}}.
-			}
-			\label{eq:three-layer-marginal}
-		\end{equation}
-		三层参数的梯度分别通过对应的因子回传。当 $\eta = \mathrm{id}$ 时，式~\eqref{eq:three-layer-marginal} 退化为 $f$-$\sigma$ 核心架构的双因子边缘化。
-	\end{proposition}
-	
-	\subsection{\texorpdfstring{$f$-$\eta$-$\sigma$}{f-η-σ} MDL 三层先验}
-	
-	\begin{definition}[$f$-$\eta$-$\sigma$ MDL 三层先验]\label{def:three-layer-mdl}
-		三层扩展的 MDL 先验为各组件独立先验的乘积：
-		\begin{equation}
-			p(\theta_\sigma, \theta_\eta, \theta_f) \propto \exp\bigl(
-			-\lambda_\sigma \DL(\theta_\sigma) 
-			- \lambda_\eta \DL(\theta_\eta) 
-			- \lambda_f \DL(\theta_f)
-			\bigr),
-			\label{eq:three-layer-mdl}
-		\end{equation}
-		其中 $\lambda_\sigma, \lambda_\eta, \lambda_f > 0$ 为独立正则化系数。在 SGLD 更新中对应于各组件的独立权重衰减：
-		\begin{equation}
-			\begin{aligned}
-				\theta_\sigma^{(t+1)} &= \theta_\sigma^{(t)} - \frac{\eta_t}{2} \bigl( \nabla_{\theta_\sigma} \ell_t + \lambda_\sigma \nabla_{\theta_\sigma} \DL(\theta_\sigma) \bigr) + \sqrt{\eta_t} \xi_t^{(\sigma)}, \\
-				\theta_\eta^{(t+1)} &= \theta_\eta^{(t)} - \frac{\eta_t}{2} \bigl( \nabla_{\theta_\eta} \ell_t + \lambda_\eta \nabla_{\theta_\eta} \DL(\theta_\eta) \bigr) + \sqrt{\eta_t} \xi_t^{(\eta)}, \\
-				\theta_f^{(t+1)} &= \theta_f^{(t)} - \frac{\eta_t}{2} \bigl( \nabla_{\theta_f} \ell_t + \lambda_f \nabla_{\theta_f} \DL(\theta_f) \bigr) + \sqrt{\eta_t} \xi_t^{(f)}.
-			\end{aligned}
-			\label{eq:three-layer-sgld-mdl}
-		\end{equation}
-	\end{definition}
-	
-	\subsection{物理辨识实例：流固冲击粒子动力学（三层扩展）}
-	
-	以高速流固碰撞连续介质的拉格朗日粒子追踪数据流为例，$f$-$\eta$-$\sigma$ 三层扩展的物理映射如下：
-	
-	\begin{itemize}[leftmargin=2em]
-		\item \textbf{$\sigma$（历史倾向）}：从历史轨迹 $\mathcal{H}_{t-1}$ 中提取局部塑性应变累积特征，当累积应力超过屈服极限时，触发断裂连边倾向，生成初始裂纹图 $G_t^{(0)}$；
-		\item \textbf{$\eta$（拓扑传播）}：对初始裂纹图执行应力波传播闭包计算，将局域断裂倾向扩展为宏观裂纹拓扑 $\widetilde{G}_t$，确定飞溅液滴的边界与脱离区域；
-		\item \textbf{$f$（状态转移）}：在有效拓扑 $\widetilde{G}_t$ 上依据周围介质质点的动量与质量张量，计算每个被激活飞溅粒子的初始物理状态（位置、速度、质量）；
-		\item \textbf{对偶反向}：飞溅粒子位置的预测误差 $\ell_t$ 沿 $f \to \eta \to \sigma$ 逐层回传：$f$ 调整动量交换系数，$\eta$ 调整裂纹扩展判据，$\sigma$ 调整塑性累积触发阈值——这对应于物理上的“应力集中反馈”机制。
-	\end{itemize}
+	以高速流固碰撞连续介质的拉格朗日粒子追踪数据流（图~\ref{fig:splash}）为例，三层自指对偶架构展现出精确的物理同构：
 	
 	\begin{figure}[htbp]
 		\centering
 		\begin{tikzpicture}[
 			box/.style={draw, rounded corners=2pt, align=center, inner sep=3pt, font=\scriptsize, minimum height=6mm},
-			arr/.style={-{Stealth[length=1.5mm]}, thin},
-			parr/.style={-{Stealth[length=1.5mm]}, thin, dashed}]
-			\node[box, fill=gray!10] (sigma) at (0,0) {\textbf{$\sigma$：历史倾向}\\塑性应变累积\\触发断裂连边};
-			\node[box, fill=gray!15] (eta) at (4.0,0) {\textbf{$\eta$：拓扑传播}\\应力波传递闭包\\生成裂纹拓扑};
-			\node[box, fill=gray!20] (f) at (8.0,0) {\textbf{$f$：状态转移}\\动量质量交换\\计算飞溅初态};
-			\node[box, fill=gray!25] (loss) at (12.0,0) {\textbf{$\ell_t$：预测误差}\\对比真实飞溅\\计算损失};
-			\draw[arr] (sigma) -- node[above] {$G^{(0)}$} (eta);
-			\draw[arr] (eta) -- node[above] {$\widetilde{G}$} (f);
-			\draw[arr] (f) -- node[above] {$\hat{s}_{t+1}$} (loss);
-			\draw[parr] (loss) to[out=-90,in=-90] node[below, font=\tiny] {$\nabla_\theta \ell$ 逐层回传} (f);
-			\draw[parr] (f) to[out=-90,in=-90] (eta);
-			\draw[parr] (eta) to[out=-90,in=-90] (sigma);
+			arr/.style={-{Stealth[length=1.5mm]}, thin}]
+			\node[box, fill=gray!10] (phase1) at (0,0) {\textbf{平流运动相}\\历史平滑 $\mathcal{H}_t$\\自由弹道 $f_{\text{ballistic}}$};
+			\node[box, fill=gray!15] (phase2) at (3.6,0) {\textbf{冲击接触相}\\历史剪切触发 $\sigma$\\$\eta$ 建立界面接触网};
+			\node[box, fill=gray!20] (phase3) at (7.4,0) {\textbf{破碎飞溅相}\\$\eta$ 选址激活 $\bot_{\mathrm{u}}$\\全微观状态激发 $s^\ast$};
+			\node[box, fill=gray!25] (phase4) at (11.2,0) {\textbf{重组融合相}\\多跳融合拓扑 $\widetilde{G}_t$\\质点吸收 $\bot_{\mathrm{d}}$};
+			\draw[arr] (phase1) -- (phase2);
+			\draw[arr] (phase2) -- (phase3);
+			\draw[arr] (phase3) -- (phase4);
 		\end{tikzpicture}
-		\caption{$f$-$\eta$-$\sigma$ 三层扩展的物理映射与对偶反向传播。实线为前向预测，虚线为误差回传。}
-		\label{fig:three-layer-physics}
+		\caption{固—液撞击连续介质动力学在三层自指交互元系统中的物理映射。}
+		\label{fig:splash}
 	\end{figure}
+	
+	\begin{itemize}[leftmargin=2em]
+		\item \textbf{历史累积与接触判定（$\mathcal{H}_t \to \sigma$）}：介质的局部塑性应变累积于历史 $\mathcal{H}_t$ 中，当累积应力超过屈服极限时，$\sigma$ 触发断裂连边倾向 $G_t^{(0)}$；
+		\item \textbf{裂纹扩展与多跳传播（$G_t^{(0)} \to \eta \to \widetilde{G}_t$）}：传播链 $\eta$ 对局域应力集中区实施断裂传递闭包计算，生成宏观裂纹与飞溅液滴的有效拓扑边界 $\widetilde{G}_t$；
+		\item \textbf{全微观状态写入（$\widetilde{G}_t \to f \to x_{t+1}$）}：转移律 $f$ 依据周围介质质点的动量与质量张量，直接计算被激活飞溅粒子的物理状态，全微观格局目标~\eqref{eq:mdl-chain} 确保每一个微观粒子的位置、速度与质量严格满足守恒律。
+	\end{itemize}
 	
 	% ================= 7 连续时间 =================
 	\section{连续时间：历史驱动的切换流与边界跃迁}\label{sec:ct}
@@ -582,13 +386,6 @@
 		\label{eq:switchflow}
 	\end{equation}
 	其中 $\mathcal{H}_t = \{x(\tau)\}_{\tau\in[0,t]}$ 为连续历史轨道。
-	
-	在连续时间在线设定下，递推~\eqref{eq:f-sigma-sgld}（或三层版本~\eqref{eq:three-layer-sgld}）的离散更新步长 $\Delta t$ 由观测采样间隔决定。当 $\Delta t \to 0$ 时，SGLD 对偶更新退化为连续时间朗之万扩散：
-	\begin{equation}
-		d\theta_t = -\frac{1}{2} \nabla_\theta \ell_t(\theta_t) \, dt + dW_t,
-		\label{eq:ct-langevin}
-	\end{equation}
-	其中 $W_t$ 为参数空间上的标准维纳过程。该扩散的平稳分布为联合后验 $p(\theta \mid \mathcal{H}_\infty)$。
 	
 	连续动力学中的两类边界行为表述为：
 	\begin{itemize}[leftmargin=2em]
@@ -629,7 +426,7 @@
 	\end{proof}
 	
 	\begin{remark}[模拟边界与可学习性区隔]\label{rem:tc-boundary}
-		命题~\ref{prop:turing-completeness} 确立了本系统的理论模拟边界：任何物理可计算的经典力学系统或偏微分方程数值解法均落在该架构的表达力闭包之内。但这仅代表系统参数空间的\textbf{存在性天花板}（Expressivity Upper-bound），并不蕴含从有限经验数据中反向推断出该规则的易学性（Learnability）。在系统辨识中，离散元胞机与连续物理粒子追踪构成了自底向上的学习难度阶梯。
+		命题~\ref{prop:turing-completeness} 确立了本系统的理论模拟边界：任何物理可计算的经典力学系统或偏微分方程数值解法均落在该架构的表达力闭包之内。但这仅代表系统参数空间的**存在性天花板**（Expressivity Upper-bound），并不蕴含从有限经验数据中反向推断出该规则的易学性（Learnability）。在系统辨识中，离散元胞机与连续物理粒子追踪构成了自底向上的学习难度阶梯。
 	\end{remark}
 	
 	\subsection{理论假设账本}
@@ -637,9 +434,8 @@
 	\begin{remark}[形式化假设账本]\label{rem:boundary}
 		本框架推导链依赖的前提假设汇总如下：
 		\begin{itemize}[leftmargin=2em]
-			\item \textbf{成对历史局部性}：成边判定仅依赖两端点的局域历史；
-			\item \textbf{值域分工设计原则}：$\sigma$ 负责图空间生成，$\eta$ 负责图空间精化，$f$ 负责状态空间转移；
-			\item \textbf{端到端可微性}：对偶学习要求 $f$ 关于输入 $\widetilde{G}_t$ 可微（连续流形 $M_i$ 保证此条件）；三层扩展额外要求 $\eta$ 关于 $G_t^{(0)}$ 可微；
+			\item \textbf{成对历史局部性}（假设~\ref{ass:pairwise}）：成边判定仅依赖两端点的局域历史；
+			\item \textbf{值域分工设计原则}（Step F）：$\sigma$ 负责图空间生成，$\eta$ 负责图空间精化，$f$ 负责状态空间转移；
 			\item \textbf{潜在元宇宙基数}：理论分析假定 $V_\infty = \mathbb{N}$，实际计算中取足够大常数或采用死态复用机制（$\bot_{\mathrm{d}}\to\bot_{\mathrm{u}}$）。
 		\end{itemize}
 	\end{remark}
@@ -648,11 +444,10 @@
 	\section{结论}\label{sec:conclusion}
 	
 	本文系统建立了包含历史依赖倾向 $\sigma$、多层拓扑传播链 $\eta$ 与微观物理转移 $f$ 的自指交互元系统理论框架：
-	\begin{enumerate}[label=(\arabic*), leftmargin=2em]
+	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
 		\item 建立了 $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$ 的自指因果回路，将拓扑生成推广为历史驱动且包含多层结构协调的传播过程；
-		\item 提出了基于全微观格局 $x_{t+1}$ 的维数裂解似然与分层参考测度，排除了宏观标量约束导致的退化伪事实；
-		\item 建立了 $f$-$\sigma$ 对偶核心架构的在线贝叶斯递推框架：$\sigma$ 生成有效图，$f$ 预测物理状态，误差通过 $f$ 回传更新 $\sigma$；利用随机梯度朗之万动力学实现了联合后验的逐帧递推更新；证明了在温和条件下累积损失收敛于全局最优；
-		\item 进一步将核心架构扩展为 $f$-$\eta$-$\sigma$ 三层架构，引入可学习的拓扑传播链 $\eta$ 作为 $\sigma$ 与 $f$ 之间的中间精化层，使 $\sigma$ 能感知经过 $\eta$ 精化后的图结构对预测的影响；给出了三层链式法则与同步 SGLD 更新公式；
+		\item 提出了基于全微观格局 $x_{t+1}$ 的维数裂解似然与分层参考测度，排除了宏观标量约束导致的退化伪事实，导出了规整的裂解 MDL 优化目标；
+		\item 基于值域分工设计原则，严格导出了三因子边际似然分解公式与三相解耦优化算法；
 		\item 构造性证明了系统的图灵完备性，确立了系统的理论模拟能力下界。
 	\end{enumerate}
 	该理论体系为复杂自组织演化系统、自适应拓扑神经网络以及连续介质拉格朗日多相物理建模提供了严格统一的数理基石。
@@ -713,16 +508,6 @@
 		\bibitem{mordvintsev2020}
 		Mordvintsev, A., Randazzo, E., Niklasson, E., Levin, M. Growing neural
 		cellular automata. \textit{Distill}, 2020. \texttt{doi:10.23915/distill.00023}.
-		
-		\bibitem{welling2011bayesian}
-		Welling, M., Teh, Y. W. Bayesian learning via stochastic gradient Langevin
-		dynamics. \textit{Proceedings of the 28th International Conference on Machine
-			Learning (ICML)}, 2011: 681--688.
-		
-		\bibitem{teh2016consistency}
-		Teh, Y. W., Thiery, A. H., Vollmer, S. J. Consistency and fluctuations for
-		stochastic gradient Langevin dynamics. \textit{Journal of Machine Learning
-			Research}, 2016, 17: 1--33.
 		
 	\end{thebibliography}
 	
