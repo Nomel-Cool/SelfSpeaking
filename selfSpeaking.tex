@@ -42,7 +42,7 @@
 \DeclareMathOperator{\supp}{\mathrm{supp}} % 支撑集
 \DeclareMathOperator{\DL}{\mathrm{DL}}     % 描述长度
 
-\title{\bfseries 自指交互元系统：历史依赖倾向、多层拓扑传播链与分层像空间自回归动力学}
+\title{\bfseries 自指交互元系统：历史依赖倾向、多层拓扑传播链与分层自回归动力学}
 \author{蒙进朗}
 \date{2026年9月9日}
 
@@ -57,11 +57,11 @@
 		(1) \textbf{历史依赖倾向与多层拓扑传播链}：倾向性规则族 $\sigma$ 以系统演化至今的完整历史轨迹 $\mathcal{H}_t = (x_0, x_1, \dots, x_t)$ 为输入，生成初始交互图 $G_t^{(0)}$；随后引入图拓扑传播链 $\eta = \eta_L \circ \dots \circ \eta_1$，通过多层结构重写与局域协调，将初始拓扑精化为实际生效的有效交互图 $\widetilde{G}_t$，闭合了 $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$ 的自指因果回路；
 		(2) \textbf{全微观格局转移与并行演化}：局部转移规则 $f$ 在有效图 $\widetilde{G}_t$ 上并行驱动全体槽位的状态更新，全局动力学严格闭合于乘积相空间 $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$ 上的自同态映射；
 		(3) \textbf{全微观状态跟踪的 MDL 辨识准则}：构建了覆盖 $V_\infty$ 全体元微观复合配置 $x_{t+1}$ 的全条件似然，推导了包含拓扑生成、传播链与微观状态转移的三重边际似然分解公式，确立了三个功能组件的解耦交替优化策略，消除了宏观标量约束导致的退化伪解；
-		(4) \textbf{分层元交互系统与自顶向下相空间自回归重塑}：构建分层元系统塔 $\mathcal{A}^{(0)} \prec \dots \prec \mathcal{A}^{(N)}$。底层状态经前向消息传递诱导高阶像空间流形 $\mathcal{I}^{(k)}$，高层元系统通过分层相空间重构算子 $\Psi^{(k+1 \to k)}$ 显式重塑低阶相空间的本征维度、几何联络与切丛向量场；提出了自底向上级联逐层贪心诱导（Layer-wise Progressive Induction）学习机制，在数学上与重整化群粗粒化同构，将指数级多层图搜索复杂度降至严格线性 $\mathcal{O}(N)$；
+		(4) \textbf{分层元交互系统与自顶向下拓扑自回归}：构建多尺度分层系统 $\mathcal{V}^{(0)} \prec \dots \prec \mathcal{V}^{(K)}$。底层微观网络输出拓扑状态，高层网络跟踪并预测下层的拓扑变化；在训练阶段采用自底向上逐层递进学习策略，在推断阶段采用自顶向下逐层预测并修改下一时刻拓扑的双向自回归闭环；
 		(5) \textbf{计算普遍性与理论模拟边界}：严格证明了该系统在退化流形上包含初等元胞机 Rule 110 与 Conway's Game of Life，具备图灵完备性（Turing Completeness），为复杂物理与离散系统的建模提供了无界表达力基准。
 		在连续时间设定下，该框架形式化为历史驱动的变维混合切换系统。本文表明，该系统在保持严密测度分析良定义性的同时，能够实现结构、规律与微观状态的内生协同演化。
 		\par\medskip
-		\noindent\textbf{关键词：}交互元系统；历史依赖；拓扑传播链；零态紧化；分层元系统；像空间投影；相空间重塑；最小描述长度；图灵完备性
+		\noindent\textbf{关键词：}交互元系统；历史依赖；拓扑传播链；零态紧化；分层系统；拓扑自回归；最小描述长度；图灵完备性
 	\end{abstract}
 	
 	\vspace{1em}
@@ -72,12 +72,12 @@
 		We establish a tripartite self-referential closed loop, multi-scale hierarchical abstraction, and full microscopic configuration identification theory:
 		(1) \textbf{History-dependent propensity and multi-layer topology propagation chain}: The propensity rules $\sigma$ take the historical trajectory $\mathcal{H}_t = (x_0, \dots, x_t)$ as input to generate an initial interaction graph $G_t^{(0)}$. A multi-layer topology propagation chain $\eta = \eta_L \circ \dots \circ \eta_1$ executes structural refinement, transforming $G_t^{(0)}$ into an effective operational graph $\widetilde{G}_t$, closing the causal loop $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$;
 		(2) \textbf{Full microscopic transition and parallel dynamics}: The local transition rules $f$ execute parallel updates across $\widetilde{G}_t$, strictly formalizing global dynamics as a closed endomorphism on the invariant product space $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$;
-		(3) \textbf{Microscopic configuration tracking under MDL}: We formulate the joint likelihood over the complete microstate configuration $x_{t+1}$ across all potential coordinates $V_\infty$. We deduce a tripartite marginal likelihood factorization governing structural evaluation, topological propagation, and microstate transition, establishing a decoupled alternating coordinate optimization scheme that eliminates degenerate solutions;
-		(4) \textbf{Hierarchical meta-systems and top-down phase-space autoregressive reconfiguration}: We extend the architecture into a multi-scale hierarchy $\mathcal{A}^{(0)} \prec \dots \prec \mathcal{A}^{(N)}$. Lower-level forward message passing induces an image-space manifold $\mathcal{I}^{(k)}$, enabling higher-level meta-systems to autoregressively rewrite the intrinsic dimensionality, geometric connections, and tangent vector fields of lower-level phase spaces via a reconfiguration operator $\Psi^{(k+1 \to k)}$. We establish a layer-wise progressive induction scheme isomorphic to renormalization group coarse-graining, reducing multi-layer discrete search complexity to strictly linear $\mathcal{O}(N)$;
+		(3) \textbf{Microscopic configuration tracking under MDL}: We formulate the joint likelihood over the complete microstate configuration $x_{t+1}$ across all potential coordinates $V_\infty$. We deduce a tripartite marginal likelihood factorization governing structural evaluation, topological propagation, and microstate transition, establishing a decoupled alternating coordinate optimization scheme;
+		(4) \textbf{Hierarchical meta-systems and top-down topological autoregression}: We construct a multi-level hierarchy $\mathcal{V}^{(0)} \prec \dots \prec \mathcal{V}^{(K)}$ where higher layers track and predict the topological states of lower layers. We establish a bottom-up layer-wise progressive training strategy paired with a bidirectional autoregressive inference loop that dynamically predicts and rewrites lower-level computation graphs;
 		(5) \textbf{Computational universality and simulation boundaries}: We prove that the system encompasses Rule 110 and Conway's Game of Life on degenerate submanifolds, establishing Turing Completeness (TC) as a formal expressivity baseline.
 		In continuous time, this framework instantiates history-driven hybrid switched systems. We prove that this architecture preserves analytical tractability while endogenously accommodating open-ended evolution.
 		\par\medskip
-		\noindent\textbf{Keywords:} interaction-element system; history dependence; topology propagation chain; null-state compactification; hierarchical meta-system; image-space projection; phase-space reconfiguration; Minimum Description Length; Turing Completeness
+		\noindent\textbf{Keywords:} interaction-element system; history dependence; topology propagation chain; null-state compactification; hierarchical meta-system; topological autoregression; Minimum Description Length; Turing Completeness
 	\end{abstract}
 	
 	\tableofcontents
@@ -90,7 +90,7 @@
 	
 	在自组织复杂系统与演化动力学的建模中，拓扑结构与微观物理状态之间存在着深层的自指循环：系统的交互拓扑并非瞬时状态的无记忆切片，而是由系统自初始时刻演化至今的完整历史路径 $\mathcal{H}_t$ 所共同塑造；同时，由历史诱导的微观成边倾向在转化为实际物理耦合前，往往需要经历多层次的局域协调、路径传递与结构重写 $\eta$；最终，在提炼出的有效交互结构上，微观转移律 $f$ 驱动全体实体推进至下一物理状态，生成新的历史片段。
 	
-	传统复杂动力学模型通常割裂了这一因果回路，将拓扑生成退化为单步无记忆映射，或使用固定不变的邻接矩阵 \cite{stewart2003symmetry,deville2015modular}。同时，在统计推断与系统辨识中，若仅使用系统活性规模等宏观标量作为损失约束，极易诱导模型拟合出违反局域物理守恒的伪因果关系。此外，单一扁平网络在处理不同时空尺度的复合动力学时，缺乏提取高阶守恒量与动态操作底层相空间的多尺度表征机制。
+	传统复杂动力学模型通常割裂了这一因果回路，将拓扑生成退化为单步无记忆映射，或使用固定不变的邻接矩阵 \cite{stewart2003symmetry,deville2015modular}。同时，在统计推断与系统辨识中，若仅使用系统活性规模等宏观标量作为损失约束，极易诱导模型拟合出违反局域物理守恒的伪因果关系。此外，单一扁平网络在处理不同时空尺度的复合动力学时，缺乏提取高阶守恒量与动态操作底层拓扑的多尺度表征机制。
 	
 	\subsection{理论框架与本文探讨的核心论点}
 	
@@ -99,7 +99,7 @@
 		\item \textbf{自指因果回路的完备性论点（$f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$）}：主张将交互拓扑生成视为历史轨迹流形 $\mathcal{H}_t$ 的非马尔可夫泛函，并通过多层图传播链 $\eta$ 显式建模相互作用通道在局域上的传递闭包与协调，从而在因果结构上闭合“状态演化积累历史、历史泛函诱导拓扑、拓扑约束状态演化”的完整自指因果回路；
 		\item \textbf{零态紧化与相空间维度内生化论点}：主张通过通用坐标索引集 $V_\infty$ 与零态紧化空间 $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$，将传统变维动力系统中非连续的外生集合增删，转化为固定乘积相空间 $\Sigma$ 上的全局自同态映射，使系统的活性有效规模 $|V_t|=\#\supp(x_t)$ 严格内生化为微观格局的可测泛函；
 		\item \textbf{全微观格局约束与因果推断论点}：主张系统辨识必须直接建立在通用坐标全集 $V_\infty$ 的微观复合配置 $x_{t+1}$ 之上以防止伪因果拟合；通过单步似然的维数裂解与分层参考测度消解变维奇异性，结合拓扑—状态值域分离原则，为结构倾向 $\sigma$、拓扑传播 $\eta$ 与微观转移 $f$ 的解耦优化提供信息论与统计力学依据；
-		\item \textbf{分层元系统与相空间自顶向下自回归重塑论点}：主张通过构建多尺度元系统塔 $\mathcal{A}^{(0)} \prec \dots \prec \mathcal{A}^{(N)}$ 与像空间投影算子 $\Pi$，将高阶元系统形式化为对低阶相空间维度、几何联络与切丛向量场的分层相空间重构算子 $\Psi^{(k+1 \to k)}$；并探讨自底向上级联逐层递进诱导（Layer-wise Progressive Induction）在数学上与重整化群粗粒化的同构性，为将多层离散图搜索复杂度降至线性 $\mathcal{O}(N)$ 提供理论范式；
+		\item \textbf{分层系统与逐层递进拓扑自回归论点}：主张构建多尺度分层元系统 $\mathcal{V}^{(0)} \prec \dots \prec \mathcal{V}^{(K)}$，高层网络跟踪并预测低层的拓扑变化，提出自底向上逐层递进训练策略与自顶向下逐层重塑拓扑的自回归推断回路，将多层离散图搜索复杂度降至线性 $\mathcal{O}(K)$；
 		\item \textbf{计算普遍性与理论模拟边界论点}：通过在确定性退化子流形上对初等元胞机（Rule 110）与生命游戏（Conway's Game of Life）的构造性归约，确立该理论架构在表达力层面的图灵完备性（TC）下界，以此论证其作为离散与连续物理系统通用建模底座的形式化合法性。
 	\end{itemize}
 	
@@ -502,7 +502,7 @@
 			\draw[draw=purple!50, dashed, rounded corners=6pt] (4.1, -0.8) rectangle (11.1, 8.7);
 			
 		\end{tikzpicture}
-		\caption{分层交互元系统的全局学习与自回归推断架构。(a) \textbf{训练阶段}：采用自底向上级联逐层递进诱导机制（Layer-wise Progressive Induction），各层独立以相邻低层的像空间轨迹为监督目标最小化局部 MDL 损失；(b) \textbf{自回归推断阶段}：采用“自底向上前向传递 + 自顶向下拓扑重塑”的双向闭环机制，顶层向下逐级重塑子网络下一时刻的计算图拓扑 $\widetilde{G}_{t+1}^{(k-1)}$，最终驱动底层物理状态 $\mathcal{V}_{t+1}^{(0)}$ 的前向更新并形成时间自回归递归。}
+		\caption{分层交互元系统的全局学习与自回归推断架构。(a) \textbf{训练阶段}：采用自底向上级联逐层递进诱导机制，各层独立以相邻低层的像空间轨迹为监督目标最小化局部 MDL 损失；(b) \textbf{自回归推断阶段}：采用“自底向上前向传递 + 自顶向下拓扑重塑”的双向闭环机制，顶层向下逐级重塑子网络下一时刻的计算图拓扑 $\widetilde{G}_{t+1}^{(k-1)}$，最终驱动底层物理状态 $\mathcal{V}_{t+1}^{(0)}$ 的前向更新并形成时间自回归递归。}
 		\label{fig:framework-pipeline}
 	\end{figure*}
 	
@@ -562,7 +562,7 @@
 		\item \textbf{微观规则的种群演化}：伴随休眠槽位不断被有效图 $\widetilde{G}_t$ 激活，重组算子 $\mathcal{R}$ 持续向系统注入新的局域规则 $(\sigma^\ast, f^\ast)$，经验规则测度 $\mu_t = \frac{1}{|V_t|}\sum_{v\in\supp(x_t)}\delta_{(\sigma_v, f_v)}$ 在无限维表示空间中呈现非平衡态定向扩散。
 	\end{enumerate}
 	
-	\subsection{计算普遍性与理论模拟边界}
+	\subsection{计算普遍性与理论模拟边界（Turing Completeness）}
 	
 	为了确立该动力系统框架在计算论层面的表达力理论下界，本文通过子流形退化构造证明其具备通用图灵计算能力。
 	
@@ -582,7 +582,7 @@
 	\begin{remark}[计算普遍性的理论定位与有效表达力边界]\label{rem:tc-boundary}
 		命题~\ref{prop:turing-completeness} 确立了本系统在计算论意义下的理论能力基准，其在方法论与系统辨识中具有明确的界定范围：
 		\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-			\item \textbf{可计算性边界}：图灵完备性证明了该自指交互元架构在渐近意义下不存在数理范式层面的计算盲区，原则上能够包含任意可计算的离散算法、数值 PDE 求解器或经典力学动力学流形；
+			\item \textbf{计算性边界}：图灵完备性证明了该自指交互元架构在渐近意义下不存在数理范式层面的计算盲区，原则上能够包含任意可计算的离散算法、数值 PDE 求解器或经典力学动力学流形；
 			\item \textbf{渐近完备性 $\neq$ 有限资源下的有效表达力}：图灵完备性依赖于无限通用坐标集 $V_\infty = \mathbb{Z}$ 或无界时间演化。在实际工程与有限网络参数设定下，系统仍受制于多层传播链深度 $L$ 带来的局域感受野限制（难以在单步内直接捕获全局椭圆型约束）、有限参数容量以及连续流形奇异刚性逼近误差；
 			\item \textbf{表达力存在性 $\neq$ 经验可学习性}：即使目标动力学落在表达力闭包内，非凸图优化、稀有相变跳变以及强 MDL 复杂度惩罚 $-\lambda \DL(\theta)$ 对复杂假设空间的剪裁，仍可能导致逆向参数推断陷入局部极值。图灵完备性确立了系统理论表达力的存在性上限，但解决实际动力学辨识依然依赖于合理的局部传播层数 $L$ 设计、损失分层加权与相空间样本覆盖。
 		\end{enumerate}
@@ -596,22 +596,22 @@
 			\item \textbf{局域双边历史可分解性假设}：任意两槽位之间的瞬时连边倾向，严格仅取决于这两端自带的历史微观世界线（式~\eqref{eq:edge-history}），保证了分布式图计算的局域性与因果隔离；
 			\item \textbf{拓扑—状态值域分离原则}：$\sigma$ 与 $\eta$ 的值域严格限定在离散图空间 $\mathfrak{G}(V_\infty)$，负责拓扑结构生成；转移律 $f$ 的值域严格限定在连续状态流形 $\bar{\widetilde{M}}$，负责物理状态演化。这一原则唯一确立了边际似然的前向因果分解方向（式~\eqref{eq:marginal-likelihood}）；
 			\item \textbf{通用坐标集可数性假设}：理论分析设定通用坐标全集为可数无限集 $V_\infty = \mathbb{N}$；在实际计算仿真中取足够大常数或采用吸收死态复位机制（$\bot_{\mathrm{d}}\to\bot_{\mathrm{u}}$）；
-			\item \textbf{乘积流形正交分解与无约束嵌入假设}：外部测量特征（如速度差分、各向同性间距）仅作为微观状态属性嵌入有效流形 $M_i$（定义~\ref{def:state-decomposition}），严禁硬编码任何物理代数约束方程，所有动力学相互作用均由网络在 MDL 约束下纯内生涌现。
+			\item \textbf{乘积流形正交分解与无约束嵌入假设}：外部测量特征（如速度差分、各向同性间距）仅作为微观状态属性嵌入有效流形 $M_i$（定义~\ref{def:state-decomposition}），严禁硬编码任何物理代数约束方程，所有动力学相互作用均由网络在 MDL 约束下涌现。
 		\end{itemize}
 	\end{remark}
 	
-	% ================= 10 结论 =================
+	% ================= 9 结论 =================
 	\section{结论}\label{sec:conclusion}
 	
-	本文系统建立了包含历史依赖倾向 $\sigma$、多层拓扑传播链 $\eta$、微观物理转移 $f$ 以及分层元相空间自回归重塑的自指交互元系统理论框架：
+	本文系统建立了包含历史依赖倾向 $\sigma$、多层拓扑传播链 $\eta$、微观物理转移 $f$ 以及分层拓扑自回归的自指交互元系统理论框架：
 	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
 		\item 建立了 $f \to \mathcal{H}_t \to \sigma \to \{\eta\} \to f$ 的自指因果回路，将拓扑生成推广为历史驱动且包含多层结构协调的传播过程；
 		\item 提出了基于全微观格局 $x_{t+1}$ 的维数裂解似然与分层参考测度，排除了宏观标量约束导致的退化伪事实，导出了规整的裂解 MDL 优化目标；
-		\item 构建了分层元系统塔与像空间投影算子，形式化了高阶元系统通过分层相空间重构算子 $\Psi^{(k+1 \to k)}$ 对子网络本征维度、耦合联络与切丛向量场的自顶向下自回归重塑机制；
-		\item 建立了自底向上级联逐层递进诱导学习算法，在数学上与重整化群粗粒化同构，将多层图优化复杂度降至严格线性 $\mathcal{O}(N)$；
+		\item 构建了分层元系统与逐层递进学习机制，形式化了高层网络对低层计算图拓扑自顶向下的预测与重塑回路；
+		\item 建立了自底向上级联逐层递进诱导学习算法，将多层图优化复杂度降至严格线性 $\mathcal{O}(K)$；
 		\item 构造性证明了系统的图灵完备性，确立了系统的理论模拟能力下界与有效表达力边界。
 	\end{enumerate}
-	该理论体系为复杂自组织演化系统、自适应拓扑神经网络以及连续介质多相物理建模提供了严格统一的数理基石。
+	该理论体系为复杂自组织演化系统、自适应拓扑神经网络以及动力学建模提供了严格统一的数理基石。
 	
 	% ================= 参考文献 =================
 	\begin{thebibliography}{99}
