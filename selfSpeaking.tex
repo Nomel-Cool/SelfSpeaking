@@ -42,7 +42,7 @@
 \DeclareMathOperator{\supp}{\mathrm{supp}} % 支撑集
 \DeclareMathOperator{\DL}{\mathrm{DL}}     % 描述长度
 
-\title{\bfseries 自指交互元系统：有限维记忆变量、全局调制拓扑倾向与分层自回归动力学}
+\title{\bfseries 自指交互元系统：状态—拓扑增广历史、全局调制倾向与分层自回归动力学}
 \author{蒙进朗}
 \date{2026年9月10日}
 
@@ -54,14 +54,14 @@
 	\begin{abstract}
 		本文提出一类基于局域并行交互机制的自指动力系统理论框架——交互元系统 $\mathcal{A}=\langle V_\infty,\{\bar{M}_i\},\mathfrak{S},\mathfrak{E},\mathfrak{F},\eta,f\rangle$。系统构建在通用坐标索引集 $V_\infty$ 与零态紧化（Null-State Compactification）空间 $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$ 之上，微观槽位 $v_i$ 携带状态—规则复合配置 $x_i(t)=(s_i(t),\sigma_i(t),f_i(t))$。
 		针对动力学闭环与多尺度因果解构，本文建立了完备的自指演化与全微观格局辨识理论：
-		(1) \textbf{有限维记忆变量与全局调制拓扑倾向}：为克服无限维历史轨迹在长时间演化中的维数发散，系统引入有限维记忆动力学 $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \mathbf{m}_t)$ 将历史有效马尔可夫化；倾向性规则 $\sigma$ 废除孤立的纯局域双边可分解性假设，构建由“有限维记忆变量 $\to$ 成对局域意愿 $\to$ 全局环境场调制”构成的三层设计架构，并通过多层图传播链 $\eta$ 精化为有效交互图 $\widetilde{G}_t$，闭合了 $f \to \mathbf{m}_t \to \sigma \to \{\eta\} \to f$ 的有限维自指因果回路；
-		(2) \textbf{全微观格局转移与并行演化}：局部转移规则 $f$ 在有效图 $\widetilde{G}_t$ 上并行驱动全体槽位的状态更新，全局动力学严格闭合于乘积相空间 $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$ 上的自同态映射；
-		(3) \textbf{真实历史锚定与全微观 MDL 辨识准则}：构建了覆盖 $V_\infty$ 全体元微观复合配置 $x_{t+1}$ 的条件似然。针对模型训练早期自推演未成熟历史引发的恶性误差累积与发散，确立了\textbf{真实历史锚定原则}（Ground-Truth Historical Grounding），在客观真值轨迹驱动下推导了包含拓扑生成、传播链与微观状态转移的三重边际似然分解公式与交替优化策略，消除了因果漂移与退化解；
+		(1) \textbf{状态—拓扑增广历史与记忆变量}：将系统的演化历史严格形式化为微观状态与瞬时交互拓扑的联合轨迹 $\mathcal{H}_t = \big( (x_k, \widetilde{G}_k) \big)_{k=0}^t$，使拓扑连接经历本身作为结构记忆固化留存；通过有限维记忆动力学 $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \widetilde{G}_t, \mathbf{m}_t)$ 将该联合流形递归压缩，消除了无界历史的维数发散；
+		(2) \textbf{两级调制拓扑倾向机制}：倾向性规则族 $\sigma$ 废除孤立的纯局域双边可分解性假设，构建由“有限维记忆变量 $\to$ 成对局域意愿 $w_{ij}$ $\to$ 全局环境场调制 $g(\mathbf{m}_t)$”构成的判定架构，并通过多层图传播链 $\eta$ 精化为有效交互图 $\widetilde{G}_t$，闭合了 $f \to \mathbf{m}_t \to \sigma \to \{\eta\} \to f$ 的有限维自指因果回路；
+		(3) \textbf{全微观格局转移与真实历史锚定}：局部转移规则 $f$ 在有效图 $\widetilde{G}_t$ 上并行驱动全体槽位状态更新；确立了训练期真实历史锚定原则（Ground-Truth Historical Grounding），在客观真值轨迹驱动下推导了三重边际似然分解公式与解耦交替优化策略，消除了未成熟自生成历史诱发的协变量漂移；
 		(4) \textbf{分层元交互系统与自顶向下拓扑自回归}：构建多尺度分层系统 $\mathcal{V}^{(0)} \prec \dots \prec \mathcal{V}^{(K)}$，给出了倾向性网络 $\sigma$ 的具体神经参数化方案；在训练阶段采用基于真值轨迹的自底向上逐层递进学习策略，在推断阶段采用自顶向下逐层预测并修改下一时刻拓扑的双向自回归闭环；
 		(5) \textbf{计算普遍性与理论模拟边界}：严格证明了该系统在退化流形上包含初等元胞机 Rule 110 与 Conway's Game of Life，具备图灵完备性（Turing Completeness），为复杂物理与离散系统的建模提供了无界表达力基准。
-		本文表明，该系统在保持严密测度分析良定义性的同时，能够实现拓扑结构、环境背景与微观状态的内生协同演化。
+		本文表明，该系统在保持严密测度分析良定义性的同时，能够实现结构历史、宏观环境与微观状态的内生协同演化。
 		\par\medskip
-		\noindent\textbf{关键词：}交互元系统；有限维记忆变量；全局环境调制；真实历史锚定；零态紧化；分层系统；拓扑自回归；最小描述长度；图灵完备性
+		\noindent\textbf{关键词：}交互元系统；状态—拓扑联合历史；有限维记忆变量；全局环境调制；真实历史锚定；分层系统；拓扑自回归；图灵完备性
 	\end{abstract}
 	
 	\vspace{1em}
@@ -70,13 +70,13 @@
 	\begin{abstract}
 		This paper presents a formal theoretical framework for self-referential dynamical systems founded on local parallel interactions, termed the interaction-element system $\mathcal{A}=\langle V_\infty,\{\bar{M}_i\},\mathfrak{S},\mathfrak{E},\mathfrak{F},\eta,f\rangle$. Formulated over a universal coordinate index set $V_\infty$ and a null-state compactified manifold $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$, each coordinate slot $v_i$ carries a composite state-rule configuration $x_i(t)=(s_i(t),\sigma_i(t),f_i(t))$.
 		We establish a tripartite self-referential closed loop, multi-scale hierarchical abstraction, and full microscopic configuration identification theory:
-		(1) \textbf{Finite-dimensional memory variables and globally modulated topological propensity}: To prevent dimensional explosion from infinite historical trajectories, the system introduces a finite-dimensional recurrent memory dynamic $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \mathbf{m}_t)$ to Markovianize the past. Rejecting naive bilateral decomposability, the propensity rule $\sigma$ establishes a conceptual three-tier architecture: memory variables $\to$ local dyadic affinity $\to$ global contextual modulation, refined via a multi-layer propagation chain $\eta$ into an operational graph $\widetilde{G}_t$, closing the causal loop $f \to \mathbf{m}_t \to \sigma \to \{\eta\} \to f$;
-		(2) \textbf{Full microscopic transition and parallel dynamics}: The local transition rules $f$ execute parallel updates across $\widetilde{G}_t$, strictly formalizing global dynamics as a closed endomorphism on the invariant product space $\Sigma = \prod_{v\in V_\infty}(\bar{M}_v\times\mathfrak{S}\times\mathfrak{F})$;
-		(3) \textbf{Ground-truth historical grounding and microscopic MDL identification}: We formulate the joint likelihood over the complete microstate configuration $x_{t+1}$ across all potential coordinates $V_\infty$. Addressing the catastrophic covariate shift caused by conditioning on immature self-rollouts during training, we establish the \textbf{Ground-Truth Historical Grounding} protocol, deducing a tripartite marginal likelihood factorization governing structural evaluation, topological propagation, and microstate transition;
-		(4) \textbf{Hierarchical meta-systems and top-down topological autoregression}: We construct a multi-level hierarchy $\mathcal{V}^{(0)} \prec \dots \prec \mathcal{V}^{(K)}$ and detail the neural parameterization of $\sigma$. We establish a bottom-up layer-wise progressive training strategy driven by ground-truth historical streams, paired with a bidirectional autoregressive inference loop that dynamically predicts and rewrites lower-level computation graphs during testing;
+		(1) \textbf{State-topology augmented history and recurrent memory}: The historical trajectory is formalized as a joint sequence of microstates and instantaneous topologies $\mathcal{H}_t = \big( (x_k, \widetilde{G}_k) \big)_{k=0}^t$, preserving past relational connectivity as structural memory. A finite-dimensional recurrent dynamic $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \widetilde{G}_t, \mathbf{m}_t)$ compresses this joint manifold to prevent dimensional divergence;
+		(2) \textbf{Two-tier modulated topological propensity}: Rejecting isolated bilateral decomposability, the propensity rule $\sigma$ establishes an architecture combining local dyadic affinity $w_{ij}$ with global environmental context modulation $g(\mathbf{m}_t)$, refined via a multi-layer propagation chain $\eta$ into an operational graph $\widetilde{G}_t$, closing the causal loop $f \to \mathbf{m}_t \to \sigma \to \{\eta\} \to f$;
+		(3) \textbf{Full microscopic transition and ground-truth historical grounding}: Local transition rules $f$ execute parallel updates across $\widetilde{G}_t$. Addressing catastrophic compounding errors caused by conditioning on immature rollouts during training, we establish the Ground-Truth Historical Grounding protocol and deduce a tripartite marginal likelihood factorization governing structural evaluation, topological propagation, and microstate transition;
+		(4) \textbf{Hierarchical meta-systems and top-down topological autoregression}: We construct a multi-level hierarchy $\mathcal{V}^{(0)} \prec \dots \prec \mathcal{V}^{(K)}$ and detail the neural parameterization of $\sigma$. We establish a bottom-up layer-wise progressive training strategy driven by ground-truth historical streams, paired with a bidirectional autoregressive inference loop that dynamically rewrites lower-level computation graphs;
 		(5) \textbf{Computational universality and simulation boundaries}: We prove that the system encompasses Rule 110 and Conway's Game of Life on degenerate submanifolds, establishing Turing Completeness (TC) as a formal expressivity baseline.
 		\par\medskip
-		\noindent\textbf{Keywords:} interaction-element system; finite-dimensional memory; global contextual modulation; ground-truth historical grounding; null-state compactification; hierarchical meta-system; topological autoregression; Minimum Description Length; Turing Completeness
+		\noindent\textbf{Keywords:} interaction-element system; state-topology joint history; finite-dimensional memory; global contextual modulation; ground-truth historical grounding; hierarchical meta-system; topological autoregression; Turing Completeness
 	\end{abstract}
 	
 	\tableofcontents
@@ -87,15 +87,15 @@
 	
 	\subsection{研究背景与理论闭环的重构}
 	
-	在自组织复杂系统与演化动力学的建模中，拓扑结构与微观物理状态之间存在着深层的自指循环：系统的交互拓扑并非瞬时状态的无记忆切片，而是受历史轨迹演化所形成的记忆结构所塑造；同时，任意两实体之间是否发生相互作用，绝非孤立取决于两端点自身，而是受到全系统宏观环境背景场（如整体温度、平均密度、相变临界性）的全局调制。此外，由局域意愿与宏观环境共同激发的微观连边倾向，往往需要经历多层次的局域协调、路径传递与拓扑重写 $\eta$；最终，在提炼出的有效交互结构上，微观转移律 $f$ 驱动全体实体推进至下一物理状态，生成新的记忆增量。
+	在自组织复杂系统与演化动力学的建模中，拓扑结构与微观物理状态之间存在着深层的自指循环：系统的交互拓扑并非瞬时状态的无记忆切片，而是由过去全部时步的**状态演变轨迹与交互连接历史**所共同塑造；在物理与复杂网络现实中，两实体是否建立关联不仅取决于其位置与动量，更取决于它们过去是否曾发生过碰撞、相互绑定的持续时长以及历史相互作用频次。同时，任意两实体之间是否发生相互作用，绝非孤立取决于两端点自身，而是受到全系统宏观环境背景场（如整体温度、平均密度、相变临界性）的全局调制。
 	
-	在动力学辨识与参数优化中，另一个被普遍忽视的结构性陷阱在于**时序自回归中的协变量漂移（Covariate Shift）与误差级联雪崩**：当模型在参数未收敛的训练早期使用自身推演的未成熟历史作为后续演化的条件时，虚假的微观误差会被写入时序记忆，导致拓扑网络生成荒谬的连接结构，进而迫使转移网络在非真实拓扑上过拟合，导致整个优化过程剧烈震荡而不收敛。因此，必须在理论上严格确立**训练期真实历史锚定（Ground-Truth Historical Grounding）**与**推断期自回归展开**的因果分离。
+	在以往的模型设计中，历史往往被狭隘地定义为纯物理坐标序列 $\mathcal{H}_t = (x_0, \dots, x_t)$，过去的交互拓扑被视为瞬态消耗品而未被系统正式记录。这种缺失割裂了“拓扑记忆”对未来因果决策的沉淀作用。此外，在动力学辨识中，如果在训练早期使用未成熟的自推演历史，会引发严重的**协变量漂移（Covariate Shift）与误差级联雪崩**。因此，必须在理论上统一**状态—拓扑联合历史记录**与**训练期真实历史锚定原则**。
 	
 	\subsection{理论框架与本文探讨的核心论点}
 	
 	本文属于概念性与形式化数理设计工作，暂不涉及具体的实证与工程实现，旨在为自指动力系统的微观建模、结构推断与分层认知提供一套自洽的理论骨架。本文重点探讨并形式化以下五个核心论点：
 	\begin{itemize}[leftmargin=2em]
-		\item \textbf{自指因果回路与全局调制拓扑论点（$f \to \mathbf{m}_t \to \sigma \to \{\eta\} \to f$）}：主张通过有限维记忆动力学 $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \mathbf{m}_t)$ 将无限维历史递归马尔可夫化；主张成边决策由“局域微观意愿 $w_{ij}$”与“宏观环境调制 $g(\mathbf{m}_t)$”共同决定，彻底打破孤立的局域可分解性假定，并通过多层图传播链 $\eta$ 显式建模结构传递闭包，闭合有限维自指动力学回路；
+		\item \textbf{状态—拓扑增广历史与记忆闭环论点（$f \to \mathbf{m}_t \to \sigma \to \{\eta\} \to f$）}：主张历史轨迹必须同时记录微观状态与瞬时有效交互图 $\mathcal{H}_t = \big( (x_k, \widetilde{G}_k) \big)_{k=0}^t$，并通过有限维记忆动力学 $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \widetilde{G}_t, \mathbf{m}_t)$ 将该联合信息递归马尔可夫化；成边决策由“局域微观意愿 $w_{ij}$”与“宏观环境调制 $g(\mathbf{m}_t)$”共同决定，彻底打破孤立的双边可分解性假定；
 		\item \textbf{零态紧化与相空间维度内生化论点}：主张通过通用坐标索引集 $V_\infty$ 与零态紧化空间 $\bar{M}_i = M_i \sqcup \{\bot_{\mathrm{u}}, \bot_{\mathrm{d}}\}$，将传统变维动力系统中非连续的外生集合增删，转化为固定乘积相空间 $\Sigma$ 上的全局自同态映射，使系统的活性有效规模 $|V_t|=\#\supp(x_t)$ 严格内生化为微观格局的可测泛函；
 		\item \textbf{真实历史锚定与全微观因果推断论点}：主张系统辨识在训练期必须严格基于**真实客观历史观测轨迹 $\mathcal{H}_t^\ast$** 构建条件转移似然，阻断未成熟自生成历史诱发的误差雪崩与非平稳漂移；通过单步似然的维数裂解与分层参考测度消解变维奇异性，结合拓扑—状态值域分离原则，为结构倾向 $\sigma$、拓扑传播 $\eta$ 与微观转移 $f$ 的解耦优化提供信息论依据；
 		\item \textbf{分层系统与逐层递进拓扑自回归论点}：主张构建多尺度分层元系统 $\mathcal{V}^{(0)} \prec \dots \prec \mathcal{V}^{(K)}$，高层网络跟踪并预测低层的拓扑变化，提出自底向上逐层递进训练策略与自顶向下逐层重塑拓扑的自回归推断回路，将多层离散图搜索复杂度降至线性 $\mathcal{O}(K)$；
@@ -128,7 +128,7 @@
 			\item $f=\{f_i\}_{i\in V_\infty} \in \mathfrak{F}$ 为局域物理转移规则族。
 		\end{itemize}
 	\end{definition}
-	
+
 	\begin{definition}[测量特征嵌入与乘积流形分解]\label{def:state-decomposition}
 		有效物理流形 $M_i$ 形式化分解为潜在演化流形与测量观测流形的直积：
 		\begin{equation}
@@ -138,37 +138,50 @@
 		微观状态相应表述为 $s_i(t) = \bigl(s_i^{\mathrm{lat}}(t),\ s_i^{\mathrm{meas}}(t)\bigr)$，其中 $s_i^{\mathrm{lat}}$ 为未被直接捕获的内部自由度，$s_i^{\mathrm{meas}}$ 为由传感器数据流直接给出的测量特征。系统满足\emph{无约束嵌入假设}：测量坐标仅作为属性标签嵌入 $M_i$，禁止预置任何硬编码的代数约束方程，状态分量间的动力学关联由转移律 $f_i$ 在 MDL 准则下自主涌现。
 	\end{definition}
 	
-	\subsection{有限维记忆动力学流形}
-	
-	直接以无界增长的全局历史 $\mathcal{H}_t = (x_0, \dots, x_t)$ 作为输入，会导致动力系统在时间极限下陷入无限维发散。本文通过引入局域记忆更新机制，将非马尔可夫历史压缩为有限维状态空间模型。
-	
-	\begin{definition}[有限维记忆变量与更新方程]\label{def:memory-variable}
-		设每个槽位 $v_i\in V_\infty$ 携带有限维局域记忆向量 $\mathbf{m}_i(t) \in \mathbb{R}^{d_m}$，全系统记忆状态为 $\mathbf{m}_t = \{\mathbf{m}_i(t)\}_{i\in V_\infty} \in \mathbb{R}^{V_\infty \times d_m}$。记忆状态随微观状态递归演化：
+	\subsection{状态—拓扑增广历史流形与有限维记忆变量}
+
+	\begin{definition}[状态—拓扑增广历史轨迹]\label{def:augmented-history}
+		系统演化至时刻 $t$ 的\emph{完整增广历史轨迹}定义为微观物理状态与瞬时有效交互拓扑的联合时序序列：
 		\begin{equation}
-			\mathbf{m}_{t+1} = \mathbf{M}\bigl(x_t,\, \mathbf{m}_t\bigr), \qquad \text{局域分量形式: } \mathbf{m}_i(t+1) = M_i\bigl(x_i(t),\, \mathbf{m}_i(t),\, x_t|_{\Ncal_{\widetilde{G}_t}(v_i)}\bigr).
+			\mathcal{H}_t \coloneqq \Biggl( \Bigl(x_0, \widetilde{G}_0\Bigr),\; \Bigl(x_1, \widetilde{G}_1\Bigr),\; \dots,\; \Bigl(x_t, \widetilde{G}_t\Bigr) \Biggr) \in \prod_{k=0}^t \Bigl(\Sigma \times \mathfrak{G}(V_\infty)\Bigr) \eqqcolon \mathbf{H}_t.
+			\label{eq:augmented-history}
+		\end{equation}
+		每个槽位 $v_i \in V_\infty$ 本地保有的\emph{局域增广微观世界线}定义为自身状态及其局域交互邻域的联合历史：
+		\begin{equation}
+			\mathcal{H}_t(v_i) \coloneqq \Biggl( \Bigl(x_i(0), \Ncal_{\widetilde{G}_0}(v_i)\Bigr),\; \Bigl(x_i(1), \Ncal_{\widetilde{G}_1}(v_i)\Bigr),\; \dots,\; \Bigl(x_i(t), \Ncal_{\widetilde{G}_t}(v_i)\Bigr) \Biggr).
+			\label{eq:local-worldline}
+		\end{equation}
+	\end{definition}
+
+	增广历史~\eqref{eq:augmented-history} 保证了过去的拓扑结构经历（如接触持续时间、解聚与重聚频次）作为结构记忆沉淀下来。为消除该序列随时间无限维发散的问题，系统引入状态—拓扑联合记忆动力学：
+
+	\begin{definition}[有限维记忆变量与状态—拓扑递归更新]\label{def:memory-variable}
+		设每个槽位 $v_i\in V_\infty$ 携带有限维局域记忆向量 $\mathbf{m}_i(t) \in \mathbb{R}^{d_m}$，全系统记忆状态为 $\mathbf{m}_t = \{\mathbf{m}_i(t)\}_{i\in V_\infty} \in \mathbb{R}^{V_\infty \times d_m}$。记忆状态综合摄取状态增量与有效拓扑进行递归更新：
+		\begin{equation}
+			\mathbf{m}_{t+1} = \mathbf{M}\bigl(x_t,\, \widetilde{G}_t,\, \mathbf{m}_t\bigr), \qquad \text{局域形式: } \mathbf{m}_i(t+1) = M_i\bigl(x_i(t),\, \Ncal_{\widetilde{G}_t}(v_i),\, \mathbf{m}_i(t),\, x_t|_{\Ncal_{\widetilde{G}_t}(v_i)}\bigr).
 			\label{eq:memory-update}
 		\end{equation}
-		算子 $\mathbf{M}$ 负责累积时间轨迹中的因果充分统计量。由此，系统在增广状态 $(x_t, \mathbf{m}_t)$ 上构成严格的有限维自治动力学体系。
+		由此，系统在增广状态 $(x_t, \widetilde{G}_t, \mathbf{m}_t)$ 上构成严格良定义的有限维自治动力学体系。
 	\end{definition}
-	
+
 	系统的有效物理支撑集仍由微观物理状态直接确定：$V_t \equiv \supp(x_t) = \{v_i\in V_\infty: s_i(t)\in M_i\}$。
 	
 	% ================= 3 记忆驱动倾向性映射与多层拓扑传播链 =================
 	\section{\texorpdfstring{记忆驱动倾向性映射与多层拓扑传播链 $\eta$}{记忆驱动倾向性映射与多层拓扑传播链 η}}\label{sec:sigma-eta}
 	
 	\subsection{\texorpdfstring{两级调制拓扑倾向设计架构}{两级调制拓扑倾向设计架构}}\label{sec:sigma-two-tier-design}
-	
-	在形式化理论层面，倾向性映射 $\sigma$ 不预设任何具体的神经网络参数结构，仅在因果与信息流层面遵循**两级拓扑判定原则**：任意两实体之间是否发生相互作用，绝非孤立地取决于两端点自身，而是由局域成对意愿与全局宏观背景场共同裁决。
-	
+
+	在形式化理论层面，倾向性映射 $\sigma$ 不预设具体的神经网络参数结构，仅在因果与信息流层面遵循**两级拓扑判定原则**：任意两实体之间是否建立相互作用通道，绝非孤立地由两端点自身决定，而是由包含状态与拓扑历史的局域成对意愿与全局宏观背景场共同裁决。
+
 	\begin{definition}[两级调制倾向性规则映射]\label{def:modulated-sigma}
-		倾向性规则族 $\sigma$ 将当前记忆状态配置 $\mathbf{m}_t$ 映射为初始瞬时交互图 $G_t^{(0)} = \sigma(\mathbf{m}_t) \in \mathfrak{G}(V_\infty)$。槽位对 $(v_i, v_j)$ 之间的成边判定满足两级因果组合结构：
+		倾向性规则族 $\sigma$ 将当前增广记忆状态配置 $\mathbf{m}_t$ 映射为初始瞬时交互图 $G_t^{(0)} = \sigma(\mathbf{m}_t) \in \mathfrak{G}(V_\infty)$。槽位对 $(v_i, v_j)$ 之间的成边判定满足两级因果组合结构：
 		\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-			\item \textbf{局域成对意愿（Local Dyadic Affinity）}：由两端点的记忆状态通过局域亲和核 $h$ 评估相互作用倾向：
+			\item \textbf{局域成对意愿（Local Dyadic Affinity）}：由两端点携带历史连接经历的记忆状态通过亲和核 $h$ 评估相互作用倾向：
 			\begin{equation}
 				w_{ij}(t) = h\bigl(\mathbf{m}_i(t),\, \mathbf{m}_j(t);\, \sigma_i, \sigma_j\bigr);
 				\label{eq:local-affinity}
 			\end{equation}
-			\item \textbf{全局环境场调制（Global Contextual Modulation）}：由全系统微观实体记忆诱导的宏观环境背景项 $g(\mathbf{m}_t) \in \mathbb{R}$ 进行阈值调节；
+			\item \textbf{全局环境场调制（Global Contextual Modulation）}：由全系统微观实体记忆诱导的宏观环境背景项 $g(\mathbf{m}_t) \in \mathbb{R}$ 进行全局阈值调节；
 			\item \textbf{联合成边决策}：成边事件的激活概率满足：
 			\begin{equation}
 				\mathbb{I}_{\{(v_i, v_j) \in E(G_t^{(0)})\}} \sim \Theta\Bigl(w_{ij}(t),\, g(\mathbf{m}_t)\Bigr),
@@ -177,15 +190,15 @@
 			其中 $\Theta$ 为单调联合判定泛函。
 		\end{enumerate}
 	\end{definition}
-	
+
 	\begin{remark}[全局调制的物理与因果内涵]\label{rem:global-modulation-concept}
-		定义~\ref{def:modulated-sigma} 彻底消除了“两点是否连接仅由两点自身决定”的狭隘局部性。全局调制项 $g(\mathbf{m}_t)$ 刻画了宏观热力学背景场或系统级相变压力：即使两粒子间的相对运动态势保持不变（即 $w_{ij}$ 恒定），当整个系统处于强烈的受压激波相时，全局项会系统性降低成边门槛，迫使局域建立接触通道；而在稀疏平流相中则抑制成边。关于 $\sigma$ 的具体神经网络参数化实现形式，详见第~\ref{sec:sigma-nn-design}~节。
+		定义~\ref{def:modulated-sigma} 彻底消除了“两点是否连接仅由两点自身决定”的狭隘局部性。全局调制项 $g(\mathbf{m}_t)$ 刻画了宏观热力学背景场或系统级相变压力：即使两粒子间的相对运动态势与拓扑历史保持不变（即 $w_{ij}$ 恒定），当整个系统处于强烈的受压激波相时，全局项会系统性降低成边门槛，迫使局域建立接触通道；而在稀疏平流相中则抑制成边。关于 $\sigma$ 的具体神经网络参数化实现形式，详见第~\ref{sec:sigma-nn-design}~节。
 	\end{remark}
 	
 	\subsection{\texorpdfstring{多层拓扑传播链 $\eta$（$G_t^{(0)} \to \dots \to \widetilde{G}_t$）}{多层拓扑传播链 η（G_t^(0) -> ... -> G_t~）}}
 	
 	初始倾向图 $G_t^{(0)}$ 仅反映点对间的一阶直接交互意愿。在实际物理或复杂网络演化中，相互作用通道需经历多跳传递、介质极化或局域协调。
-	
+
 	\begin{definition}[拓扑传播链]\label{def:eta-chain}
 		定义由 $L$ 层拓扑变换算子构成的传播链 $\eta = \eta_L \circ \eta_{L-1} \circ \dots \circ \eta_1$。在记忆状态 $\mathbf{m}_t$ 调制下，交互图经历如下多层精化：
 		\begin{equation}
@@ -234,10 +247,15 @@
 	\begin{proposition}[系统演化闭环]\label{prop:closed-loop}
 		系统的单步演化构成了如下无缝闭合的因果回路：
 		\begin{equation}
-			\mathbf{m}_t \xrightarrow{\quad\sigma\quad} G_t^{(0)} \xrightarrow{\quad\eta\quad} \widetilde{G}_t \xrightarrow{\quad f\quad} x_{t+1} \implies \mathbf{m}_{t+1} = \mathbf{M}(x_t, \mathbf{m}_t),
+			\mathbf{m}_t \xrightarrow{\quad\sigma\quad} G_t^{(0)} \xrightarrow{\quad\eta\quad} \widetilde{G}_t \xrightarrow{\quad f\quad} x_{t+1} \implies \mathbf{m}_{t+1} = \mathbf{M}(x_t, \widetilde{G}_t, \mathbf{m}_t),
 			\label{eq:loop}
 		\end{equation}
-		系统全局状态转移 $\Phi: \Sigma \times \mathbb{R}^{V_\infty \times d_m} \to \Sigma$ 在紧化相空间上是严格内生闭合的有限维自治动力系统。
+		随后将状态—拓扑对 $(x_{t+1}, \widetilde{G}_{t+1})$ 增广写入历史序列：
+		\begin{equation}
+			\mathcal{H}_{t+1} = \Bigl( \mathcal{H}_t,\; \bigl(x_{t+1}, \widetilde{G}_{t+1}\bigr) \Bigr).
+			\label{eq:history-append}
+		\end{equation}
+		系统全局演化在紧化相空间与拓扑流形上是严格内生闭合的有限维自治动力系统。
 	\end{proposition}
 	
 	\begin{figure}[htbp]
@@ -247,7 +265,7 @@
 			arr/.style={-{Stealth[length=2.5mm]}, thick}]
 			
 			\node[box, fill=gray!12, text width=9.2cm] (hist)
-			{\textbf{有限维记忆状态更新}：$\mathbf{m}_t = \mathbf{M}(x_{t-1}, \mathbf{m}_{t-1}) \in \mathbb{R}^{V_\infty \times d_m}$};
+			{\textbf{状态—拓扑联合记忆更新}：$\mathbf{m}_t = \mathbf{M}(x_{t-1}, \widetilde{G}_{t-1}, \mathbf{m}_{t-1}) \in \mathbb{R}^{V_\infty \times d_m}$};
 			
 			\node[box, fill=blue!05, text width=9.2cm, below=6mm of hist] (sig)
 			{\textbf{两级调制倾向映射}：$\mathbb{I}_{\{e_{ij}\in E(G_t^{(0)})\}} \sim \Theta(w_{ij}, g(\mathbf{m}_t)) \implies G_t^{(0)}$};
@@ -259,7 +277,7 @@
 			{\textbf{有效图上并行转移}：$x_i(t+1)=f_i\bigl(x_i(t), \mathbf{m}_i(t), x_t|_{\Ncal_{\widetilde{G}_t}(v_i)}\bigr), \forall v_i\in V_\infty$};
 			
 			\node[box, fill=gray!15, text width=9.2cm, below=6mm of tr] (vt)
-			{\textbf{全微观格局与记忆更新}：$x_{t+1}\in\Sigma = \prod_{v\in V_\infty}\bar{\widetilde{M}}_v$；$\mathbf{m}_{t+1} = \mathbf{M}(x_t, \mathbf{m}_t)$};
+			{\textbf{格局与拓扑联合归档}：$x_{t+1}\in\Sigma$；$\mathcal{H}_{t+1} = \big(\mathcal{H}_t, (x_{t+1}, \widetilde{G}_{t+1})\big)$};
 			
 			\draw[arr] (hist) -- (sig);
 			\draw[arr] (sig) -- (eta);
@@ -268,7 +286,7 @@
 			\draw[arr, dashed] (vt.west) to[out=165, in=195]
 			node[left, font=\scriptsize, align=center, xshift=-2pt] {推进至下一时步\\$t{+}1$} (hist.west);
 		\end{tikzpicture}
-		\caption{基于有限维记忆 $\mathbf{m}_t$、两级调制倾向 $\sigma$、传播链 $\eta$ 与微观转移 $f$ 的自指动力学闭环。}
+		\caption{基于联合记忆 $\mathbf{m}_t$、两级调制倾向 $\sigma$、传播链 $\eta$ 与微观转移 $f$ 的自指动力学闭环。}
 		\label{fig:lifecycle}
 	\end{figure}
 	
@@ -289,7 +307,7 @@
 	\end{equation}
 	
 	\paragraph{Step B（真实历史锚定下的因果条件因子化）。}
-	在训练阶段，为防止模型因自身参数未收敛而产生虚假的“未成熟历史”，迫使动力学演化发生严重的协变量漂移与发散，**历史条件必须严格锚定于客观观测真实轨迹** $\mathcal{H}_t^\ast$ 与无偏真实记忆 $\mathbf{m}_t^\ast = \mathbf{M}(x_{t-1}^\ast, \mathbf{m}_{t-1}^\ast)$：
+	在训练阶段，为防止模型因自身参数未收敛而产生虚假的“未成熟历史”，迫使动力学演化发生严重的协变量漂移与发散，**历史条件必须严格锚定于客观观测真实轨迹** $\mathcal{H}_t^\ast$ 与无偏真实记忆 $\mathbf{m}_t^\ast = \mathbf{M}(x_{t-1}^\ast, \widetilde{G}_{t-1}^\ast, \mathbf{m}_{t-1}^\ast)$：
 	\begin{equation}
 		p\bigl(s_{0:T}^\ast\mid\text{Rule-Chains}\bigr) = p(s_0^\ast)\prod_{t=0}^{T-1} p\bigl(s_{t+1}^\ast\mid s_t^\ast, \mathbf{m}_t^\ast;\ \sigma^{(c(t))}, \eta^{(c(t))}, f^{(c(t))}\bigr),
 		\label{eq:step-b}
@@ -298,7 +316,7 @@
 	
 	\paragraph{Step C（制度时间化）与 Step D（MDL 编码映射）。}
 	引入分段常数映射 $c(t)\in\{1,\dots,K\}$，并将先验转化为 Kolmogorov 描述长度惩罚 $-\lambda\DL(\text{Rule-Chain})$。
-	
+
 	\begin{remark}[训练期真实历史锚定与自回归误差雪崩阻断]\label{rem:teacher-forcing-physics}
 		式~\eqref{eq:step-b} 确立了训练阶段与推断阶段的关键因果分工：
 		如果在训练阶段使用模型未成熟的自回归生成历史 $\widehat{\mathcal{H}}_t$ 参与条件计算，微小的预测残差会在记忆变量 $\mathbf{m}_t$ 中递归累积，导致倾向性规则 $\sigma$ 接收到失真的虚假历史特征并输出荒谬的拓扑连接 $\widetilde{G}_t$，进而迫使转移规则 $f$ 在错误的计算图上过拟合，形成**“恶性正反馈漂移”**致使训练完全无法收敛。因此，在训练辨识阶段必须严格采用真实历史锚定（Teacher Forcing）；而在推断阶段模型完全定型后，方允许启动长程自回归展开（Free Rollout）。
@@ -350,7 +368,7 @@
 	\paragraph{Step F（拓扑—状态值域分离原则）。}
 	依据模块化设计的\textbf{拓扑—状态值域分离原则}（Topological-Metric Disjoint Range Principle）：
 	\begin{itemize}[leftmargin=2em]
-		\item $\sigma$ 的值域限定于初始图空间 $\mathfrak{G}(V_\infty)$（结合记忆评估局域亲和与全局调制）；
+		\item $\sigma$ 的值域限定于初始图空间 $\mathfrak{G}(V_\infty)$（结合状态与拓扑联合记忆评估局域亲和与全局调制）；
 		\item $\eta$ 的值域限定于有效图空间 $\mathfrak{G}(V_\infty)$（在图空间内部执行拓扑精化与协调）；
 		\item $f$ 的值域限定于物理状态流形 $\bar{\widetilde{M}}$（在给定有效图拓扑下执行状态更新）。
 	\end{itemize}
@@ -538,11 +556,11 @@
 		\end{equation}
 		\item \textbf{第 $2$ 阶及更高阶元图层 $\mathcal{V}^{(i)}$ ($i \ge 2$)}：第 $i$ 层不再直接读取底层连续物理坐标，而是把第 $i-1$ 层的拓扑状态（邻接矩阵与关联矩阵）作为输入，进一步抽象出更高阶的宏观拓扑状态 $\mathcal{I}^{(i)}_t = \{\mathbf{A}^{(i)}, \mathbf{E}^{(i)}, \mathbf{h}^{(i)}\}_t$。以此类推，直到顶层 $\mathcal{V}^{(K)}$。
 	\end{itemize}
-	
+
 	\subsection{\texorpdfstring{倾向性网络 $\sigma$ 的三层次具体神经架构设计}{倾向性网络 σ 的三层次具体神经架构设计}}\label{sec:sigma-nn-design}
-	
+
 	在第~\ref{sec:sigma-two-tier-design}~节两级调制倾向映射的指导下，本框架在具体神经网络实现中采用如图~\ref{fig:sigma-three-tier} 所示的三层次神经架构：
-	
+
 	\begin{figure}[htbp]
 		\centering
 		\begin{tikzpicture}[
@@ -550,8 +568,8 @@
 			arr/.style={-{Stealth[length=2mm]}, semithick}]
 			
 			\node[box, fill=blue!05, text width=9.2cm] (tier1) at (0, 2.6) {
-				\textbf{层次 1：有限维记忆压缩网络 (Recurrent Memory Compression)}\\
-				$\mathbf{m}_i(t) = \text{GRU}\bigl(x_i^\ast(t-1), \mathbf{m}_i^\ast(t-1)\bigr)$ 或因果注意力
+				\textbf{层次 1：增广记忆压缩网络 (Augmented Memory Compression)}\\
+				$\mathbf{m}_i(t) = \text{GRU}\bigl([x_i^\ast(t-1), \Ncal_{\widetilde{G}_{t-1}^\ast}(v_i)],\, \mathbf{m}_i^\ast(t-1)\bigr)$ 或因果注意力
 			};
 			
 			\node[box, fill=teal!05, text width=9.2cm] (tier2) at (0, 1.3) {
@@ -571,10 +589,10 @@
 		\caption{倾向性规则 $\sigma$ 的三层次神经网络参数化架构。}
 		\label{fig:sigma-three-tier}
 	\end{figure}
-	
+
 	具体计算流程实现如下：
 	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-		\item \textbf{记忆变量的循环压缩}：各槽位配备小型门控循环单元（GRU），在真实历史轨迹驱动下将微观状态序列压缩为定长隐状态 $\mathbf{m}_i(t) \in \mathbb{R}^{d_m}$；
+		\item \textbf{状态与拓扑联合记忆的循环压缩}：各槽位配备小型门控循环单元（GRU），在真实历史轨迹驱动下将微观状态及其局部连接经历共同压缩为定长隐状态 $\mathbf{m}_i(t) \in \mathbb{R}^{d_m}$；
 		\item \textbf{局域意愿前馈计算}：双边网络 $\text{MLP}_{\text{dyad}}$ 接收两端点的记忆拼接特征，输出无向局域亲和得分 $w_{ij}(t) \in \mathbb{R}$；
 		\item \textbf{置换不变全局池化与调制输出}：利用全局平均池化消除槽位排列依赖，通过全局前馈网络提取宏观调制标量 $g(\mathbf{m}_t)$，最终经由 Sigmoid 激活函数映射为初始交互图邻接概率矩阵 $\mathbf{A}_t^{(0)}[i, j] \in [0, 1]$。
 	\end{enumerate}
@@ -616,7 +634,7 @@
 	
 	引入有限维记忆动力学 $\mathbf{m}_t$ 与全微观格局跟踪后，系统在本质上强化了开放式演化的数理基础：
 	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-		\item \textbf{记忆变量驱动的相空间发散}：虽然系统在形式上被有限维化，但记忆动力学更新 $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \mathbf{m}_t)$ 能够持续累积长程非平衡态特征，系统微观轨道在相空间中展现出持续的非周期分支，打破了有限维紧致相空间的 Poincaré 递归；
+		\item \textbf{记忆变量驱动的相空间发散}：虽然系统在形式上被有限维化，但记忆动力学更新 $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \widetilde{G}_t, \mathbf{m}_t)$ 能够持续累积长程非平衡态特征与连接拓扑演化历史，系统微观轨道在相空间中展现出持续的非周期分支，打破了有限维紧致相空间的 Poincaré 递归；
 		\item \textbf{微观规则的种群演化}：伴随休眠槽位不断被有效图 $\widetilde{G}_t$ 激活，重组算子 $\mathcal{R}$ 持续向系统注入新的局域规则 $(\sigma^\ast, f^\ast)$，经验规则测度 $\mu_t = \frac{1}{|V_t|}\sum_{v\in\supp(x_t)}\delta_{(\sigma_v, f_v)}$ 在规则空间中呈现非平衡态定向扩散。
 	\end{enumerate}
 	
@@ -651,9 +669,9 @@
 	\begin{remark}[形式化假设体系与结构原则]\label{rem:boundary}
 		为了便于理论核查与后续推导，本框架依赖的形式化前提与设计原则汇总如下：
 		\begin{itemize}[leftmargin=2em]
-			\item \textbf{训练期真实历史锚定原则（Axiom of Ground-Truth Historical Grounding）}：在参数推断与训练阶段，条件记忆 $\mathbf{m}_t^\ast$ 与历史轨迹 $\mathcal{H}_t^\ast$ 必须严格锚定于客观物理真值观测数据流，严禁使用模型自身未成熟的自回归生成历史参与训练，从因果根源上阻断协变量漂移与误差雪崩；
-			\item \textbf{两级环境调制拓扑倾向假设（Two-Tier Contextual Propensity）}：任意两实体间的相互作用绝不仅由双方孤立决定，而是由局域成对意愿 $w_{ij}$ 与全局上下文环境场 $g(\mathbf{m}_t)$ 共同裁决（式~\eqref{eq:three-tier-edge}），兼顾局域自主性与宏观相变敏感性；
-			\item \textbf{有限维记忆马尔可夫化假设（Finite Memory Markovization）}：系统通过递归方程 $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \mathbf{m}_t)$（定义~\ref{def:memory-variable}）将时间累积效应压缩为有限维记忆变量，保证动力系统在有限维增广相空间上的分析良定义性；
+			\item \textbf{训练期真实历史锚定原则（Axiom of Ground-Truth Historical Grounding）}：在参数推断与训练阶段，条件记忆 $\mathbf{m}_t^\ast$ 与历史轨迹 $\mathcal{H}_t^\ast$ 必须严格锚定于客观真实观测数据流（包含真实状态与真实交互拓扑经历），严禁使用模型自身未成熟的自回归生成历史参与训练，从因果根源上阻断协变量漂移与误差雪崩；
+			\item \textbf{两级环境调制拓扑倾向假设（Two-Tier Contextual Propensity）}：任意两实体间的相互作用绝不仅由双方孤立决定，而是由包含状态与拓扑历史的局域成对意愿 $w_{ij}$ 与全局上下文环境场 $g(\mathbf{m}_t)$ 共同裁决（式~\eqref{eq:three-tier-edge}），兼顾局域自主性与宏观相变敏感性；
+			\item \textbf{有限维联合记忆马尔可夫化假设（Finite Joint Memory Markovization）}：系统通过递归方程 $\mathbf{m}_{t+1} = \mathbf{M}(x_t, \widetilde{G}_t, \mathbf{m}_t)$（定义~\ref{def:memory-variable}）将状态与拓扑的时序累积效应压缩为有限维记忆变量，保证动力系统在有限维增广相空间上的分析良定义性；
 			\item \textbf{拓扑—状态值域分离原则（Topological-Metric Disjoint Range Principle）}：$\sigma$ 与 $\eta$ 的值域严格限定在离散图空间 $\mathfrak{G}(V_\infty)$，负责拓扑结构生成；转移律 $f$ 的值域严格限定在连续状态流形 $\bar{\widetilde{M}}$，负责物理状态演化。这一原则唯一确立了边际似然的前向因果分解方向（式~\eqref{eq:marginal-likelihood}）；
 			\item \textbf{通用坐标集可数性假设（Countable Universal Coordinate Set）}：理论分析设定通用坐标全集为可数无限集 $V_\infty = \mathbb{N}$；在实际计算仿真中取足够大常数或采用吸收死态复位机制（$\bot_{\mathrm{d}}\to\bot_{\mathrm{u}}$）；
 			\item \textbf{乘积流形正交分解与无约束嵌入假设（Unconstrained Metric Embedding）}：外部测量特征（如速度差分、各向同性间距）仅作为微观状态属性嵌入有效流形 $M_i$（定义~\ref{def:state-decomposition}），严禁硬编码任何物理代数约束方程，所有动力学相互作用均由网络在 MDL 约束下涌现。
@@ -663,15 +681,15 @@
 	% ================= 9 结论 =================
 	\section{结论}\label{sec:conclusion}
 	
-	本文系统建立了包含有限维记忆变量、全局调制倾向 $\sigma$、多层拓扑传播链 $\eta$、微观物理转移 $f$ 以及分层拓扑自回归的自指交互元系统理论框架：
+	本文系统建立了包含状态—拓扑增广历史、有限维记忆动力学、全局调制倾向 $\sigma$、多层拓扑传播链 $\eta$、微观物理转移 $f$ 以及分层拓扑自回归的自指交互元系统理论框架：
 	\begin{enumerate}[label=(\arabic*), leftmargin=2.4em]
-		\item 引入有限维记忆动力学 $\mathbf{m}_t = \mathbf{M}(x_{t-1}, \mathbf{m}_{t-1})$，消除了无限维历史随时间的发散，建立了基于“局域意愿 $w_{ij}$ + 全局背景调制 $g(\mathbf{m}_t)$”的两级拓扑生成机制，闭合了有限维自指动力学回路；
-		\item 确立了训练期真实历史锚定原则，提出了基于全微观格局 $x_{t+1}$ 的维数裂解似然与分层参考测度，排除了宏观标量约束导致的退化伪事实，导出了规整的裂解 MDL 优化目标；
+		\item 将历史扩展为状态与有效交互拓扑的联合轨迹序列 $\mathcal{H}_t = \big( (x_k, \widetilde{G}_k) \big)_{k=0}^t$，并通过有限维记忆动力学 $\mathbf{m}_t = \mathbf{M}(x_{t-1}, \widetilde{G}_{t-1}, \mathbf{m}_{t-1})$ 实现了非马尔可夫演化的有限维状态空间马尔可夫化；
+		\item 确立了训练期真实历史锚定原则，彻底阻断了未成熟自回归生成历史带来的误差雪崩，推导了包含结构倾向、拓扑传播与状态转移的三重边际似然分解与交替优化算法；
 		\item 构建了分层元系统与逐层递进学习机制，并在高层具体阐述了 $\sigma$ 的三层次神经网络设计，形式化了高层网络对低层计算图拓扑自顶向下的预测与重塑回路；
 		\item 建立了基于真值驱动的自底向上级联逐层递进诱导学习算法，将多层图优化复杂度降至严格线性 $\mathcal{O}(K)$；
 		\item 构造性证明了系统的图灵完备性，确立了系统的理论模拟能力下界与有效表达力边界。
 	\end{enumerate}
-	该理论体系为复杂自组织演化系统、自适应拓扑神经网络以及动力学建模提供了严格统一的数理基石。
+	该理论体系为复杂自组织演化系统、自适应拓扑神经网络以及时变网络动力学建模提供了严格统一的数理基石。
 	
 	% ================= 参考文献 =================
 	\begin{thebibliography}{99}
